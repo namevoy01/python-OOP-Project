@@ -1,8 +1,9 @@
 class Booking:
-    def __init__(self, booking_id, name_passenger, payment_option, date, payment):
+    def __init__(self, booking_id, name_passenger, payment_option, amount, date, payment):
         self.__booking_id  = booking_id 
         self.__name_passenger = name_passenger
         self.__payment_option = payment_option
+        self.__amount = amount
         self.__date = date
         self.__payment = payment
     
@@ -15,6 +16,9 @@ class Booking:
     @property
     def payment_option(self):
         return self.__payment_option
+    @property
+    def amount(self):
+        return self.__amount
     @property
     def date(self):
         return self.__date
