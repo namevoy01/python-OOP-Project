@@ -12,5 +12,9 @@ class Bus:
     def location(self):
         return self.__location
     
+    @property
+    def seat_list(self):
+        return self.__seat_list
+    
     def update_location():
         pass
