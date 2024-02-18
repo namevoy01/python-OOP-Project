@@ -1,4 +1,4 @@
-from User import User
+import User
 class Passenger(User) :
     def __init__(self, account_number, email):
         self.__account_number= account_number
