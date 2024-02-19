@@ -1,4 +1,4 @@
-import Admin, Booking, Bus, Bustrip, Passenger, Payment, Province, Route, Schedule, Seat, Station, Ticket, User
+import Admin, Booking, Bus, BusTrip, Passenger, Payment, Province, Route, Schedule, Seat, Station, Ticket, User
 class BusService_Controller :
     def __init__(self, province_lst, ticket_lst, bus_lst, payment_lst):
         self.__province_lst = []
