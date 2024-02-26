@@ -1,23 +1,31 @@
 import Admin, Booking, Bus, BusTrip, Passenger, Payment, Province, Route, Schedule, Seat, Station, Ticket, User
 class BusService_Controller :
-    def __init__(self, province_lst, ticket_lst, bus_lst, payment_lst):
+    def __init__(self, province_lst, ticket_lst, bus_lst, payment_lst, schedule_lst):
         self.__province_lst = []
         self.__ticket_lst = []
         self.__bus_lst = []
         self.__payment_lst = []
+        self.__schedule_lst = []
 
     @property
     def province_lst (self):
         return self.__province_lst
+    
     @property
     def ticket_lst(self):
         return self.__ticket_lst
+    
     @property
     def bus_lst(self):
         return self.__bus_lst
+    
     @property
     def payment_lst(self):
         return self.__payment_lst
+    
+    @property
+    def schedule_lst(self):
+        return self.__schedule_lst
     
     def get_booked_seat(self, bus_license, seat_number, seat_status) :
         pass
