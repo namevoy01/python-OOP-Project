@@ -13,12 +13,14 @@ from Ticket import Ticket
 from User import User
 
 class BusService_Controller :
-    def __init__(self, province_lst, ticket_lst, bus_lst, payment_lst, schedule_lst):
+    def __init__(self, province_lst, ticket_lst, bus_lst, payment_lst, schedule_lst, booking_lst):
         self.__province_lst = []
         self.__ticket_lst = []
         self.__bus_lst = []
         self.__payment_lst = []
         self.__schedule_lst = []
+        self.__route_lst = []
+        self.__booking_lst = []
 
     @property
     def get_province_lst (self):
@@ -40,17 +42,31 @@ class BusService_Controller :
     def get_schedule_lst(self):
         return self.__schedule_lst
     
+    @property
+    def get_route_lst(self):
+        return self.__route_lst
+    
+    @property
+    def get_booking_lst(self):
+        return self.__booking_lst
+    
     def get_booked_seat(self, bus_license, seat_number, seat_status) :
         pass
 
     def get_next_station(self, bus_license) :
         pass
 
+    def get_source_station(self):
+        if self.__route_lst:
+            return [route[0] for route in self.__route_lst]
+        else:
+            return None 
+
     def add_province(self, province_id, province_name) :
-        pass
+        self.__province_lst.append()
 
     def add_booking(self, booking_id, passenger_name, payment_option, amount) :
-        pass
+        self.__booking_lst.append()
 
     def add_bus(self, bus_license, seat_list, location) :
         pass
