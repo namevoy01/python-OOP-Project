@@ -1,4 +1,4 @@
-class Bus:
+class Route:
     def __init__(self, source_station, destination_station, price, bus_trip_lst):
         self.__source_station = source_station
         self.__destination_station = destination_station
