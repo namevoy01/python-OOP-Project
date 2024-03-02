@@ -1,4 +1,4 @@
-class Bus:
+class Station:
     def __init__(self, station_id, name_station):
         self.__station_id = station_id
         self.__name_station = name_station
