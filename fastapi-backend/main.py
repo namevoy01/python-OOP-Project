@@ -50,10 +50,10 @@ def get_source_province():
 @app.get('/api/source_station')
 def get_source_station():
     source_stations = set()
-    target_province_name = 'กรุงเทพมหานคร'
+    province_name = 'กรุงเทพมหานคร'
     
     for province in bus_controller.get_province_lst:
-        if province.get_province_name == target_province_name:
+        if province.get_province_name == province_name:
             for route in province.get_route_lst:
                 source_stations.add(route.get_source_station)
     
