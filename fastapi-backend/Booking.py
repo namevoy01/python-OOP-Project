@@ -8,20 +8,20 @@ class Booking:
         self.__payment = payment
     
     @property
-    def booking_id (self):
+    def get_booking_id (self):
         return self.__booking_id 
     @property
-    def name_passenger(self):
+    def get_name_passenger(self):
         return self.__name_passenger
     @property
-    def payment_option(self):
+    def get_payment_option(self):
         return self.__payment_option
     @property
-    def amount(self):
+    def get_amount(self):
         return self.__amount
     @property
-    def date(self):
+    def get_date(self):
         return self.__date
     @property
-    def payment(self):
+    def get_payment(self):
         return self.__payment
