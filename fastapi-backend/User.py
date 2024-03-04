@@ -6,17 +6,17 @@ class User :
         self.__tel = tel 
  
     @property
-    def user_id(self):
+    def get_user_id(self):
         return self.__user_id
     
     @property
-    def name(self):
+    def get_name(self):
         return self.__name
     
     @property
-    def gender (self):
+    def get_gender (self):
         return self.__gender 
     
     @property
-    def tel  (self):
+    def get_tel(self):
         return self.__tel 
