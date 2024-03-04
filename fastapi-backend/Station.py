@@ -4,9 +4,9 @@ class Station:
         self.__name_station = name_station
 
     @property
-    def station_id(self):
+    def get_station_id(self):
         return self.__station_id
     
     @property
-    def name_station(self):
+    def get_name_station(self):
         return self.__name_station
