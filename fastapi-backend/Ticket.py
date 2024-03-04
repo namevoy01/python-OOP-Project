@@ -5,13 +5,13 @@ class Ticket :
         self.__seat_number = seat_number
 
     @property
-    def ticket_id(self):
+    def get_ticket_id(self):
         return self.__ticket_id
     
     @property
-    def schedule(self):
+    def get_schedule(self):
         return self.__schedule
     
     @property
-    def seat_number(self):
+    def get_seat_number(self):
         return self.__seat_number
