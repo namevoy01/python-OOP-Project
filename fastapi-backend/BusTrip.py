@@ -5,13 +5,13 @@ class BusTrip :
         self.__schedule = schedule
 
     @property
-    def bustrip_id(self):
+    def get_bustrip_id(self):
         return self.__bustrip_id
     
     @property
-    def bus(self):
+    def get_bus(self):
         return self.__bus
     
     @property
-    def schedule(self):
+    def get_schedule(self):
         return self.__schedule 
