@@ -17,7 +17,7 @@ bus_controller = BusService_Controller([], [], [], [], [])
 
 # province and route ####################################################
 
-bangkok = Province('1','กรุงเทพมหานคร')
+bangkok = Province('1','กรุงเทพมหานคร', [])
 bus_controller.add_province(bangkok)
 
 route_1 = Route('1',
@@ -76,23 +76,24 @@ route_7 = Route('7',
                 [])
 bangkok.add_route(route_7)
 
-krabi = Province('2', 'krabi')
-bus_controller.add_province(bangkok)
+krabi = Province('2', 'กระบี่', [])
+bus_controller.add_province(krabi)
 
 # seat ####################################################
 
-bus_1 = Bus('1','1นค5463', 'on station', [])
-bus_controller.add_bus(bus_1)
+# bus_1 = Bus('1','1นค5463', 'on station', [])
+# bus_controller.add_bus(bus_1)
 
-route_1 = Route('1',
-                'สถานีขนส่งผู้โดยสารกรุงเทพฯ (หมอชิต 2)',
-                'กรุงเทพมหานคร',
-                'ท่าอากาศยานสุวรรณภูมิ',
-                100,
-                [])
-bangkok.add_route(route_1)
+# route_1 = Route('1',
+#                 'สถานีขนส่งผู้โดยสารกรุงเทพฯ (หมอชิต 2)',
+#                 'กรุงเทพมหานคร',
+#                 'ท่าอากาศยานสุวรรณภูมิ',
+#                 100,
+#                 [])
+# bangkok.add_route(route_1)
 
-# print("รายการจังหวัดและเส้นทาง:")
+print("รายการจังหวัดและเส้นทาง:")
+print([province.get_province_name for province in bus_controller.get_province_lst])
 # for province in bus_controller.get_province_lst:
 #     print(f"จังหวัด : {province.get_province_name}")
 #     print("เส้นทาง :")
@@ -100,4 +101,3 @@ bangkok.add_route(route_1)
 #         print(f"- จุดเริ่มต้น : {route.get_source_station}")
 #         print(f"  จุดหมายปลายทาง : {route.get_destination_station}")
 #         print(f"  ราคา : {route.get_price} บาท")
-#         break
