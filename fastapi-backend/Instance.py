@@ -417,7 +417,7 @@ route_15 = Route('15',
                 [])
 krabi.add_route(route_15)
 
-# seat ####################################################
+# bus ####################################################
 
 bus_1 = Bus('1','1นค5463', 'on station', [])
 bus_controller.add_bus(bus_1)
@@ -429,6 +429,8 @@ bus_4 = Bus('4','2บห4110', 'on station', [])
 bus_controller.add_bus(bus_4)
 bus_5 = Bus('5','1วส7845', 'on station', [])
 bus_controller.add_bus(bus_5)
+
+# seat ####################################################
 
 seat_A01 = Seat('1',
             'A01',
