@@ -52,8 +52,19 @@ class BusService_Controller :
     def add_booking(self, booking_id, passenger_name, payment_option, amount) :
         pass
 
+<<<<<<< Updated upstream
     def add_bus(self) :
         self.__bus_lst.append()
+<<<<<<< Updated upstream
+=======
+    
+    def add_route(self, route):
+        self.__route_lst.append(route)
+=======
+    def add_bus(self, bus) :
+        self.__bus_lst.append(bus)
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 
     def add_passenger_to_bus(self, booking_id, schedule, seat_number) :
         pass
