@@ -5,16 +5,13 @@ class Province :
         self.__route_lst = []
 
     @property
-    def province_id(self):
+    def get_province_id(self):
         return self.__province_id
     
     @property
-    def province_name(self):
+    def get_province_name(self):
         return self.__province_name
     
     @property
-    def route_lst(self):
-        return self.__route_lst
-    
-    def add_route():
-        pass
+    def get_route_lst(self):
+        return self.__route_ls
