@@ -5,14 +5,14 @@ class Schedule:
         self.__departure_date  =  departure_date 
  
     @property
-    def schedule_id(self):
+    def get_schedule_id(self):
         return self.__schedule_id
     
     @property
-    def route(self):
+    def get_route(self):
         return self.__route
     
     @property
-    def departure_date (self):
+    def get_departure_date (self):
         return self.__departure_date 
     
