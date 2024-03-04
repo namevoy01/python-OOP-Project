@@ -6,10 +6,10 @@ class Passenger(User) :
         self.__email = email
  
     @property
-    def account_number(self):
+    def get_account_number(self):
         return self.__account_number
     
     @property
-    def email(self):
+    def get_email(self):
         return self.__email
     
