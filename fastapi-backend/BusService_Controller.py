@@ -1,4 +1,3 @@
-import Admin, Booking, Bus, BusTrip, Passenger, Payment, Province, Route, Schedule, Seat, Station, Ticket, User
 class BusService_Controller :
     def __init__(self, province_lst, ticket_lst, bus_lst, payment_lst, schedule_lst):
         self.__province_lst = []
@@ -8,23 +7,23 @@ class BusService_Controller :
         self.__schedule_lst = []
 
     @property
-    def province_lst (self):
+    def get_province_lst(self):
         return self.__province_lst
     
     @property
-    def ticket_lst(self):
+    def get_ticket_lst(self):
         return self.__ticket_lst
     
     @property
-    def bus_lst(self):
+    def get_bus_lst(self):
         return self.__bus_lst
     
     @property
-    def payment_lst(self):
+    def get_payment_lst(self):
         return self.__payment_lst
     
     @property
-    def schedule_lst(self):
+    def get_schedule_lst(self):
         return self.__schedule_lst
     
     def get_booked_seat(self, bus_license, seat_number, seat_status) :
@@ -33,8 +32,8 @@ class BusService_Controller :
     def get_next_station(self, bus_license) :
         pass
 
-    def add_province(self, province_id, province_name) :
-        pass
+    def add_province(self, province) :
+        self.__province_lst.append(province)
 
     def add_booking(self, booking_id, passenger_name, payment_option, amount) :
         pass
@@ -42,8 +41,8 @@ class BusService_Controller :
     def add_bus(self, bus_license, seat_list, location) :
         pass
     
-    def add_route (self, source_station, destination_station, bus_trip_lst) :
-        pass
+    def add_route(self, province):
+        self.__route_lst.append(province)
 
     def add_passenger_to_bus(self, booking_id, schedule, seat_number) :
         pass
