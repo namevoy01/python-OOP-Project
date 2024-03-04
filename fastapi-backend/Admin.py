@@ -6,10 +6,10 @@ class Admin(User) :
         self.__password = password
  
     @property
-    def username(self):
+    def get_username(self):
         return self.__username
     
     @property
-    def password(self):
+    def get_password(self):
         return self.__password
     
