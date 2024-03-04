@@ -14,4 +14,7 @@ class Province :
     
     @property
     def get_route_lst(self):
-        return self.__route_ls
+        return self.__route_lst
+    
+    def add_route(self, route):
+        self.__route_lst.append(route)
