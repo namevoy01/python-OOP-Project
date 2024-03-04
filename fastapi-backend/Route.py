@@ -20,6 +20,3 @@ class Route:
     @property
     def get_bus_trip_lst(self):
         return self.__bus_trip_lst
-    
-    def add_bus_trip(bus_trip):
-        pass
