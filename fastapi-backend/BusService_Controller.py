@@ -1,3 +1,17 @@
+from Admin import Admin
+from Booking import Booking
+from Bus import Bus
+from BusTrip import BusTrip
+from Passenger import Passenger
+from Payment import Payment
+from Province import Province
+from Route import Route
+from Schedule import Schedule
+from Seat import Seat
+from Station import Station
+from Ticket import Ticket
+from User import User
+
 class BusService_Controller :
     def __init__(self, province_lst, ticket_lst, bus_lst, payment_lst, schedule_lst):
         self.__province_lst = []
@@ -41,8 +55,8 @@ class BusService_Controller :
     def add_bus(self, bus_license, seat_list, location) :
         pass
     
-    def add_route(self, province):
-        self.__route_lst.append(province)
+    def add_route(self, route):
+        self.__route_lst.append(route)
 
     def add_passenger_to_bus(self, booking_id, schedule, seat_number) :
         pass
