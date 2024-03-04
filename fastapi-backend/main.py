@@ -1,10 +1,24 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
+from Admin import Admin
+from Booking import Booking
+from Bus import Bus
+from BusTrip import BusTrip
+from Passenger import Passenger
+from Payment import Payment
+from Province import Province
+from Route import Route
+from Schedule import Schedule
+from Seat import Seat
+from Station import Station
+from Ticket import Ticket
+from User import User
+from Instance import create_instance,get_controller
 from BusService_Controller import BusService_Controller
 
 app = FastAPI()
-bus_controller = BusService_Controller([], [], [], [], [], [])
+bus_controller = get_controller()
 
 # Setup CORS middleware
 origins = ["http://localhost:3000"]  # ระบุ domain ของ React Front-end ที่อนุญาตให้เข้าถึง
@@ -29,16 +43,35 @@ def get_data():
     return data
 
 @app.get('/api/source_province')
-def get_province():
-    return bus_controller.get_province_lst
-
+def get_source_province():
+    source_province = [province.get_province_name for province in bus_controller.get_province_lst]
+    return source_province
+    
 @app.get('/api/source_station')
 def get_source_station():
-    return bus_controller.get_source_station()
+    source_stations = set()
+    target_province_name = 'กรุงเทพมหานคร'
+    
+    for province in bus_controller.get_province_lst:
+        if province.get_province_name == target_province_name:
+            for route in province.get_route_lst:
+                source_stations.add(route.get_source_station)
+    
+    return(list(source_stations))
 
 @app.get('/api/destination_province')
 def get_destination_province():
-    pass
+    destination_province = set()
+    target_source_province = 'กรุงเทพมหานคร'
+    target_source_station = 'สถานีขนส่งผู้โดยสารกรุงเทพฯ (หมอชิต 2)'
+    
+    for province in bus_controller.get_province_lst:
+        if province.get_province_name == target_source_province:
+            for route in province.get_route_lst:
+                if route.get_source_station == target_source_station:
+                    destination_province.add(route.get_destination_province)
+    
+    return list(destination_province)
 
 @app.get('/api/destination_station')
 def get_destination_station():
