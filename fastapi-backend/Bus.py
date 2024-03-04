@@ -1,17 +1,22 @@
 class Bus:
-    def __init__(self, bus_number, location, seat_list):
+    def __init__(self, bus_id, bus_number, location, seat_list):
+        self.__bus_id = bus_id
         self.__bus_number = bus_number
         self.__location = location
         self.__seat_list = []
 
     @property
-    def bus_number(self):
+    def get_bus_id(self):
+        return self.__bus_id
+
+    @property
+    def get_bus_number(self):
         return self.__bus_number
     
     @property
-    def location(self):
+    def get_location(self):
         return self.__location
     
     @property
-    def seat_list(self):
+    def get_seat_list(self):
         return self.__seat_list
