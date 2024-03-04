@@ -52,8 +52,8 @@ class BusService_Controller :
     def add_booking(self, booking_id, passenger_name, payment_option, amount) :
         pass
 
-    def add_bus(self, bus_license, seat_list, location) :
-        pass
+    def add_bus(self) :
+        self.__bus_lst.append()
     
     def add_route(self, route):
         self.__route_lst.append(route)
