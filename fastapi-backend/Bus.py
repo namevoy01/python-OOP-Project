@@ -3,7 +3,7 @@ class Bus:
         self.__bus_id = bus_id
         self.__bus_number = bus_number
         self.__location = location
-        self.__seat_list = []
+        self.__seat_lst = []
 
     @property
     def get_bus_id(self):
@@ -18,5 +18,8 @@ class Bus:
         return self.__location
     
     @property
-    def get_seat_list(self):
-        return self.__seat_list
+    def get_seat_lst(self):
+        return self.__seat_lst
+    
+    def add_seat(self, seat):
+        self.__seat_lst.append(seat)
