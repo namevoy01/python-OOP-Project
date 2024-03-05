@@ -13,7 +13,7 @@ from Ticket import Ticket
 from User import User
 from BusService_Controller import BusService_Controller
 
-bus_controller = BusService_Controller([], [], [], [], [])
+bus_controller = BusService_Controller([], [], [], [], [], [])
 
 def get_controller():
     return bus_controller
@@ -155,7 +155,7 @@ def create_instance():
     bus_controller.add_province(maehongson)
 
     yasothon = Province('45', 'ยโสธร', [])
-    bus_controller.add_provincey(yasothon)
+    bus_controller.add_province(yasothon)
 
     yala = Province('46','ยะลา', [])
     bus_controller.add_province(yala)
@@ -230,7 +230,7 @@ def create_instance():
     bus_controller.add_province(nongbualamphu)
 
     ayutthaya = Province('70','อยุธยา', [])
-    bus_controller.add_provinca(ayutthaya)
+    bus_controller.add_province(ayutthaya)
 
     angthong = Province('71', 'อ่างทอง', [])
     bus_controller.add_province(angthong)
@@ -422,7 +422,7 @@ def create_instance():
                     [])
     krabi.add_route(route_15)
 
-    # seat ####################################################
+    # bus ####################################################
 
     bus_1 = Bus('1','1นค5463', 'on station', [])
     bus_controller.add_bus(bus_1)
@@ -434,6 +434,8 @@ def create_instance():
     bus_controller.add_bus(bus_4)
     bus_5 = Bus('5','1วส7845', 'on station', [])
     bus_controller.add_bus(bus_5)
+
+    # seat ####################################################
 
     seat_A01 = Seat('1',
                 'A01',
@@ -620,3 +622,31 @@ create_instance()
 print("รายการจังหวัดและเส้นทาง:")
 print([province.get_province_name for province in bus_controller.get_province_lst])
 print([bus.get_bus_number for bus in bus_controller.get_bus_lst])
+
+def search_ticket_by_ticket_id(self, ticket_id) :
+    return {(ticket.get_ticket_id, ticket.get_schedule, ticket.get_seat_number)
+            for ticket in self.__ticket_lst
+            if ticket.get_ticket_id == ticket_id
+            for ticket in ticket.get_ticket_lst}
+
+bus_controller.search_ticket_by_ticket_id('001')
+
+bus_controller.add_booking('001', 'chamaiporn', 'credit card', 540, '10-02-2024', 'payment')
+bus_controller.add_ticket('01', 'booking', 'A01')
+
+# show_booking = [booking.get_booking_id for booking in bus_controller.get_booking_lst]
+# print(show_booking)
+
+show_ticket = [ticket.get_ticket_id for ticket in bus_controller.get_ticket_lst]
+print(show_ticket)
+
+## check search route by province
+# route_list = bus_controller.search_route_by_province('กรุงเทพมหานคร')
+# for route_info in route_list:
+#     destination_province, destination_station = route_info
+#     print(f"{destination_province} {destination_station}")
+
+ticket_list = bus_controller.search_ticket_by_ticket_id('01')
+for ticket in ticket_list:
+    ticket_id, ticket_id, seat_number = ticket
+    print(f"{ticket_id} {ticket_id} {seat_number}")
