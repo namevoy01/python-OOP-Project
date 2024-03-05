@@ -1,7 +1,7 @@
 class Bus:
-    def __init__(self, bus_id, bus_number, location, seat_list):
+    def __init__(self, bus_id, bus_license, location, seat_list):
         self.__bus_id = bus_id
-        self.__bus_number = bus_number
+        self.__bus_license = bus_license
         self.__location = location
         self.__seat_lst = []
 
@@ -10,8 +10,8 @@ class Bus:
         return self.__bus_id
 
     @property
-    def get_bus_number(self):
-        return self.__bus_number
+    def get_bus_license(self):
+        return self.__bus_license
     
     @property
     def get_location(self):
