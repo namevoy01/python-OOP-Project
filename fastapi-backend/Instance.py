@@ -599,8 +599,19 @@ def create_instance():
 create_instance()
 
 
-bus_controller.add_booking('001', 'chamaiporn', 'credit card', 540, '10-02-2024', 'payment')
-bus_controller.add_ticket('01', 'booking', 'A01')
+bus_controller.add_booking('001',
+                           'chamaiporn',
+                           'credit card',
+                           540, '10-02-2024',
+                           'payment',
+                           [])
+
+bus_controller.add_ticket('01',
+                          'booking',
+                          'A01')
+
+bus_controller.add_schedule('000001',
+                            '')
 
 # check search route by province
 route_list = bus_controller.search_route_by_province('กรุงเทพมหานคร')
@@ -626,11 +637,15 @@ for bus_license, location, seat_lst  in bus_list:
         print("-----------------------------------------------------------------")
         break
 
-# check search source_station by bus province
-# bus_list = bus_controller.search_source_station_by_province('กรุงเทพมหานคร')
-# for bus_license, location, seat_lst  in bus_list:
-#     print(f"เลขทะเบียนนรถ {bus_license} สถานที่รถอยู่ปัจจุบัน {location}")
-#     for seat_number, status_seat in seat_lst:
-#         print(f"เลขที่นั่ง {seat_number} สถานะ {status_seat}")
-#         print("-----------------------------------------------------------------")
-#         break
+# check add passenger when passenger paid
+# passenger = bus_controller.add_passenger('0001',
+#                                          'chamaiporn',
+#                                          'female',
+#                                          '090393820',
+#                                          'hdjgjedr@gmail.com',
+#                                          True)
+
+# for user_id, username, password, name, gender, tel, email, status_payment in passenger:
+#     print(f"{user_id} รอบรถคือ {username} หมายเลขที่นั่ง {password}")
+#     print("-----------------------------------------------------------------")
+#     break
