@@ -86,7 +86,12 @@ def get_trip():
 
 @app.get('/api/seat')
 def get_seat():
-    pass
+    bus_list = bus_controller.search_bus_by_bus_license('1นค5463')
+    seat_lst = []
+    for bus_license, location, seat_list in bus_list:
+        for seat_number, status_seat in seat_list:
+            seat_lst.append((seat_number, status_seat))
+    return seat_lst
 
 @app.post('/api/seat')
 def post_seat():
@@ -98,7 +103,9 @@ def post_info():
 
 @app.get('/api/ticket')
 def get_ticket():
-    pass
+    ticket_list = bus_controller.search_ticket_by_ticket_id('01')
+    for ticket_id, schedule, seat_number in ticket_list:
+        return ticket_id, schedule, seat_number
 
 @app.put('/api/cancel')
 def put_cancel():
