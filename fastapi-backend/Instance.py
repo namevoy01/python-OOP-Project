@@ -625,11 +625,10 @@ bus_controller.add_ticket('01', 'booking', 'A01')
 # check search route by province
 route_list = bus_controller.search_route_by_province('กรุงเทพมหานคร')
 for province_name, source_station, destination_province, destination_station in route_list:
-    print("-----------------------------------------------------------------")
-    print(f"ต้นทาง {province_name} - {destination_province}")
+    print(f"ต้นทาง {province_name} - {source_station}")
     print(f"ปลายทาง {destination_province} - {destination_station}")
     print("-----------------------------------------------------------------")
-    break
+    
 
 # check search ticket by ticket id
 ticket_list = bus_controller.search_ticket_by_ticket_id('01')
@@ -648,10 +647,10 @@ for bus_license, location, seat_lst  in bus_list:
         break
 
 # check search source_station by bus province
-bus_list = bus_controller.search_source_station_by_province('กรุงเทพมหานคร')
-for bus_license, location, seat_lst  in bus_list:
-    print(f"เลขทะเบียนนรถ {bus_license} สถานที่รถอยู่ปัจจุบัน {location}")
-    for seat_number, status_seat in seat_lst:
-        print(f"เลขที่นั่ง {seat_number} สถานะ {status_seat}")
-        print("-----------------------------------------------------------------")
-        break
+# bus_list = bus_controller.search_source_station_by_province('กรุงเทพมหานคร')
+# for bus_license, location, seat_lst  in bus_list:
+#     print(f"เลขทะเบียนนรถ {bus_license} สถานที่รถอยู่ปัจจุบัน {location}")
+#     for seat_number, status_seat in seat_lst:
+#         print(f"เลขที่นั่ง {seat_number} สถานะ {status_seat}")
+#         print("-----------------------------------------------------------------")
+#         break
