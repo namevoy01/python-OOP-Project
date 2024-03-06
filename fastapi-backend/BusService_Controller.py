@@ -104,16 +104,15 @@ class BusService_Controller :
 
     def search_bus_by_bus_license(self, bus_license) :
         return [(bus.get_bus_license, bus.get_location,
-                [seat.get_seat_number for seat in bus.get_seat_lst],
-                [seat.get_status_seat for seat in bus.get_seat_lst])
+                [(seat.get_seat_number, seat.get_status_seat) for seat in bus.get_seat_lst])
                 for bus in self.__bus_lst
                 if bus.get_bus_license == bus_license]
 
-    def search_source_station_by_province(self, province_name) :
-        return {(province_name, route.get_source_station) 
-                for province in self.__province_lst 
-                if province.get_province_name == province_name 
-                for route in province.get_route_lst}
+    # def search_source_station_by_province(self, province_name) :
+    #     return {(province_name, route.get_source_station) 
+    #             for province in self.__province_lst 
+    #             if province.get_province_name == province_name 
+    #             for route in province.get_route_lst}
 
     def comfirm_booking(self, user_id) :
         return 
@@ -125,7 +124,4 @@ class BusService_Controller :
         pass
 
     def send_refund_comfirm_email(self, ticket_id, email) :
-        pass
-
-    def calculate_ticekt_price(self, distance) :
-        pass
+        pass 
