@@ -55,32 +55,33 @@ class BusService_Controller :
     def get_admin_lst(self):
         return self.__admin_lst
     
-    def get_booked_seat(self, bus_license, seat_number):
-        for bus in self.bus_lst:
-            if bus.get_license == bus_license:
-                for trip in bus.get_trip_lst:
-                    for schedule in trip.get_schedule_lst:
-                        for seat in schedule.get_seat_lst:
-                            if seat.get_seat_number == seat_number:
-                                seat.set_status(False)
-                                return
-
     def get_next_station(self, bus_license) :
         pass
 
-    def add_passenger(self, user_id, name, gender, tel, email, status_payment) :
-        new_passenger = Passenger(email, status_payment)
-        new_user = User(user_id, name, gender, tel)
-        self.__passenger_lst.append(new_passenger, new_user)
+    def add_passenger(self, user_id, name, gender, tel, email, status_payment):
+        new_passenger = Passenger(user_id, name, gender, tel, email, status_payment)
+        self.__passenger_lst.append(new_passenger)
+        return new_passenger
         
     def add_admin(self, user_id, username, password, name, gender, tel, email, status_payment) :
         new_admin = Admin(user_id, username, password, name, gender, tel, email, status_payment)
         self.__admin_lst.append(new_admin)
+        return new_admin
+    
+    def add_schedule(self, schedule_id, route, departure_date) :
+        route_id = Route.get_route_id
+        source_province = self.get_provine_lst
+        source_station = Route.get_route_id
+        destination_province = Route.get_destination_province
+        destination_station = Route.get_destination_station
+        route = Route(route_id, source_province, source_station, destination_province,destination_station)
+        new_schedule = Schedule(schedule_id, route, departure_date)
+        self.__province_lst.append(new_schedule)
 
     def add_province(self, province) :
         self.__province_lst.append(province)
 
-    def add_bus_trip_lst(self, bustrip_id, bus, schedule) :
+    def add_bus_trip(self, bustrip_id, bus, schedule) :
         new_booking = Booking(bustrip_id, bus, schedule)
         self.__booking_lst.append(new_booking)
 
@@ -111,12 +112,6 @@ class BusService_Controller :
                 [(seat.get_seat_number, seat.get_status_seat) for seat in bus.get_seat_lst])
                 for bus in self.__bus_lst
                 if bus.get_bus_license == bus_license]
-
-    # def search_source_station_by_province(self, province_name) :
-    #     return {(province_name, route.get_source_station) 
-    #             for province in self.__province_lst 
-    #             if province.get_province_name == province_name 
-    #             for route in province.get_route_lst}
 
     def comfirm_booking(self, user_id) :
         return
