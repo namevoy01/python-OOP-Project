@@ -14,7 +14,7 @@ from Seat import Seat
 from Station import Station
 from Ticket import Ticket
 from User import User
-from Instance import create_instance,get_controller
+from Instance import create_instance, get_controller
 from BusService_Controller import BusService_Controller
 
 app = FastAPI()
@@ -49,7 +49,7 @@ def get_source_province():
     
 @app.get('/api/source_station')
 def get_source_station():
-    route_list = bus_controller.search_route_by_province('กรุงเทพมหานคร')
+    route_list = bus_controller.search_route_by_province('กระบี่')
     for province_name, source_station, destination_province, destination_station in route_list:
         return source_station
 
