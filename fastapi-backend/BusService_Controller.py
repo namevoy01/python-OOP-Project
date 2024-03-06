@@ -80,8 +80,12 @@ class BusService_Controller :
     def add_province(self, province) :
         self.__province_lst.append(province)
 
-    def add_booking(self, booking_id, name_passenger, payment_option, amount, date, payment) :
-        new_booking = Booking(booking_id, name_passenger, payment_option, amount, date, payment)
+    def add_bus_trip_lst(self, bustrip_id, bus, schedule) :
+        new_booking = Booking(bustrip_id, bus, schedule)
+        self.__booking_lst.append(new_booking)
+
+    def add_booking(self, booking_id, name_passenger, payment_option, amount, date, payment, bus_trip_lst) :
+        new_booking = Booking(booking_id, name_passenger, payment_option, amount, date, payment, bus_trip_lst)
         self.__booking_lst.append(new_booking)
 
     def add_bus(self, bus) :
@@ -115,7 +119,7 @@ class BusService_Controller :
     #             for route in province.get_route_lst}
 
     def comfirm_booking(self, user_id) :
-        return 
+        return
 
     def cancel_ticket(self, ticket_id, phone_number)  :
         pass
@@ -124,4 +128,4 @@ class BusService_Controller :
         pass
 
     def send_refund_comfirm_email(self, ticket_id, email) :
-        pass 
+        pass
