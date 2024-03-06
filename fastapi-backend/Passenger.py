@@ -18,3 +18,6 @@ class Passenger(User) :
     @property
     def get_status_payment(self):
         return self.__status_payment
+    
+    def set_status_payment(self, status):
+        self.__status_payment = status
