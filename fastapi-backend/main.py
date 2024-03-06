@@ -61,6 +61,7 @@ def get_source_station():
 
 @app.get('/api/destination_province')
 def get_destination_province():
+<<<<<<< Updated upstream
     destination_province = set()
     target_source_province = 'กรุงเทพมหานคร'
     target_source_station = 'สถานีขนส่งผู้โดยสารกรุงเทพฯ (หมอชิต 2)'
@@ -72,10 +73,17 @@ def get_destination_province():
                     destination_province.add(route.get_destination_province)
     
     return list(destination_province)
+=======
+    route_list = bus_controller.search_route_by_province('กรุงเทพมหานคร')
+    for province_name, source_station, destination_province, destination_station in route_list:
+        return destination_province
+>>>>>>> Stashed changes
 
 @app.get('/api/destination_station')
 def get_destination_station():
-    pass
+    route_list = bus_controller.search_route_by_province('กรุงเทพมหานคร')
+    for province_name, source_station, destination_province, destination_station in route_list:
+        return destination_station
 
 @app.get('/api/date_trip')
 def get_date_trip():
