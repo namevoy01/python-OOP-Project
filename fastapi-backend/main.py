@@ -49,41 +49,32 @@ def get_source_province():
     
 @app.get('/api/source_station')
 def get_source_station():
-    source_stations = set()
-    province_name = 'กรุงเทพมหานคร'
-    
-    for province in bus_controller.get_province_lst:
-        if province.get_province_name == province_name:
-            for route in province.get_route_lst:
-                source_stations.add(route.get_source_station)
-    
-    return(list(source_stations))
+    route_list = bus_controller.search_route_by_province('กรุงเทพมหานคร')
+    for province_name, source_station, destination_province, destination_station in route_list:
+        return source_station
 
 @app.get('/api/destination_province')
 def get_destination_province():
-<<<<<<< Updated upstream
-    destination_province = set()
-    target_source_province = 'กรุงเทพมหานคร'
-    target_source_station = 'สถานีขนส่งผู้โดยสารกรุงเทพฯ (หมอชิต 2)'
-    
-    for province in bus_controller.get_province_lst:
-        if province.get_province_name == target_source_province:
-            for route in province.get_route_lst:
-                if route.get_source_station == target_source_station:
-                    destination_province.add(route.get_destination_province)
-    
-    return list(destination_province)
-=======
+    destination_province_set = set()
     route_list = bus_controller.search_route_by_province('กรุงเทพมหานคร')
-    for province_name, source_station, destination_province, destination_station in route_list:
-        return destination_province
->>>>>>> Stashed changes
+    for route in route_list:
+        province_name, source_station, destination_province, destination_station = route
+        if source_station == 'สถานีขนส่งผู้โดยสารกรุงเทพฯ (หมอชิต 2)':
+            destination_province_set.add(destination_province)
+    destination_provinces_lst = list(destination_province_set)
+    return destination_provinces_lst
 
 @app.get('/api/destination_station')
 def get_destination_station():
+    destination_station_set = set()
     route_list = bus_controller.search_route_by_province('กรุงเทพมหานคร')
-    for province_name, source_station, destination_province, destination_station in route_list:
-        return destination_station
+    for route in route_list:
+        province_name, source_station, destination_province, destination_station = route
+        if source_station == 'สถานีขนส่งผู้โดยสารกรุงเทพฯ (หมอชิต 2)':
+            if destination_province == 'กาญจนบุรี':
+                destination_station_set.add(destination_station)
+    destination_stations_lst = list(destination_station_set)
+    return destination_stations_lst
 
 @app.get('/api/date_trip')
 def get_date_trip():
