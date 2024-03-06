@@ -647,11 +647,11 @@ for bus_license, location, seat_lst  in bus_list:
         print("-----------------------------------------------------------------")
         break
 
-# # check search source_station by bus province
-# bus_list = bus_controller.search_source_station_by_province('กรุงเทพมหานคร')
-# for bus_license, location, seat_lst  in bus_list:
-#     print(f"เลขทะเบียนนรถ {bus_license} สถานที่รถอยู่ปัจจุบัน {location}")
-#     for seat_number, status_seat in seat_lst:
-#         print(f"เลขที่นั่ง {seat_number} สถานะ {status_seat}")
-#         print("-----------------------------------------------------------------")
-#         break
+# check search source_station by bus province
+bus_list = bus_controller.search_source_station_by_province('กรุงเทพมหานคร')
+for bus_license, location, seat_lst  in bus_list:
+    print(f"เลขทะเบียนนรถ {bus_license} สถานที่รถอยู่ปัจจุบัน {location}")
+    for seat_number, status_seat in seat_lst:
+        print(f"เลขที่นั่ง {seat_number} สถานะ {status_seat}")
+        print("-----------------------------------------------------------------")
+        break
