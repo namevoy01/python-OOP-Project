@@ -13,7 +13,7 @@ from Ticket import Ticket
 from User import User
 from BusService_Controller import BusService_Controller
 
-bus_controller = BusService_Controller([], [], [], [], [], [])
+bus_controller = BusService_Controller([], [], [], [], [], [], [], [])
 
 def get_controller():
     return bus_controller
@@ -619,34 +619,39 @@ def create_instance():
 
 create_instance()
 
-print("รายการจังหวัดและเส้นทาง:")
-print([province.get_province_name for province in bus_controller.get_province_lst])
-print([bus.get_bus_number for bus in bus_controller.get_bus_lst])
-
-def search_ticket_by_ticket_id(self, ticket_id) :
-    return {(ticket.get_ticket_id, ticket.get_schedule, ticket.get_seat_number)
-            for ticket in self.__ticket_lst
-            if ticket.get_ticket_id == ticket_id
-            for ticket in ticket.get_ticket_lst}
-
-bus_controller.search_ticket_by_ticket_id('001')
-
 bus_controller.add_booking('001', 'chamaiporn', 'credit card', 540, '10-02-2024', 'payment')
 bus_controller.add_ticket('01', 'booking', 'A01')
 
-# show_booking = [booking.get_booking_id for booking in bus_controller.get_booking_lst]
-# print(show_booking)
+# check search route by province
+route_list = bus_controller.search_route_by_province('กรุงเทพมหานคร')
+for province_name, source_station, destination_province, destination_station in route_list:
+    print("-----------------------------------------------------------------")
+    print(f"ต้นทาง {province_name} - {destination_province}")
+    print(f"ปลายทาง {destination_province} - {destination_station}")
+    print("-----------------------------------------------------------------")
+    break
 
-show_ticket = [ticket.get_ticket_id for ticket in bus_controller.get_ticket_lst]
-print(show_ticket)
-
-## check search route by province
-# route_list = bus_controller.search_route_by_province('กรุงเทพมหานคร')
-# for route_info in route_list:
-#     destination_province, destination_station = route_info
-#     print(f"{destination_province} {destination_station}")
-
+# check search ticket by ticket id
 ticket_list = bus_controller.search_ticket_by_ticket_id('01')
-for ticket in ticket_list:
-    ticket_id, ticket_id, seat_number = ticket
-    print(f"{ticket_id} {ticket_id} {seat_number}")
+for ticket_id, schedule, seat_number in ticket_list:
+    print(f"{ticket_id} รอบรถคือ {schedule} หมายเลขที่นั่ง {seat_number}")
+    print("-----------------------------------------------------------------")
+    break
+
+# check search bus by bus license
+bus_list = bus_controller.search_bus_by_bus_license('1นค5463')
+for bus_license, location, seat_lst  in bus_list:
+    print(f"เลขทะเบียนนรถ {bus_license} สถานที่รถอยู่ปัจจุบัน {location}")
+    for seat_number, status_seat in seat_lst:
+        print(f"เลขที่นั่ง {seat_number} สถานะ {status_seat}")
+        print("-----------------------------------------------------------------")
+        break
+
+# # check search source_station by bus province
+# bus_list = bus_controller.search_source_station_by_province('กรุงเทพมหานคร')
+# for bus_license, location, seat_lst  in bus_list:
+#     print(f"เลขทะเบียนนรถ {bus_license} สถานที่รถอยู่ปัจจุบัน {location}")
+#     for seat_number, status_seat in seat_lst:
+#         print(f"เลขที่นั่ง {seat_number} สถานะ {status_seat}")
+#         print("-----------------------------------------------------------------")
+#         break
