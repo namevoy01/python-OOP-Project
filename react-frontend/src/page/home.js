@@ -4,27 +4,57 @@ import Navbar from '../component/navbar';
 import { Link } from 'react-router-dom';
 
 function Home() {
-    const [data, setData] = useState([]);
+
+    const [selectedProvince, setSelectedProvince] = useState('');
+    const [source_province, set_source_province] = useState([]);
 
     useEffect(() => {
-        // Fetch data from API endpoint
-        fetch('http://127.0.0.1:8000/api/data')  // ระบุ URL ของ FastAPI Back-end
+        fetch('http://127.0.0.1:8000/api/source_province')
             .then(response => response.json())
-            .then(data => setData(data))
+            .then(source_province => set_source_province(source_province))
             .catch(error => console.error('Error fetching data:', error));
 
     }, []);
 
+    const [selectedStation, setSourceStation] = useState('');
+    const [source_station, set_source_station] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch(`http://127.0.0.1:8000/api/source_station?source_province=${encodeURIComponent(selectedProvince)}`);
+                const data = await response.json();
+                set_source_station(data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchData();
+    }, [selectedProvince]);
 
 
+    const handleProvinceChange = (event) => {
+        const selectedValue = event.target.value;
+        setSelectedProvince(selectedValue);
+
+        // เพิ่มโค้ดอื่น ๆ ที่คุณต้องการทำเมื่อมีการเลือกจังหวัด
+        // เช่น การดึงข้อมูลจาก API หรือปรับแต่งการแสดงผล
+    };
+
+    const handleStationChange = (event) => {
+        const selectedStation = event.target.value;
+        setSourceStation(selectedStation);
+
+        // เพิ่มโค้ดอื่น ๆ ที่คุณต้องการทำเมื่อมีการเลือกจังหวัด
+        // เช่น การดึงข้อมูลจาก API หรือปรับแต่งการแสดงผล
+    };
 
     return (
         <div>
-            <ul>
-                {data.map(item => (
-                    <li key={item.id}>{item.name}</li>
-                ))}
-            </ul>
+            <p>จังหวัดที่เลือก: {selectedProvince}</p>
+            <p>{source_station}</p>
+
             <Navbar />
             <div className="max-w-screen-2xl mx-auto">
                 <div className='flex justify-between'>
@@ -51,24 +81,27 @@ function Home() {
                         <div className=''>
                             จังหวัดต้นทาง
                             <form className="mt-3">
-                                <select id="countries" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option selected>Choose a country</option>
-                                    <option value="US">United States</option>
-                                    <option value="CA">Canada</option>
-                                    <option value="FR">France</option>
-                                    <option value="DE">Germany</option>
+                                <select id="Province"
+                                    value={selectedProvince}
+                                    onChange={handleProvinceChange}
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+                                    <option id='source_province'>เลือกจังหวัดต้นทาง</option>
+                                    {source_province.map((province, index) => (
+                                        <option key={index} value={province}>{province}</option>
+                                    ))}
+
                                 </select>
                             </form>
                         </div>
                         <div>
                             จุดขึ้นรถ
                             <form className="mt-3">
-                                <select id="countries" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option selected>Choose a country</option>
-                                    <option value="US">United States</option>
-                                    <option value="CA">Canada</option>
-                                    <option value="FR">France</option>
-                                    <option value="DE">Germany</option>
+                                <select id="station" onChange={handleStationChange} value={selectedStation} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option selected>เลือกจุดขึ้นรถ</option>
+                                    {source_station.map((station, index) => (
+                                        <option key={index} value={station}>{station}</option>
+                                    ))}
                                 </select>
                             </form>
                         </div>
