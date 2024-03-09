@@ -1,10 +1,9 @@
 class Province :
     province_id = 0
-    def __init__(self, province_name, route_lst):
+    def __init__(self, province_name):
         Province.province_id += 1
         self.__province_id = Province.province_id
         self.__province_name = province_name
-        self.__route_lst = []
 
     @property
     def get_province_id(self):
