@@ -2070,9 +2070,15 @@ create_instance()
 #                            540,
 #                            '10-02-2024')
 
-# bus_controller.add_ticket('01',
-#                           'booking',
-#                           'A01')
+# ticket_lst = bus_controller.add_ticket('booking', 'A01')
+# show = bus_controller.search_ticket_by_ticket_id('1')
+# for t in show:
+#     print(t.get_ticket_id, t.get_booking, t.get_seat_number)
+
+
+# for ticket in ticket_lst:
+#     print(ticket.get_ticket_id)
+
 
 ## check add schdule ##
 # schedule = bus_controller.add_schedule('กรุงเทพมหานคร', '')
