@@ -37,6 +37,8 @@ data = [
     {"id": 3, "name": "Item 3"},
 ]
 
+
+
 # API endpoint
 @app.get('/api/data')
 def get_data():
