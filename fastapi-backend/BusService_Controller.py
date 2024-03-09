@@ -67,22 +67,30 @@ class BusService_Controller :
         new_admin = Admin(user_id, username, password, name, gender, tel, email, status_payment)
         self.__admin_lst.append(new_admin)
         return new_admin
+    
+    def add_schedule(self, schedule_id, route, departure_date) :
+        route_id = Route.get_route_id
+        source_province = self.get_provine_lst
+        source_station = Route.get_route_id
+        destination_province = Route.get_destination_province
+        destination_station = Route.get_destination_station
+        route = Route(route_id, source_province, source_station, destination_province,destination_station)
+        new_schedule = Schedule(schedule_id, route, departure_date)
+        self.__province_lst.append(new_schedule)
 
     def add_province(self, province) :
         self.__province_lst.append(province)
 
-    def add_booking(self, name_passenger, payment_option, amount, date, payment, bus_trip_lst) :
-        new_booking = Booking(name_passenger, payment_option, amount, date, payment, bus_trip_lst)
+    def add_booking(self, name_passenger, payment_option, amount, date) :
+        new_booking = Booking(name_passenger, payment_option, amount, date)
         self.__booking_lst.append(new_booking)
+        return new_booking
         
-    def add_bus_trip(self, bus, booking) :
-        new_booking = Booking(bus, booking)
-        self.__booking_lst.append(new_booking)
-        
-    def add_schedule(self, source_province, departure_date) :
-        route = controller.search_route_by_province(source_province)
-        new_schedule = Schedule(route, departure_date)
-        self.__province_lst.append(new_schedule)
+    # def add_schedule(self, name_passenger) :
+    #     new_schedule = Schedule(departure_date)
+    #     departure_date = self.search_booking_by_name_passenger(name_passenger)
+    #     self.__province_lst.append(new_schedule)
+    #     route.add_schedule(route)
 
     def add_bus(self, bus) :
         self.__bus_lst.append(bus)
@@ -92,21 +100,24 @@ class BusService_Controller :
         self.__ticket_lst.append(new_ticket)
 
     def search_route_by_province(self, province_name):
-        return {(province_name, route.get_source_station, route.get_destination_province, route.get_destination_station) 
-                for province in self.__province_lst 
-                if province.get_province_name == province_name 
-                for route in province.get_route_lst}
-
+        for province in self.__province_lst:
+            if province.get_province_name == province_name:
+                return [province]
+            
     def search_ticket_by_ticket_id(self, ticket_id) :
-        return [(ticket.get_ticket_id, ticket.get_schedule, ticket.get_seat_number)
-                for ticket in self.__ticket_lst
-                if ticket.get_ticket_id == ticket_id]
+        for ticket in self.__ticket_lst:
+            if ticket.ticket_id == ticket_id:
+                return ticket
+            
+    def search_booking_by_name_passenger(self, name_passenger) :
+        for passenger in self.__passenger_lst:
+            if passenger.name_passenger == name_passenger:
+                return passenger
 
     def search_bus_by_bus_license(self, bus_license) :
-        return [(bus.get_bus_license, bus.get_location,
-                [(seat.get_seat_number, seat.get_status_seat) for seat in bus.get_seat_lst])
-                for bus in self.__bus_lst
-                if bus.get_bus_license == bus_license]
+        for bus in self.__bus_lst:
+            if bus.bus_license == bus_license:
+                return bus
 
     def comfirm_booking(self, user_id) :
         return
@@ -119,5 +130,3 @@ class BusService_Controller :
 
     def send_refund_comfirm_email(self, ticket_id, email) :
         pass
-
-controller = BusService_Controller
