@@ -1,6 +1,8 @@
 class Seat :
-    def __init__(self, seat_id, seat_number , status_seat=False):
-        self.__seat_id = seat_id
+    seat_id = 0
+    def __init__(self, seat_number , status_seat=False):
+        Seat.seat_id += 1
+        self.__seat_id = Seat.seat_id
         self.__seat_number = seat_number
         self.__status_seat = status_seat
 
