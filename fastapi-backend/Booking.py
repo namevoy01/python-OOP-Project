@@ -1,6 +1,8 @@
 class Booking:
-    def __init__(self, booking_id, name_passenger, payment_option, amount, date, payment, trip_lst):
-        self.__booking_id  = booking_id 
+    booking_id = 0
+    def __init__(self, name_passenger, payment_option, amount, date, payment, trip_lst):
+        Booking.booking_id += 1
+        self.__booking_id  = Booking.booking_id 
         self.__name_passenger = name_passenger
         self.__payment_option = payment_option
         self.__amount = amount
