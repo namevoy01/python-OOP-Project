@@ -1,6 +1,8 @@
 class BusTrip :
-    def __init__(self, bustrip_id , bus, schedule):
-        self.__bustrip_id = bustrip_id
+    bus_trip_id = 0
+    def __init__(self, bus, schedule):
+        BusTrip.bus_trip_id += 1
+        self.__bustrip_id = BusTrip.bustrip_id
         self.__bus = bus
         self.__schedule = schedule
 
