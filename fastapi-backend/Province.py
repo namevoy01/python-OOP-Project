@@ -1,7 +1,9 @@
 class Province :
-    def __init__(self, province_id , province_name, route_lst):
-        self.__province_id = province_id
-        self.__province_name= province_name
+    province_id = 0
+    def __init__(self, province_name, route_lst):
+        Province.province_id += 1
+        self.__province_id = Province.province_id
+        self.__province_name = province_name
         self.__route_lst = []
 
     @property
