@@ -1,6 +1,8 @@
 class Station:
-    def __init__(self, station_id, name_station):
-        self.__station_id = station_id
+    station_id = 0
+    def __init__(self, name_station):
+        Station.station_id += 1
+        self.__station_id = Station.station_id
         self.__name_station = name_station
 
     @property
