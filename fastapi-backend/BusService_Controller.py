@@ -61,12 +61,12 @@ class BusService_Controller :
     def add_passenger(self, user_id, name, gender, tel, email, status_payment):
         new_passenger = Passenger(user_id, name, gender, tel, email, status_payment)
         self.__passenger_lst.append(new_passenger)
-        return new_passenger
+        return self.__passenger_lst
         
     def add_admin(self, user_id, username, password, name, gender, tel, email, status_payment) :
         new_admin = Admin(user_id, username, password, name, gender, tel, email, status_payment)
         self.__admin_lst.append(new_admin)
-        return new_admin
+        return self.__admin_lst
     
     def add_schedule(self, schedule_id, route, departure_date) :
         route_id = Route.get_route_id
@@ -77,6 +77,7 @@ class BusService_Controller :
         route = Route(route_id, source_province, source_station, destination_province,destination_station)
         new_schedule = Schedule(schedule_id, route, departure_date)
         self.__province_lst.append(new_schedule)
+        return self.__schedule_lst
 
     def add_province(self, province) :
         self.__province_lst.append(province)
@@ -84,7 +85,7 @@ class BusService_Controller :
     def add_booking(self, name_passenger, payment_option, amount, date) :
         new_booking = Booking(name_passenger, payment_option, amount, date)
         self.__booking_lst.append(new_booking)
-        return new_booking
+        return self.__booking_lst
         
     # def add_schedule(self, name_passenger) :
     #     new_schedule = Schedule(departure_date)
@@ -95,9 +96,10 @@ class BusService_Controller :
     def add_bus(self, bus) :
         self.__bus_lst.append(bus)
     
-    def add_ticket(self, ticket_id , booking, seat_number):
-        new_ticket = Ticket(ticket_id , booking, seat_number)
+    def add_ticket(self, booking, seat_number):
+        new_ticket = Ticket(booking, seat_number)
         self.__ticket_lst.append(new_ticket)
+        return self.__ticket_lst
 
     def search_route_by_province(self, province_name):
         for province in self.__province_lst:
@@ -105,19 +107,21 @@ class BusService_Controller :
                 return [province]
             
     def search_ticket_by_ticket_id(self, ticket_id) :
+        ticket = []
         for ticket in self.__ticket_lst:
-            if ticket.ticket_id == ticket_id:
-                return ticket
+            if ticket.get_ticket_id == ticket_id:
+                ticket.append(ticket.get_ticket_id, ticket.get_booking, ticket.get_seat_number)
+        return ticket
             
     def search_booking_by_name_passenger(self, name_passenger) :
         for passenger in self.__passenger_lst:
-            if passenger.name_passenger == name_passenger:
-                return passenger
+            if passenger.get_name_passenger == name_passenger:
+                return [passenger]
 
     def search_bus_by_bus_license(self, bus_license) :
         for bus in self.__bus_lst:
-            if bus.bus_license == bus_license:
-                return bus
+            if bus.get_bus_license == bus_license:
+                return [bus]
 
     def comfirm_booking(self, user_id) :
         return
