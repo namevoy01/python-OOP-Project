@@ -1,6 +1,8 @@
 class User :
-    def __init__(self, user_id, name, gender, tel):
-        self.__user_id = user_id
+    user_id = 0
+    def __init__(self, name, gender, tel):
+        User.user_id += 1
+        self.__user_id = User.user_id
         self.__name = name 
         self.__gender  =  gender
         self.__tel = tel 
