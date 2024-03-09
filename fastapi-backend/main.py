@@ -46,33 +46,33 @@ def get_data():
 def get_source_province():
     source_province = [province.get_province_name for province in bus_controller.get_province_lst]
     return source_province
-    
-@app.get('/api/source_station')
-def get_source_station():
-    route_list = bus_controller.search_route_by_province('กระบี่')
+  
+@app.get('/api/source_station')  
+def get_source_station(source_province):
+    source_station_set = set()
+    route_list = bus_controller.search_route_by_province(source_province)
     for province_name, source_station, destination_province, destination_station in route_list:
-        return source_station
+        source_station_set.add(source_station)
+    source_station_lst = list(source_station_set)
+    return source_station_lst
 
 @app.get('/api/destination_province')
-def get_destination_province():
+def get_destination_province(source_province, source_station):
     destination_province_set = set()
-    route_list = bus_controller.search_route_by_province('กรุงเทพมหานคร')
-    for route in route_list:
-        province_name, source_station, destination_province, destination_station = route
-        if source_station == 'สถานีขนส่งผู้โดยสารกรุงเทพฯ (หมอชิต 2)':
+    route_list = bus_controller.search_route_by_province(source_province)
+    for province_name, route_source_station, destination_province, destination_station in route_list:
+        if route_source_station == source_station:
             destination_province_set.add(destination_province)
     destination_provinces_lst = list(destination_province_set)
     return destination_provinces_lst
 
 @app.get('/api/destination_station')
-def get_destination_station():
+def get_destination_station(source_province, source_station, destination_province):
     destination_station_set = set()
-    route_list = bus_controller.search_route_by_province('กรุงเทพมหานคร')
-    for route in route_list:
-        province_name, source_station, destination_province, destination_station = route
-        if source_station == 'สถานีขนส่งผู้โดยสารกรุงเทพฯ (หมอชิต 2)':
-            if destination_province == 'กาญจนบุรี':
-                destination_station_set.add(destination_station)
+    route_list = bus_controller.search_route_by_province(source_province)
+    for province_name, route_source_station, route_destination_province, destination_station in route_list:
+        if route_source_station == source_station and route_destination_province == destination_province:
+            destination_station_set.add(destination_station)
     destination_stations_lst = list(destination_station_set)
     return destination_stations_lst
 
