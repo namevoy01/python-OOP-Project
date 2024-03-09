@@ -68,15 +68,10 @@ class BusService_Controller :
         self.__admin_lst.append(new_admin)
         return new_admin
     
-    def add_schedule(self, schedule_id, route, departure_date) :
-        route_id = Route.get_route_id
-        source_province = self.get_provine_lst
-        source_station = Route.get_route_id
-        destination_province = Route.get_destination_province
-        destination_station = Route.get_destination_station
-        route = Route(route_id, source_province, source_station, destination_province,destination_station)
-        new_schedule = Schedule(schedule_id, route, departure_date)
-        self.__province_lst.append(new_schedule)
+    # def add_schedule(self, source_province, departure_date) :
+    #     route = controller.search_route_by_province(source_province)
+    #     new_schedule = Schedule(schedule_id, route, departure_date)
+    #     self.__province_lst.append(new_schedule)
 
     def add_province(self, province) :
         self.__province_lst.append(province)
@@ -85,9 +80,9 @@ class BusService_Controller :
         new_booking = Booking(bustrip_id, bus, schedule)
         self.__booking_lst.append(new_booking)
 
-    def add_booking(self, booking_id, name_passenger, payment_option, amount, date, payment, bus_trip_lst) :
-        new_booking = Booking(booking_id, name_passenger, payment_option, amount, date, payment, bus_trip_lst)
-        self.__booking_lst.append(new_booking)
+    # def add_booking(self, booking_id, name_passenger, payment_option, amount, date, payment, bus_trip_lst) :
+    #     new_booking = Booking(booking_id, name_passenger, payment_option, amount, date, payment, bus_trip_lst)
+    #     self.__booking_lst.append(new_booking)
 
     def add_bus(self, bus) :
         self.__bus_lst.append(bus)
@@ -124,3 +119,5 @@ class BusService_Controller :
 
     def send_refund_comfirm_email(self, ticket_id, email) :
         pass
+
+controller = BusService_Controller
