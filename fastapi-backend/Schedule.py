@@ -1,6 +1,8 @@
 class Schedule:
-    def __init__(self, schedule_id, route, departure_date):
-        self.__schedule_id = schedule_id
+    schedule_id = 0
+    def __init__(self, route, departure_date):
+        Schedule.schedule_id += 1
+        self.__schedule_id = Schedule.schedule_id
         self.__route = route
         self.__departure_date = departure_date 
  
