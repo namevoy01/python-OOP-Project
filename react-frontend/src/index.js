@@ -5,8 +5,10 @@ import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from './page/home';
 import Travel from './page/Travel';
+import Seat from './page/seat';
+import Inputfill from './page/Inputfill';
+import Ticket from './page/ticket';
 import Error from './page/error404';
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -15,6 +17,18 @@ const router = createBrowserRouter([
   {
     path: "travel",
     element: <Travel />
+  },
+  {
+    path: "inputfill",
+    element: <Inputfill />
+  },
+  {
+    path: "ticket",
+    element: <Ticket />
+  },
+  {
+    path: "seat",
+    element: <Seat />
   },
   {
     path: "*",

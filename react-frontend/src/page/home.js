@@ -51,11 +51,11 @@ function Home() {
 
     return (
         <div>
-            <p>จังหวัดที่เลือก: {selectedProvince}</p>
-            <p>{selectedStation}</p>
+            {/* <p>จังหวัดที่เลือก: {selectedProvince}</p>
+            <p>{selectedStation}</p> */}
 
             <Navbar />
-            <div className="max-w-screen-2xl mx-auto">
+            <div className="max-w-screen-2xl mx-auto xl:w-10/12 lg: w-10/12">
                 <div className='flex justify-between'>
                     <div className='mt-5 text-2xl mb-8'>
                         ค้นหาเที่ยวรถ

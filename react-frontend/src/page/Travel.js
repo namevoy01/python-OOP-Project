@@ -4,16 +4,13 @@ import { Link } from 'react-router-dom';
 
 function Travel() {
 
-
-
-
     return (
 
 
         <div>
 
             <Navbar />
-            <div className="max-w-screen-2xl mx-auto">
+            <div className="max-w-screen-2xl mx-auto xl:w-10/12 lg: w-10/12">
                 <div className='flex justify-between'>
                     <div className='mt-5 text-2xl mb-8'>
                         เลือกเที่ยวรถ
@@ -367,7 +364,7 @@ function Travel() {
                 <div className='flex justify-center mt-20'>
                     <Link to="/"><button type="button" class="text-white bg-gradient-to-r from-gray-400 via-gray-500 to-gray-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-gray-300 dark:focus:ring-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2   text-lg mt-5">กลับไปค้นหาเที่ยวรถ</button></Link>
 
-                    <button type="button" class="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 text-lg mt-5">ดำเนินการต่อ</button>
+                    <Link to="/seat"><button type="button" class="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 text-lg mt-5">เลือกที่นั่ง</button></Link>
                 </div>
             </div>
 
