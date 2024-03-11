@@ -37,8 +37,6 @@ data = [
     {"id": 3, "name": "Item 3"},
 ]
 
-
-
 # API endpoint
 @app.get('/api/data')
 def get_data():
@@ -51,43 +49,29 @@ def get_source_province():
   
 @app.get('/api/source_station')  
 def get_source_station(source_province):
-    source_station_set = set()
-    province_lst = bus_controller.search_route_by_province(source_province)
-    for province in province_lst:
-        for route in province.get_route_lst:
-            if province.get_province_name == source_province:
-                source_station_set.add(route.get_source_station)
-    source_station_lst = list(source_station_set)
-    return source_station_lst
+    source_station = bus_controller.search_source_station(source_province)
+    return source_station
 
 @app.get('/api/destination_province')
 def get_destination_province(source_province, source_station):
-    destination_province_set = set()
-    province_lst = bus_controller.search_route_by_province(source_province)
-    for province in province_lst:
-        for route in  province.get_route_lst:
-            if province.get_province_name == source_province and route.get_source_station == source_station:
-                destination_province_set.add(route.get_destination_province)
-    destination_provinces_lst = list(destination_province_set)
-    return destination_provinces_lst
+    destination_province = bus_controller.search_destination_province(source_province, source_station)
+    return destination_province
 
 @app.get('/api/destination_station')
 def get_destination_station(source_province, source_station, destination_province):
-    destination_station_set = set()
-    province_lst = bus_controller.search_route_by_province(source_province)
-    for province in province_lst:
-        for route in province.get_route_lst:
-            if province.get_province_name == source_province and route.get_source_station == source_station and route.get_destination_province == destination_province:
-                destination_station_set.add(route.get_destination_station)
-    destination_stations_lst = list(destination_station_set)
-    return destination_stations_lst
+    destination_station = bus_controller.search_destination_station(source_province, source_station,destination_province)
+    return destination_station
 
 @app.get('/api/date_trip')
 def get_date_trip():
     pass
 
+@app.get('/api/booking')
+def get_booking(name_passenger, payment_option, amount, date, bus_license, province_name, bus_trip):
+    pass
+
 @app.get('/api/trip')
-def get_trip():
+def get_trip(source_province, destination_province):
     pass
 
 @app.get('/api/seat')
