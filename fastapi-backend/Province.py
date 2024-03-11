@@ -4,6 +4,7 @@ class Province :
         Province.province_id += 1
         self.__province_id = Province.province_id
         self.__province_name = province_name
+        self.__route_lst = []
 
     @property
     def get_province_id(self):
