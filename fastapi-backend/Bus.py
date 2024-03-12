@@ -1,6 +1,6 @@
 class Bus:
     bus_id = 0
-    def __init__(self, bus_license, location, seat_list):
+    def __init__(self, bus_license, location, seat_lst):
         Bus.bus_id += 1
         self.__bus_id = Bus.bus_id
         self.__bus_license = bus_license

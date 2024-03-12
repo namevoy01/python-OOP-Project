@@ -33,8 +33,7 @@ def create_instance():
                     'กรุงเทพมหานคร',
                     'ท่าอากาศยานสุวรรณภูมิ',
                     100,
-                    '1นค5463',
-                    '08.40'))
+                    '1นค5463'))
     bangkok.add_route(Route('สถานีขนส่งผู้โดยสารกรุงเทพฯ (หมอชิต 2)',
                     'กรุงเทพมหานคร',
                     'สถานีขนส่งผู้โดยสารกรุงเทพฯ (รังสิต)',
@@ -2379,16 +2378,15 @@ print("-----------------------------------------------------------------")
 
 
 # search bus trip and add bus trip ##
-bus_controller.add_bus_trip('1นค5463', 'กรุงเทพมหานคร', 'ท่าอากาศยานสุวรรณภูมิ', 'กาญจนบุรี', 'จุดจอด อ.สังขละบุรี', '22-11-2024', '08.40')
-for trip in bus_controller.get_bus_trip_lst:
-    province = trip.get_province
-    route = trip.get_route
-    departure_date = trip.get_departure_date
-    departure_time = trip.get_departure_time
-    print(trip.get_bus, province.get_province_name, route.get_source_station)
-    # for seat in bus:
-    #     print(seat.get_seat_number)
-# bus_controller.search_bus_trip_by_bus_license('1นค5463')
+# bus_controller.add_bus_trip('1นค5463', 'กรุงเทพมหานคร', 'ท่าอากาศยานสุวรรณภูมิ', 'กาญจนบุรี', 'จุดจอด อ.สังขละบุรี', '22-11-2024', '08.40')
+# for trip in bus_controller.get_bus_trip_lst:
+#     province = trip.get_province
+#     route = trip.get_route
+#     departure_date = trip.get_departure_date
+#     departure_time = trip.get_departure_time
+#     print(trip.get_bus, province.get_province_name, route.get_destination_province)
+
+# bus_controller.search_price_by_route('กรุงเทพมหานคร', 'ท่าอากาศยานสุวรรณภูมิ', 'กาญจนบุรี', 'จุดจอด อ.สังขละบุรี')
 
 # search = bus_controller.search_seat_by_bus_license('1นค5463', 'A01')
 
@@ -2398,3 +2396,25 @@ for trip in bus_controller.get_bus_trip_lst:
 # add_booking = bus_controller.add_booking('chamaiporn', 'Credit Card', 500, '20-11-2024', '1นค5463', 'กรุงเทพมหานคร', 'ท่าอากาศยานสุวรรณภูมิ', 'ชลบุรี', 'จุดจอด กม10')
 # for book in add_booking:
 #     print(book.get_booking_id)
+
+
+def get_trip(source_province, source_station, destination_province, destination_station):
+    for trip in bus_controller.get_province_lst:
+        if trip.get_province_name == source_province:
+            source = source_province
+            for route in trip.get_route_lst:
+                if route.get_source_station == source_station and route.get_destination_province == destination_province and route.get_destination_station == destination_station:
+                    destination = destination_station
+                    price = route.get_price
+                    bus = route.get_bus
+                    seat_lst = bus_controller.search_all_seat_by_bus_license(bus)
+                    seat = len(seat_lst)
+                    return [bus, source, destination, seat, price]
+        # departure_date = trip.get_departure_date
+        # departure_time = trip.get_departure_time
+    
+# print(bus_controller.search_all_seat_by_bus_license('1นค5463')) 
+print(get_trip('กรุงเทพมหานคร',
+               'สถานีขนส่งผู้โดยสารกรุงเทพฯ(รังสิต)',
+               'กาฬสินธุ์',
+               'จุดจอดวังสามหมอ'))

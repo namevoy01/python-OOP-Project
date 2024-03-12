@@ -101,7 +101,7 @@ class BusService_Controller :
 
     def search_source_station(self, source_province):
         source_station_set = set()
-        province_lst = self.search_route_by_province(source_province)
+        province_lst = self.search_province_by_province(source_province)
         for province in province_lst:
             for route in province.get_route_lst:
                 if province.get_province_name == source_province:
@@ -111,7 +111,7 @@ class BusService_Controller :
     
     def search_destination_province(self, source_province, source_station):
         destination_province_set = set()
-        province_lst = self.search_route_by_province(source_province)
+        province_lst = self.search_province_by_province(source_province)
         for province in province_lst:
             for route in province.get_route_lst:
                 if province.get_province_name == source_province and route.get_source_station == source_station:
@@ -121,7 +121,7 @@ class BusService_Controller :
     
     def search_destination_station(self, source_province, source_station, destination_province):
         destination_station_set = set()
-        province_lst = self.search_route_by_province(source_province)
+        province_lst = self.search_province_by_province(source_province)
         for province in province_lst:
             for route in province.get_route_lst:
                 if province.get_province_name == source_province and route.get_source_station == source_station and route.get_destination_province == destination_province:
@@ -129,20 +129,34 @@ class BusService_Controller :
         destination_stations_lst = list(destination_station_set)
         return destination_stations_lst
     
+    def search_province_by_province(self, province_name):
+        for province in self.__province_lst:
+            if province.get_province_name == province_name:
+                return province
+    
     def search_route_by_province(self, province_name):
         for province in self.__province_lst:
             if province.get_province_name == province_name:
-                return [province]
-            
+                for route in province.get_route_lst:
+                    return route
+    
     def search_ticket_by_ticket_id(self, ticket_id) :
         for ticket in self.__ticket_lst:
             if ticket.get_ticket_id == ticket_id:
-                return [ticket]
+                return ticket
             
     def search_booking_by_name_passenger(self, name_passenger) :
         for passenger in self.__passenger_lst:
             if passenger.get_name_passenger == name_passenger:
-                return [passenger]
+                return passenger
+                
+    def search_all_seat_by_bus_license(self, bus_license):
+        seat_lst = []
+        for bus in self.__bus_lst:
+            if bus.get_bus_license == bus_license:
+                for seat in bus.get_seat_lst:
+                    seat_lst.append(seat)  
+        return seat_lst   
                 
     def search_seat_by_bus_license(self, bus_license, seat_number):
         for bus in self.__bus_lst:
@@ -150,12 +164,7 @@ class BusService_Controller :
                 for seat in bus.get_seat_lst:
                     if seat.get_seat_number == seat_number:
                         return seat
-    
-    # def search_bus_trip_by_bus_license(self, bus_license):
-    #         for bus in trip.get_bus:
-    #             if bus.get_bus_license == bus_license:
-    #                 return bus.get_bus_license
-    
+        
     def comfirm_booking(self, user_id) :
         return
 
