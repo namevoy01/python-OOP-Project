@@ -59,8 +59,9 @@ class BusService_Controller :
         return self.__admin_lst
     
     def add_booking(self, name_passenger, surname_passenger, gender, tel, email, status_payment, payment_option, amount, date, bus_license, seat_number, source_province, source_station, destination_province, destination_station, departure_date):
-        bus_trip = self.add_bus_trip(bus_license, seat_number, source_province, source_station, destination_province, destination_station, departure_date)
-        booking = Booking(name_passenger, payment_option, amount, date, bus_trip)
+        seat = self.search_seat_number_and_status_seat_by_seat(bus_license, seat_number)
+        bus_trip = self.add_bus_trip(bus_license, source_province, source_station, destination_province, destination_station, departure_date)
+        booking = Booking(name_passenger, payment_option, amount, date, bus_trip, seat)
         self.add_passenger(name_passenger, surname_passenger, gender, tel, email, status_payment)
         passenger_lst = self.search_passenger_by_passenger_name(name_passenger)
         passenger_lst.get_booking_lst.append(booking)
@@ -74,10 +75,8 @@ class BusService_Controller :
     def add_payment(self, payment):
         self.__payment_lst.append(payment)
         
-    def add_bus_trip(self, bus_license, seat_number, source_province, source_station, destination_province, destination_station, departure_date):
-        status = self.search_status_seat_by_bus_license_and_seat_number(bus_license, seat_number)
-        add_to_seat = Seat(seat_number, status)
-        bus = Bus(bus_license, add_to_seat)
+    def add_bus_trip(self, bus_license, source_province, source_station, destination_province, destination_station, departure_date):
+        bus = Bus(bus_license)
         province = Province(source_province)
         route = self.all_route_from_method(source_province, source_station, destination_province, destination_station)
         bus_trip = BusTrip(bus, province, route, departure_date)
@@ -201,8 +200,14 @@ class BusService_Controller :
                 for route in trip.get_route_lst:
                     if route.get_source_station == source_station and route.get_destination_province == destination_province and route.get_destination_station == destination_station:
                         return route.get_departure_time 
-              
-                    
+     
+    def search_seat_number_and_status_seat_by_seat(self, bus_license, seat_number):
+        for bus in self.get_bus_lst:
+            if bus.get_bus_license == bus_license:
+                for seat in bus.get_seat_lst:
+                    if seat.get_seat_number == seat_number:
+                        return seat
+     
     def all_route_from_method(self, source_province, source_station, destination_province, destination_station):
         source_station = self.search_source_station_by_route(source_province, source_station, destination_province, destination_station)
         destination_province = self.search_destination_province_by_route(source_province, source_station, destination_province, destination_station)
@@ -217,25 +222,20 @@ class BusService_Controller :
                 for passenger in self.get_passenger_lst:
                     if passenger.get_name_passenger == name_passenger:
                         passenger.set_status_payment(False)
-                        return payment
+                        return passenger.get_status_payment
                            
-    # def change_status_seat_when_passenger_has_paid(self, name_passenger):
-    #     payment = self.payment(name_passenger)
-    #     if payment.get_name_passenger == name_passenger:
-    #         for passenger in self.get_passenger_lst:
-    #             if passenger.get_name_passenger == name_passenger and passenger.get_status_payment == False:
-    #                 for booking in passenger.get_booking_lst:
-    #                     bus_trip = booking.get_bus_trip
-    #                     bus = bus_trip.get_bus
-    #                     bus.seat.set_status_seat(False)
-                        
+    def change_status_seat_when_passenger_has_paid(self, name_passenger):
+        for payment in self.get_payment_lst:
+            if payment.get_name_passenger == name_passenger:
+                for passenger in self.get_passenger_lst:
+                    if passenger.get_name_passenger == name_passenger and passenger.get_status_payment == True:
+                        for booking in passenger.get_booking_lst:
+                            seat = booking.get_seat
+                            seat.set_status_seat(False)
+                            return seat.get_status_seat
                     
-
-    def cancel_ticket(self, ticket_id, phone_number)  :
+    def cancel_ticket(self, ticket_id)  :
         pass
 
-    def check_refund(self, ticket_id, phone_number) :
-        pass
-
-    def send_refund_comfirm_email(self, ticket_id, email) :
+    def check_refund(self, ticket_id) :
         pass
