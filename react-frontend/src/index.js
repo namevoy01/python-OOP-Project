@@ -9,7 +9,10 @@ import Seat from './page/seat';
 import Inputfill from './page/Inputfill';
 import Login from './page/login';
 import Ticket from './page/ticket';
+import Admin from './page/admin';
+import TicketRemove from './page/ticketRemove';
 import Error from './page/error404';
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -20,8 +23,17 @@ const router = createBrowserRouter([
     element: <Travel />
   },
   {
+    path: "admin",
+    element: <Admin />
+  },
+
+  {
     path: "inputfill",
     element: <Inputfill />
+  },
+  {
+    path: "ticketremove",
+    element: <TicketRemove />
   },
   {
     path: "login",
@@ -35,6 +47,7 @@ const router = createBrowserRouter([
     path: "seat",
     element: <Seat />
   },
+
   {
     path: "*",
     element: <Error />
