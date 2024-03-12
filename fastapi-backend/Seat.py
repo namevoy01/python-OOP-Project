@@ -1,10 +1,10 @@
 class Seat :
     seat_id = 0
-    def __init__(self, seat_number , status_seat=False):
+    def __init__(self, seat_number , status_seat):
         Seat.seat_id += 1
         self.__seat_id = Seat.seat_id
         self.__seat_number = seat_number
-        self.__status_seat = status_seat
+        self.__status_seat = True
 
     @property
     def get_seat_id(self):
@@ -19,4 +19,4 @@ class Seat :
         return self.__status_seat
     
     def set_status_seat(self, status):
-        self.__status_seat = True
+        self.__status_seat = status

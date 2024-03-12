@@ -1,5 +1,5 @@
 class Ticket :
-    ticket_id = 0
+    ticket_id = 15001010
     def __init__(self, booking, seat_number):
         Ticket.ticket_id += 1
         self.__ticket_id = Ticket.ticket_id

@@ -1,5 +1,5 @@
 class Booking:
-    booking_id = 155010
+    booking_id = 0
     def __init__(self, name_passenger, payment_option, amount, date, bus_trip):
         Booking.booking_id += 1
         self.__booking_id  = Booking.booking_id 
