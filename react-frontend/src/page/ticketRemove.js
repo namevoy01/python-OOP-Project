@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom';
 function useTicketRemove() {
     const [showModal, setShowModal] = useState(false);
 
-
+    function myFunction() {
+        alert("ยกเลิกตั๋วสำเร็จ!");
+    }
 
     return (
         <div>
@@ -22,7 +24,7 @@ function useTicketRemove() {
                         </div>
                         <div className='mt-5 '>
                             <div className='flex '>
-                            <Link to='/'> <div className='text-pink-400'>กลับหน้าแรก</div></Link>
+                                <Link to='/'> <div className='text-pink-400'>กลับหน้าแรก</div></Link>
                             </div>
                         </div>
                     </div>
@@ -57,13 +59,15 @@ function useTicketRemove() {
                                         <p className="mt-7 text-[15px]  text-gray-500">
                                             การยกเลิกตั๋วจะหักค่าธรรมเนียมการคืนตั๋ว 10% จากอัตราค่าโดยสาร และ คิดค่าธรรมเนียมการโอนเงิน 30 บาท/ครั้ง
                                         </p>
-                                        <div className="items-center gap-2 mt-3 sm:flex">
+                                        <div className="items-center gap-2 mt-3 sm:flex" onClick={() =>
+                                            myFunction()
+                                        }>
                                             <button
                                                 className="w-full mt-2 p-2.5 flex-1 text-white bg-green-600 rounded-md outline-none ring-offset-2 ring-green-600 focus:ring-2"
                                                 onClick={() =>
-                                                    setShowModal(false)   
+                                                    setShowModal(false)
                                                 }
-                                                
+
                                             >
                                                 ยืนยัน
                                             </button>
