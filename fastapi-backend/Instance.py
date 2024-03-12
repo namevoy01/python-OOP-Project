@@ -2597,67 +2597,16 @@ def create_instance():
     
 create_instance()
 
-# bus_controller.add_booking('chamaiporn',
-#                            'credit card',
-#                            540,
-#                            '10-02-2024')
-
-# ticket_lst = bus_controller.add_ticket('booking', 'A01')
-# show = bus_controller.search_ticket_by_ticket_id('1')
-# for t in show:
-#     print(t.get_ticket_id, t.get_booking, t.get_seat_number)
+print("-----------------------------------------------------------------")
 
 
-# # check search route by province
-# route_list = bus_controller.search_route_by_province('กรุงเทพมหานคร')
-# for province_name, source_station, destination_province, destination_station in route_list:
-#     print(f"ต้นทาง {province_name} - {source_station}")
-#     print(f"ปลายทาง {destination_province} - {destination_station}")
-#     print("-----------------------------------------------------------------")
-#     break
-    
-# # check search ticket by ticket id
-# ticket_list = bus_controller.search_ticket_by_ticket_id('01')
-# for ticket_id, schedule, seat_number in ticket_list:
-#     print(f"{ticket_id} รอบรถคือ {schedule} หมายเลขที่นั่ง {seat_number}")
-#     print("-----------------------------------------------------------------")
-#     break
+# search bus trip and add bus trip ##
+add_trip = bus_controller.add_bus_trip('1นค5463', 'กรุงเทพมหานคร', 'ท่าอากาศยานสุวรรณภูมิ', 'เชียงราย', 'จุดจอด บ้านปล้อง')
+return_route = bus_controller.return_route('กรุงเทพมหานคร', 'ท่าอากาศยานสุวรรณภูมิ', 'เชียงราย', 'จุดจอด บ้านปล้อง')
+return_bus = bus_controller.return_bus('1นค5463')
+print(return_route, return_bus)
+print("-----------------------------------------------------------------")
 
-# # check search bus by bus license
-# bus_list = bus_controller.search_bus_by_bus_license('1นค5463')
-# for bus_license, location, seat_lst  in bus_list:
-#     print(f"เลขทะเบียนนรถ {bus_license} สถานที่รถอยู่ปัจจุบัน {location}")
-#     for seat_number, status_seat in seat_lst:
-#         print(f"เลขที่นั่ง {seat_number} สถานะ {status_seat}")
-#         print("-----------------------------------------------------------------")
-#         break
-
-    
-# # check search ticket by ticket id
-# ticket_list = bus_controller.search_ticket_by_ticket_id('01')
-# for ticket_id, schedule, seat_number in ticket_list:
-#     print(f"{ticket_id} รอบรถคือ {schedule} หมายเลขที่นั่ง {seat_number}")
-#     print("-----------------------------------------------------------------")
-#     break
-
-# # check search bus by bus license
-# bus_lst = bus_controller.search_bus_by_bus_license('1นค5463')
-# for bus_license, location, seat_lst  in bus_lst:
-#     print(f"เลขทะเบียนนรถ {bus_license} สถานที่รถอยู่ปัจจุบัน {location}")
-#     for seat_number, status_seat in seat_lst:
-#         print(f"เลขที่นั่ง {seat_number} สถานะ {status_seat}")
-#         print("-----------------------------------------------------------------")
-#         break
-
-# check add passenger when passenger paid
-# passenger = bus_controller.add_passenger('0001',
-#                                          'chamaiporn',
-#                                          'female',
-#                                          '090393820',
-#                                          'hdjgjedr@gmail.com',
-#                                          True)
-
-# for user_id, username, password, name, gender, tel, email, status_payment in passenger:
-#     print(f"{user_id} รอบรถคือ {username} หมายเลขที่นั่ง {password}")
-#     print("-----------------------------------------------------------------")
-#     break
+add_booking = bus_controller.add_booking('chamaiporn', 'Credit Card', 500, '20-11-2024', '1นค5463', 'กรุงเทพมหานคร', 'ท่าอากาศยานสุวรรณภูมิ', 'ชลบุรี', 'จุดจอด กม10')
+for book in add_booking:
+    print(book.get_booking_id)
