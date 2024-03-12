@@ -2999,12 +2999,26 @@ email = 'oihto@gmail.com'
 status_payment = True
 departure_date = '11/03/2024'
 departure_time = '08.30'
+seat_number = 'A01'
 
+for trip in bus_controller.get_province_lst:
+    if trip.get_province_name == source_province:
+        source = source_province
+        for route in trip.get_route_lst:
+            if route.get_source_station == source_station and route.get_destination_province == destination_province and route.get_destination_station == destination_station:
+                destination = destination_province
+                bus = route.get_bus
+                seat_number = bus_controller.search_seat_by_bus_license_and_seat_number(bus_license, seat_number)
+                departure_time = route.get_departure_time
+                print(source, destination, source_station, destination_station, departure_date, departure_time, bus, seat_number)
+                    
 bus_controller.add_booking(name_passenger, surname_passenger, gender, tel, email, status_payment, payment_option, amount, date, bus_license, source_province, source_station, destination_province, destination_station, departure_date, departure_time)
 
 for show in bus_controller.get_passenger_lst:
     for booking in show.get_booking_lst:
         trip = booking.get_bus_trip
+        province = trip.get_province
+        route = trip.get_route
         print(booking.get_name_passenger, trip.get_bus)
 
 # bus_controller.add_bus_trip('1นค5463',

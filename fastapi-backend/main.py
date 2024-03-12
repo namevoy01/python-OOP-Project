@@ -61,13 +61,18 @@ def get_destination_station(source_province, source_station, destination_provinc
     destination_station = bus_controller.search_destination_station(source_province, source_station,destination_province)
     return destination_station
 
-@app.get('/api/date_trip')
-def get_date_trip():
-    pass
-
-@app.get('/api/booking')
-def get_booking(name_passenger, payment_option, amount, date, bus_license, province_name, bus_trip):
-    pass
+@app.get('/api/info_trip')
+def get_booking(source_province, source_station, destination_province, destination_station, departure_date, departure_time, bus_license, seat_number):
+    for trip in bus_controller.get_province_lst:
+        if trip.get_province_name == source_province:
+            source = source_province
+            for route in trip.get_route_lst:
+                if route.get_source_station == source_station and route.get_destination_province == destination_province and route.get_destination_station == destination_station:
+                    destination = destination_province
+                    bus = route.get_bus
+                    seat_number = bus_controller.search_seat_by_bus_license_and_seat_number(bus_license, seat_number)
+                    departure_time = route.get_departure_time
+                    return source, destination, source_station, destination_station, departure_date, departure_time, bus, seat_number
 
 @app.get('/api/trip')
 def get_trip(source_province, source_station, destination_province, destination_station, date_time):

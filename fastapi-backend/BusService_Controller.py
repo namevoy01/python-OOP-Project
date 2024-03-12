@@ -205,7 +205,7 @@ class BusService_Controller :
         route = source_station, destination_province, destination_station
         return route
         
-    def comfirm_booking(self, user_id) :
+    def payment(self, name_passenger) :
         return
 
     def cancel_ticket(self, ticket_id, phone_number)  :
