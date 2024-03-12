@@ -9,7 +9,6 @@ from Passenger import Passenger
 from Payment import Payment
 from Province import Province
 from Route import Route
-from Schedule import Schedule
 from Seat import Seat
 from Station import Station
 from Ticket import Ticket
@@ -71,7 +70,7 @@ def get_booking(name_passenger, payment_option, amount, date, bus_license, provi
     pass
 
 @app.get('/api/trip')
-def get_trip(source_province, destination_province):
+def get_trip(source_province, source_station, destination_province, destination_station, date_time):
     pass
 
 @app.get('/api/seat')

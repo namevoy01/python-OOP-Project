@@ -6,7 +6,6 @@ from Passenger import Passenger
 from Payment import Payment
 from Province import Province
 from Route import Route
-from Schedule import Schedule
 from Seat import Seat
 from Station import Station
 from Ticket import Ticket
@@ -68,17 +67,11 @@ class BusService_Controller :
         self.__admin_lst.append(new_admin)
         return self.__admin_lst
     
-    def add_schedule(self, route, departure_date):
-        new_schedule = Schedule(route, departure_date)
-        self.__schedule_lst.append(new_schedule)
-        return new_schedule
-    
     def add_booking(self, name_passenger, payment_option, amount, date, bus_license, source_province, source_station, destination_province, destination_station):
         bus_trip = self.add_bus_trip(bus_license, source_province, source_station, destination_province, destination_station)
         booking = Booking(name_passenger, payment_option, amount, date, bus_trip)
         search_passenger = self.search_passenger_by_passenger_name('chamaiporn')
         for passenger in search_passenger:
-            return [booking]
             booking_lst = passenger.get_booking_list
             booking_lst.append(booking)
         
@@ -88,12 +81,13 @@ class BusService_Controller :
     def add_bus(self, bus) :
         self.__bus_lst.append(bus)
         
-    def add_bus_trip(self, bus_license, source_province, source_station, destination_province, destination_station):
-        bus = self.search_bus_by_bus_license(bus_license)
-        province = self.search_route_by_province(source_province, source_station, destination_province, destination_station)
-        bus_trip = BusTrip(bus, province)
+    def add_bus_trip(self, bus_license, source_province, source_station, destination_province, destination_station, departure_date, departure_time):
+        bus = bus_license
+        province = Province(source_province)
+        route = Route(source_station, destination_province, destination_station, price=None, bus=None)
+        bus_trip = BusTrip(bus, province, route, departure_date, departure_time)
         self.__bus_trip_lst.append(bus_trip)
-        return self.__bus_trip_lst
+        return bus_trip
     
     def add_ticket(self, booking, seat_number):
         new_ticket = Ticket(booking, seat_number)
@@ -149,38 +143,19 @@ class BusService_Controller :
         for passenger in self.__passenger_lst:
             if passenger.get_name_passenger == name_passenger:
                 return [passenger]
-
-    def search_bus_by_bus_license(self, bus_license) :
+                
+    def search_seat_by_bus_license(self, bus_license, seat_number):
         for bus in self.__bus_lst:
             if bus.get_bus_license == bus_license:
-                return bus
-                
-    def search_get_route_in_trip_by_province(self, source_province, source_station, destination_province, destination_station):
-        for trip in self.__bus_trip_lst:
-            province_info = trip.get_province
-            for province in province_info :
-                for route in province.get_route_lst :
-                    if province.get_province_name == source_province and route.get_source_station == source_station and route.get_destination_province == destination_province and route.get_destination_station == destination_station and route.get_destination_
-                    return [province, route]
-                
-    def search_get_bus_in_trip_by_bus_license(self, bus_license):
-        for trip in self.__bus_trip_lst:
-            bus_info = trip.get_bus
-            return [bus_info]
-
-    def return_route(self, province_name):
-        search_province_in_trip = self.search_get_route_in_trip_by_province(province_name)
-        for province in search_province_in_trip:
-            for route in province.get_route_lst:
-                return province_name, route.get_source_station, route.get_destination_province, route.get_destination_station
-
-    def return_bus(self, bus_license):
-        search_bus_in_trip = self.search_get_bus_in_trip_by_bus_license(bus_license)
-        for bus in search_bus_in_trip:
-            for seat in bus.get_seat_lst:
-                return bus.get_bus_license, seat.get_seat_number
-                
-
+                for seat in bus.get_seat_lst:
+                    if seat.get_seat_number == seat_number:
+                        return seat
+    
+    # def search_bus_trip_by_bus_license(self, bus_license):
+    #         for bus in trip.get_bus:
+    #             if bus.get_bus_license == bus_license:
+    #                 return bus.get_bus_license
+    
     def comfirm_booking(self, user_id) :
         return
 

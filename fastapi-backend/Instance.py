@@ -6,7 +6,6 @@ from Passenger import Passenger
 from Payment import Payment
 from Province import Province
 from Route import Route
-from Schedule import Schedule
 from Seat import Seat
 from Station import Station
 from Ticket import Ticket
@@ -28,235 +27,14 @@ def create_instance():
     krabi = Province('กระบี่')
     bus_controller.add_province(krabi)
 
-    # kanchanaburi = Province('กาญจนบุรี', [])
-    # bus_controller.add_province(kanchanaburi)
-
-    # kalasin = Province('กาฬสินธุ์', [])
-    # bus_controller.add_province(kalasin)
-
-    # kamphaeng = Province('กำแพงเพชร', [])
-    # bus_controller.add_province(kamphaeng)
-
-    # khonkaen = Province('ขอนแก่น', [])
-    # bus_controller.add_province(khonkaen)
-
-    # chanthaburi = Province('จันทบุรี', [])
-    # bus_controller.add_province(chanthaburi)
-
-    # chachoengsao = Province('ฉะเชิงเทรา', [])
-    # bus_controller.add_province(chachoengsao)
-
-    # chonburi = Province('ชลบุรี', [])
-    # bus_controller.add_province(chonburi)
-
-    # chainat = Province('ชัยนาท', [])
-    # bus_controller.add_province(chainat)
-
-    # chaiyaphum = Province('ชัยภูมิ', [])
-    # bus_controller.add_province(chaiyaphum)
-
-    # chumphon = Province('ชุมพร', [])
-    # bus_controller.add_province(chumphon)
-
-    # chiangrai = Province('เชียงราย', [])
-    # bus_controller.add_province(chiangrai)
-
-    # chiangmai = Province('เชียงใหม่', [])
-    # bus_controller.add_province(chiangmai)
-
-    # trang = Province('ตรัง', [])
-    # bus_controller.add_province(trang)
-
-    # trat = Province('ตราด', [])
-    # bus_controller.add_province(trat)
-
-    # tak = Province('ตาก', [])
-    # bus_controller.add_province(tak)
-
-    # nakhonnayok = Province('นครนายก', [])
-    # bus_controller.add_province(nakhonnayok)
-
-    # nakhonpathom = Province('นครปฐม', [])
-    # bus_controller.add_province(nakhonpathom)
-
-    # nakhonphanom = Province('นครพนม', [])
-    # bus_controller.add_province(nakhonphanom)
-
-    # nakhonratchasima = Province('นครราชสีมา', [])
-    # bus_controller.add_province(nakhonratchasima)
-
-    # nakhonsithammarat = Province('นครศรีธรรมราช', [])
-    # bus_controller.add_province(nakhonsithammarat)
-
-    # nakhonsawan = Province('นครสวรรค์', [])
-    # bus_controller.add_province(nakhonsawan)
-
-    # nonthaburi = Province('นนทบุรี', [])
-    # bus_controller.add_province(nonthaburi)
-
-    # narathiwat = Province('นราธิวาส', [])
-    # bus_controller.add_province(narathiwat)
-
-    # nan = Province('น่าน', [])
-    # bus_controller.add_province(nan)
-
-    # buengkan = Province('บึงกาฬ', [])
-    # bus_controller.add_province(buengkan)
-
-    # buriram = Province('บุรีรัมย์', [])
-    # bus_controller.add_province(buriram)
-
-    # pathumthani = Province('ปทุมธานี', [])
-    # bus_controller.add_province(pathumthani)
-
-    # prachuapkkhirikhan = Province('ประจวบคีรีขันธ์', [])
-    # bus_controller.add_province(prachuapkkhirikhan)
-
-    # prachinburi = Province('ปราจีนบุรี', [])
-    # bus_controller.add_province(prachinburi)
-
-    # pattani = Province('ปัตตานี', [])
-    # bus_controller.add_province(pattani)
-
-    # phayao = Province('พะเยา', [])
-    # bus_controller.add_province(phayao)
-
-    # phangnga = Province('พังงา', [])
-    # bus_controller.add_province(phangnga)
-
-    # phatthalung = Province('พัทลุง', [])
-    # bus_controller.add_province(phatthalung)
-
-    # phichit = Province('พิจิตร', [])
-    # bus_controller.add_province(phichit)
-
-    # phitsanulok = Province('พิษณุโลก', [])
-    # bus_controller.add_province(phitsanulok)
-
-    # phetchaburi = Province('เพชรบุรี', [])
-    # bus_controller.add_province(phetchaburi)
-
-    # phetchabun = Province('เพชรบูรณ์', [])
-    # bus_controller.add_province(phetchabun)
-
-    # phrae = Province('แพร่', [])
-    # bus_controller.add_province(phrae)
-
-    # phuket = Province('ภูเก็ต', [])
-    # bus_controller.add_province(phuket)
-
-    # mahasarakham = Province('มหาสารคาม', [])
-    # bus_controller.add_province(mahasarakham)
-
-    # mukdahan = Province('มุกดาหาร', [])
-    # bus_controller.add_province(mukdahan)
-
-    # maehongson = Province('แม่ฮ่องสอน', [])
-    # bus_controller.add_province(maehongson)
-
-    # yasothon = Province('ยโสธร', [])
-    # bus_controller.add_province(yasothon)
-
-    # yala = Province('ยะลา', [])
-    # bus_controller.add_province(yala)
-
-    # roiet = Province('ร้อยเอ็ด', [])
-    # bus_controller.add_province(roiet)
-
-    # ranong = Province('ระนอง', [])
-    # bus_controller.add_province(ranong)
-
-    # rayong = Province('ระยอง', [])
-    # bus_controller.add_province(rayong)
-
-    # lopburi = Province('ลพบุรี', [])
-    # bus_controller.add_province(lopburi)
-
-    # lampang = Province('ลำปาง', [])
-    # bus_controller.add_province(lampang)
-
-    # lamphun = Province('ลำพูน', [])
-    # bus_controller.add_province(lamphun)
-
-    # loei = Province('เลย', [])
-    # bus_controller.add_province(loei)
-
-    # sisaket = Province('ศรีสะเกษ', [])
-    # bus_controller.add_province(sisaket)
-
-    # sakonnakhon = Province('สกลนคร', [])
-    # bus_controller.add_province(sakonnakhon)
-
-    # songkhla = Province('สงขลา', [])
-    # bus_controller.add_province(songkhla)
-
-    # satun = Province('สตูล', [])
-    # bus_controller.add_province(satun)
-
-    # samutprakan = Province('สมุทรปราการ', [])
-    # bus_controller.add_province(samutprakan)
-
-    # samutsongkhram = Province('สมุทรสงคราม', [])
-    # bus_controller.add_province(samutsongkhram)
-
-    # samutsakhon = Province('สมุทรสาคร', [])
-    # bus_controller.add_province(samutsakhon)
-
-    # sakaeo = Province('สระแก้ว', [])
-    # bus_controller.add_province(sakaeo)
-
-    # saraburi = Province('สระบุรี', [])
-    # bus_controller.add_province(saraburi)
-
-    # singburi = Province('สิงห์บุรี', [])
-    # bus_controller.add_province(singburi)
-
-    # sukhothai = Province('สุโขทัย', [])
-    # bus_controller.add_province(sukhothai)
-
-    # suphanburi = Province('สุพรรณบุรี', [])
-    # bus_controller.add_province(suphanburi)
-
-    # suratthani = Province('สุราษฎร์ธานี', [])
-    # bus_controller.add_province(suratthani)
-
-    # surin = Province('สุรินทร์', [])
-    # bus_controller.add_province(surin)
-
-    # nongkhai = Province('หนองคาย', [])
-    # bus_controller.add_province(nongkhai)
-
-    # nongbualamphu = Province('หนองบัวลำภู', [])
-    # bus_controller.add_province(nongbualamphu)
-
-    # ayutthaya = Province('อยุธยา', [])
-    # bus_controller.add_province(ayutthaya)
-
-    # angthong = Province('อ่างทอง', [])
-    # bus_controller.add_province(angthong)
-
-    # amnatcharoen = Province('อำนาจเจริญ', [])
-    # bus_controller.add_province(amnatcharoen)
-
-    # udonthani = Province('อุดรธานี', [])
-    # bus_controller.add_province(udonthani)
-
-    # uttaradit = Province('อุตรดิตถ์', [])
-    # bus_controller.add_province(uttaradit)
-
-    # uthaithani = Province('อุทัยธานี', [])
-    # bus_controller.add_province(uthaithani)
-
-    # ubonratchathani = Province('อุบลราชธานี', [])
-    # bus_controller.add_province(ubonratchathani)
-
     # route ####################################################
 
     bangkok.add_route(Route('สถานีขนส่งผู้โดยสารกรุงเทพฯ (หมอชิต 2)',
                     'กรุงเทพมหานคร',
                     'ท่าอากาศยานสุวรรณภูมิ',
                     100,
-                    '1นค5463'))
+                    '1นค5463',
+                    '08.40'))
     bangkok.add_route(Route('สถานีขนส่งผู้โดยสารกรุงเทพฯ (หมอชิต 2)',
                     'กรุงเทพมหานคร',
                     'สถานีขนส่งผู้โดยสารกรุงเทพฯ (รังสิต)',
@@ -2601,12 +2379,22 @@ print("-----------------------------------------------------------------")
 
 
 # search bus trip and add bus trip ##
-add_trip = bus_controller.add_bus_trip('1นค5463', 'กรุงเทพมหานคร', 'ท่าอากาศยานสุวรรณภูมิ', 'เชียงราย', 'จุดจอด บ้านปล้อง')
-return_route = bus_controller.return_route('กรุงเทพมหานคร', 'ท่าอากาศยานสุวรรณภูมิ', 'เชียงราย', 'จุดจอด บ้านปล้อง')
-return_bus = bus_controller.return_bus('1นค5463')
-print(return_route, return_bus)
-print("-----------------------------------------------------------------")
+bus_controller.add_bus_trip('1นค5463', 'กรุงเทพมหานคร', 'ท่าอากาศยานสุวรรณภูมิ', 'กาญจนบุรี', 'จุดจอด อ.สังขละบุรี', '22-11-2024', '08.40')
+for trip in bus_controller.get_bus_trip_lst:
+    province = trip.get_province
+    route = trip.get_route
+    departure_date = trip.get_departure_date
+    departure_time = trip.get_departure_time
+    print(trip.get_bus, province.get_province_name, route.get_source_station)
+    # for seat in bus:
+    #     print(seat.get_seat_number)
+# bus_controller.search_bus_trip_by_bus_license('1นค5463')
 
-add_booking = bus_controller.add_booking('chamaiporn', 'Credit Card', 500, '20-11-2024', '1นค5463', 'กรุงเทพมหานคร', 'ท่าอากาศยานสุวรรณภูมิ', 'ชลบุรี', 'จุดจอด กม10')
-for book in add_booking:
-    print(book.get_booking_id)
+# search = bus_controller.search_seat_by_bus_license('1นค5463', 'A01')
+
+# print(return_route, return_bus)
+# print("-----------------------------------------------------------------")
+
+# add_booking = bus_controller.add_booking('chamaiporn', 'Credit Card', 500, '20-11-2024', '1นค5463', 'กรุงเทพมหานคร', 'ท่าอากาศยานสุวรรณภูมิ', 'ชลบุรี', 'จุดจอด กม10')
+# for book in add_booking:
+#     print(book.get_booking_id)
