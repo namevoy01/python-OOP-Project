@@ -1,13 +1,13 @@
 class Booking:
     booking_id = 155010
-    def __init__(self, name_passenger, payment_option, amount, date):
+    def __init__(self, name_passenger, payment_option, amount, date, bus_trip):
         Booking.booking_id += 1
         self.__booking_id  = Booking.booking_id 
         self.__name_passenger = name_passenger
         self.__payment_option = payment_option
         self.__amount = amount
         self.__date = date
-        self.__bus_trip_lst = []
+        self.__bus_trip = bus_trip
     
     @property
     def get_booking_id (self):
@@ -26,9 +26,5 @@ class Booking:
         return self.__date
     
     @property
-    def get_bus_trip_lst(self):
-        return self.__bus_trip_lst
-    
-    def add_bus_trip(self, bus, booking) :
-        new_booking = Booking(bus, booking)
-        self.__booking_lst.append(new_booking)
+    def get_bus_trip(self):
+        return self.__bus_trip

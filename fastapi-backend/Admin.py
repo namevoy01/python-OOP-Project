@@ -1,7 +1,8 @@
 from User import User
 
 class Admin(User) :
-    def __init__(self, username, password):
+    def __init__(self, user_id, name_passenger, surname_passenger, gender, tel, username, password):
+        super().__init__(user_id, name_passenger, surname_passenger, gender, tel)
         self.__username = username
         self.__password = password
  

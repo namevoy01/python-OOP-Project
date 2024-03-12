@@ -70,18 +70,19 @@ def get_booking(name_passenger, payment_option, amount, date, bus_license, provi
     pass
 
 @app.get('/api/trip')
-def get_trip(source_province, source_station, destination_province, destination_station):
+def get_trip(source_province, source_station, destination_province, destination_station, date_time):
     for trip in bus_controller.get_province_lst:
         if trip.get_province_name == source_province:
             source = source_province
             for route in trip.get_route_lst:
                 if route.get_source_station == source_station and route.get_destination_province == destination_province and route.get_destination_station == destination_station:
-                    destination = destination_station
+                    destination = destination_province
                     price = route.get_price
                     bus = route.get_bus
                     seat_lst = bus_controller.search_all_seat_by_bus_license(bus)
                     seat = len(seat_lst)
-                    return bus, source, destination, seat, price
+                    departure_time = route.get_departure_time
+                    return date_time, bus, source, destination, seat, price, departure_time
                 
 @app.get('/api/seat')
 def get_seat(bus_license):

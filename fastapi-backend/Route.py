@@ -1,6 +1,6 @@
 class Route:
     route_id = 0
-    def __init__(self, source_station, destination_province, destination_station, price, bus):
+    def __init__(self, source_station, destination_province, destination_station, price, bus, departure_time):
         Route.route_id += 1
         self.__route_id = Route.route_id
         self.__source_station = source_station
@@ -8,7 +8,7 @@ class Route:
         self.__destination_station = destination_station
         self.__price = price
         self.__bus = bus
-        # self.__departure_time = departure_time
+        self.__departure_time = departure_time
         
     @property
     def get_route_id(self):
@@ -34,7 +34,7 @@ class Route:
     def get_bus(self):
         return self.__bus
     
-    # @property
-    # def get_departure_time(self):
-    #     return self.__departure_time
+    @property
+    def get_departure_time(self):
+        return self.__departure_time
         

@@ -1,12 +1,11 @@
 from User import User
-from Booking import Booking
 
 class Passenger(User):
-    def __init__(self, user_id, name, gender, tel, account_number, email, status_payment=False):
-        super().__init__(user_id, name, gender, tel)
+    def __init__(self, name_passenger, surname_passenger, gender, tel, email, account_number):
+        super().__init__(name_passenger, surname_passenger, gender, tel)
         self.__account_number = account_number
         self.__email = email
-        self.__status_payment = status_payment
+        self.__status_payment = False
         self.__booking_lst = []
 
     @property
@@ -26,5 +25,5 @@ class Passenger(User):
         return self.__booking_lst
 
     def set_status_payment(self, status):
-        self.__status_payment = status
+        self.__status_payment = True
         

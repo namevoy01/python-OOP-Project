@@ -19,4 +19,4 @@ class Seat :
         return self.__status_seat
     
     def set_status_seat(self, status):
-        self.__status_seat = status
+        self.__status_seat = True

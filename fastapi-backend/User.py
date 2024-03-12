@@ -1,9 +1,10 @@
 class User :
     user_id = 0
-    def __init__(self, name, gender, tel):
+    def __init__(self, name_passenger, surname_passenger, gender, tel):
         User.user_id += 1
         self.__user_id = User.user_id
-        self.__name = name 
+        self.__name_passenger = name_passenger
+        self.__surname_passenger = surname_passenger
         self.__gender  =  gender
         self.__tel = tel 
  
@@ -12,8 +13,12 @@ class User :
         return self.__user_id
     
     @property
-    def get_name(self):
-        return self.__name
+    def get_name_passenger(self):
+        return self.__name_passenger
+    
+    @property
+    def get_surname_passenger(self):
+        return self.__surname_passenger
     
     @property
     def get_gender (self):
