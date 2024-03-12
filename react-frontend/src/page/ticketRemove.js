@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import Navbar from '../component/navbar';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 function useTicketRemove() {
     const [showModal, setShowModal] = useState(false);
-
-    function myFunction() {
-        alert("ยกเลิกตั๋วสำเร็จ!");
-    }
 
     return (
         <div>
@@ -16,6 +13,7 @@ function useTicketRemove() {
 
             <div >
                 <Navbar />
+
                 <div className="max-w-screen-2xl mx-auto xl:w-10/12 lg: w-10/12">
 
                     <div className='flex justify-between'>
@@ -59,9 +57,13 @@ function useTicketRemove() {
                                         <p className="mt-7 text-[15px]  text-gray-500">
                                             การยกเลิกตั๋วจะหักค่าธรรมเนียมการคืนตั๋ว 10% จากอัตราค่าโดยสาร และ คิดค่าธรรมเนียมการโอนเงิน 30 บาท/ครั้ง
                                         </p>
-                                        <div className="items-center gap-2 mt-3 sm:flex" onClick={() =>
-                                            myFunction()
-                                        }>
+                                        <div className="items-center gap-2 mt-3 sm:flex" onClick={() => Swal.fire({
+                                            position: "center",
+                                            icon: "success",
+                                            title: "ยกเลิกตั๋วสำเร็จ",
+                                            showConfirmButton: false,
+                                            timer: 1500
+                                        })}>
                                             <button
                                                 className="w-full mt-2 p-2.5 flex-1 text-white bg-green-600 rounded-md outline-none ring-offset-2 ring-green-600 focus:ring-2"
                                                 onClick={() =>

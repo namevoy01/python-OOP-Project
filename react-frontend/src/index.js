@@ -12,6 +12,7 @@ import Ticket from './page/ticket';
 import Admin from './page/admin';
 import TicketRemove from './page/ticketRemove';
 import Error from './page/error404';
+
 const router = createBrowserRouter([
   {
     path: "/",
