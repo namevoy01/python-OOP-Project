@@ -311,7 +311,7 @@ class BusService_Controller :
                     'username' : username,
                     'password' : password
                 })
-                return username, password
+            return info_admin
             
     def get_schedule_info(self):
         id = 0

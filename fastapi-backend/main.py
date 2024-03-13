@@ -78,18 +78,13 @@ def get_seat(bus_license):
 
 @app.post('/api/info')
 def post_info(name_passenger, surname_passenger, gender, tel, email, status_payment, payment_option, amount, date, bus_license, seat_number, source_province, source_station, destination_province, destination_station, departure_date):
-    input_booking = bus_controller.add_booking(name_passenger, surname_passenger, gender, tel, email, status_payment, payment_option, amount, date, bus_license, seat_number, source_province, source_station, destination_province, destination_station, departure_date)
+    bus_controller.add_booking(name_passenger, surname_passenger, gender, tel, email, status_payment, payment_option, amount, date, bus_license, seat_number, source_province, source_station, destination_province, destination_station, departure_date)
 
 @app.get('/api/ticket')
 def get_ticket(ticket_id):
-    ticket = bus_controller.search_ticket_by_ticket_id(ticket_id)
-    name_passenger = ticket.get_name_passenger
-    passenger = bus_controller.search_passenger_by_name_passenger(name_passenger)
-    bus_trip = bus_controller.search_bus_trip_by_name_passenger(name_passenger)
-    province = bus_trip.get_province
-    route = bus_trip.get_route
-    return ticket.get_ticket_id, bus_trip.get_departure_date, route.get_departure_time, province.get_province_name, route.get_source_station, route.get_destination_province, route.get_destination_station, ticket.get_name_passenger, passenger.get_surname_passenger, passenger.get_status_payment, passenger.get_tel, passenger.get_email
-
+    ticket = bus_controller.get_search_ticket(ticket_id)
+    return ticket
+    
 @app.delete('/api/cancel')
 def delete_cancel(ticket_id):
     cancel_ticket = bus_controller.cancel_ticket(ticket_id)
