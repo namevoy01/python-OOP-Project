@@ -7,10 +7,6 @@ import Swal from 'sweetalert2';
 function useTicketRemove() {
     const [showModal, setShowModal] = useState(false);
 
-    function myfuntion() {
-        console.log('My function is called');
-
-    }
 
     return (
         <div>
@@ -64,32 +60,32 @@ function useTicketRemove() {
                                             การยกเลิกตั๋วจะหักค่าธรรมเนียมการคืนตั๋ว 10% จากอัตราค่าโดยสาร และ คิดค่าธรรมเนียมการโอนเงิน 30 บาท/ครั้ง
                                         </p>
                                         <div className="items-center gap-2 mt-3 sm:flex">
-                                            <button
-                                                className="w-full mt-2 p-2.5 flex-1 text-white bg-green-600 rounded-md outline-none ring-offset-2 ring-green-600 focus:ring-2"
-                                                onClick={() => {
-                                                    Swal.fire({
-                                                        position: "center",
-                                                        icon: "success",
-                                                        title: "ยกเลิกตั๋วสำเร็จ",
-                                                        showConfirmButton: false,
-                                                        timer: 1500
-                                                    })
-                                                    setShowModal(false);
-                                                }}
-                                            >
-                                                ยืนยัน
-                                            </button>
-                                            <button
-                                                className="w-full mt-2 p-2.5 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-indigo-600 focus:ring-2"
-                                                onClick={() =>
-                                                    setShowModal(false)
-                                                }
-                                            >
-                                                Cancel
-                                            </button>
-                                        </div>
+                                                <button
+                                                    className="w-full mt-2 p-2.5 flex-1 text-white bg-green-600 rounded-md outline-none ring-offset-2 ring-green-600 focus:ring-2"
+                                                    onClick={() => {
+                                                        Swal.fire({
+                                                            position: "center",
+                                                            icon: "success",
+                                                            title: "ยกเลิกตั๋วสำเร็จ",
+                                                            showConfirmButton: false,
+                                                            timer: 1500
+                                                        })
+                                                        setShowModal(false);
+                                                    }}
+                                                >
+                                            ยืนยัน
+                                        </button>
+                                        <button
+                                            className="w-full mt-2 p-2.5 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-indigo-600 focus:ring-2"
+                                            onClick={() =>
+                                                setShowModal(false)
+                                            }
+                                        >
+                                            Cancel
+                                        </button>
                                     </div>
-                                    {/* <div className="mt-2 text-center sm:ml-4 sm:text-left">
+                                </div>
+                                {/* <div className="mt-2 text-center sm:ml-4 sm:text-left">
                                         <h4 className="text-lg font-medium text-gray-800">
                                             กรุณาใส่ข้อมูล
                                         </h4>
@@ -118,14 +114,15 @@ function useTicketRemove() {
                                             </button>
                                         </div>
                                     </div> */}
-                                </div>
                             </div>
                         </div>
                     </div>
-                </>
-            ) : null}
+                </div>
+        </>
+    ) : null
+}
 
-        </div>
+        </div >
     );
 }
 
