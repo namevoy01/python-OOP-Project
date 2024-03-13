@@ -3014,9 +3014,9 @@ print("-----------------------------------------------------------------")
 # username = 'Voy'
 # password = '1234'
 
-bus_controller.add_booking(name_passenger, surname_passenger, gender, tel, email, status_payment, payment_option, amount, date, bus_license, seat_number, source_province, source_station, destination_province, destination_station, departure_date)
-bus_controller.add_ticket(name_passenger)
-# print(bus_controller.cancel_ticket(ticket_id))
+# bus_controller.add_booking(name_passenger, surname_passenger, gender, tel, email, status_payment, payment_option, amount, date, bus_license, seat_number, source_province, source_station, destination_province, destination_station, departure_date)
+# bus_controller.add_ticket(name_passenger)
+# # print(bus_controller.cancel_ticket(ticket_id))
 
-print(bus_controller.get_trip(source_province, source_station, destination_province, destination_station, departure_date))
+# print(bus_controller.get_trip(source_province, source_station, destination_province, destination_station, departure_date))
 # print(bus_controller.get_trip(source_province, source_station, destination_province, destination_station, departure_date))
