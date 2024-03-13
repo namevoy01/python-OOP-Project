@@ -3003,7 +3003,7 @@ payment_option = 'Credit Card'
 amount = 500
 date = '25/02/2024'
 gender = 'Female'
-tel = '05465116'
+tel = '085465116'
 email = 'oihto@gmail.com'
 status_payment = True
 departure_date = '11/03/2024'
@@ -3017,8 +3017,10 @@ bus_controller.add_booking(name_passenger, surname_passenger, gender, tel, email
 bus_controller.add_ticket(name_passenger)
 # print(bus_controller.cancel_ticket(ticket_id))
 
-# print(bus_controller.get_trip(source_province, source_station, destination_province, destination_station, departure_date))
+search = bus_controller.get_search_ticket(ticket_id)
+print(search)
 
-
+for ticket in bus_controller.get_ticket_lst:
+    print(ticket.get_name_passenger)
 
 # print(bus_controller.get_seat(bus_license))

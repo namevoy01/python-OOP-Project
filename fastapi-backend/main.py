@@ -81,8 +81,8 @@ def post_info(name_passenger, surname_passenger, gender, tel, email, status_paym
 
 @app.get('/api/ticket')
 def get_ticket(ticket_id):
-    ticket = bus_controller.get_search_ticket(ticket_id)
-    return ticket
+    search_ticket = bus_controller.get_search_ticket(ticket_id)
+    return search_ticket
     
 @app.delete('/api/cancel')
 def delete_cancel(ticket_id):
@@ -98,8 +98,3 @@ def login(username, password):
 def schedule():
     schedule = bus_controller.get_schedule_info()
     return schedule
-
-@app.get('/api/search_ticket')
-def search_ticket(ticket_id):
-    search = bus_controller.get_search_ticket(ticket_id)
-    return search

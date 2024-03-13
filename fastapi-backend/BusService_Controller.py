@@ -346,25 +346,27 @@ class BusService_Controller :
         id = 0
         info_ticket = []
         for ticket in self.get_ticket_lst:
-            if ticket.get_ticket_id == ticket_id:
+            if str(ticket.get_ticket_id) == str(ticket_id):
                 name_passenger = ticket.get_name_passenger
                 ticket = self.search_ticket_by_ticket_id(ticket_id)
-                name_passenger = ticket.get_name_passenger
                 passenger = self.search_passenger_by_name_passenger(name_passenger)
                 bus_trip = self.search_bus_trip_by_name_passenger(name_passenger)
+                bus = bus_trip.get_bus
+                bus_license = bus.get_bus_license
                 province = bus_trip.get_province
                 route = bus_trip.get_route
                 id += 1
                 info_ticket.append({
                     'id': id, 
-                        'bus_license': ticket.get_ticket_id,
+                        'ticket_id': ticket_id,
+                        'bus_license': bus_license.get_bus_license,
                         'source_province': bus_trip.get_departure_date,
                         'destination_province': route.get_departure_time,
                         'departure_time': province.get_province_name,
                         'source_station' : route.get_source_station,
                         'destination_province' : route.get_destination_province,
                         'destination_station' : route.get_destination_station,
-                        'name_passenger' : ticket.get_name_passenger,
+                        'name_passenger' : name_passenger,
                         'surname_passenger' : passenger.get_surname_passenger,
                         'status_payment' : passenger.get_status_payment,
                         'tel' : passenger.get_tel,
