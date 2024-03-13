@@ -58,10 +58,30 @@ function Home() {
         };
 
         fetchData();
-    }, [selectedStation], [selectedProvince]);
+    }, [selectedStation, selectedProvince]); // Include selectedProvince in the dependency array
 
 
 
+
+    const [selectedDestinationStation, setSelectedDestinationStation] = useState('');
+    const [source_destination_station, set_source_destination_station] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            if (selectedDestination) {
+                try {
+                    setSelectedDestinationStation('');
+                    const response = await fetch(`http://127.0.0.1:8000/api/destination_station?source_province=${encodeURIComponent(selectedProvince)}&source_station=${encodeURIComponent(selectedStation)}&destination_province=${encodeURIComponent(selectedDestination)}`);
+                    const data = await response.json();
+                    set_source_destination_station(data);
+                } catch (error) {
+                    console.error('Error fetching destination stations:', error);
+                }
+            }
+        };
+
+        fetchData();
+    }, [selectedStation, selectedProvince, selectedDestination]);
 
 
     const handleProvinceChange = (event) => {
@@ -82,21 +102,32 @@ function Home() {
 
     };
 
+    const handleDestinationStation = (event) => {
+        const selectedDestinationStation = event.target.value;
+        setSelectedDestinationStation(selectedDestinationStation);
+
+    };
+
+    const [selectedDateFromDatePicker, setSelectedDateFromDatePicker] = useState(null);
+
+    const handleDatePickerChange = (date) => {
+        setSelectedDateFromDatePicker(date);
+    };
     return (
         <div>
             {/* <button onClick={goBack}>Go Back</button> */}
 
-            {/* <select id="station" onChange={handleDestinationChange} value={selectedDestination} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            {/* <select id="station" onChange={handleDestinationStation} value={selectedDestinationStation} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option selected>เลือกจุดขึ้นรถ</option>
-                {source_destination.map((destination, index) => (
-                    <option key={index} value={destination}>{destination}</option>
+                {source_destination_station.map((destination_station, index) => (
+                    <option key={index} value={destination_station}>{destination_station}</option>
                 ))}
-            </select>
+            </select> */}
 
-            <p>จังหวัดที่เลือก: {selectedDestination}</p>
+            {/* <p>จังหวัดที่เลือก: {selectedDestinationStation}</p> */}
 
-            {source_destination.map((destination, index) => (
-                <option key={index} value={destination}>{destination}</option>
+            {/* {source_destination_station.map((destination_station, index) => (
+                <option key={index} value={destination_station}>{destination_station}</option>
             ))} */}
 
             <Navbar />
@@ -128,7 +159,7 @@ function Home() {
                                     value={selectedProvince}
                                     onChange={handleProvinceChange}
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option id='source_province'>เลือกจังหวัดต้นทาง</option>
+                                    <option id='source_station'>เลือกจังหวัดต้นทาง</option>
                                     {source_province.map((province, index) => (
                                         <option key={index} value={province}>{province}</option>
                                     ))}
@@ -139,8 +170,11 @@ function Home() {
                         <div>
                             จุดขึ้นรถ
                             <form className="mt-3">
-                                <select id="station" onChange={handleStationChange} value={selectedStation} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option selected>เลือกจุดขึ้นรถ</option>
+                                <select id="station"
+                                    value={selectedStation}
+                                    onChange={handleStationChange}
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option id='source_station'>เลือกจังหวัดต้นทาง</option>
                                     {source_station.map((station, index) => (
                                         <option key={index} value={station}>{station}</option>
                                     ))}
@@ -151,8 +185,11 @@ function Home() {
                         <div className='mt-5'>
                             จังหวัดปลายทาง
                             <form className="mt-3">
-                                <select id="station" onChange={handleDestinationChange} value={selectedDestination} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option selected>เลือกจังหวัดปลายทาง</option>
+                                <select id="Destination"
+                                    value={selectedDestination}
+                                    onChange={handleDestinationChange}
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option id='source_destination'>เลือกจังหวัดต้นทาง</option>
                                     {source_destination.map((destination, index) => (
                                         <option key={index} value={destination}>{destination}</option>
                                     ))}
@@ -163,22 +200,24 @@ function Home() {
                         <div className='mt-5'>
                             จุดลงรถ
                             <form className="mt-3">
-                                <select id="countries" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option selected>Choose a country</option>
-                                    <option value="US">United States</option>
-                                    <option value="CA">Canada</option>
-                                    <option value="FR">France</option>
-                                    <option value="DE">Germany</option>
+                                <select id="station"
+                                    value={selectedDestinationStation}
+                                    onChange={handleDestinationStation}
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option id='source_destination_station'>เลือกจังหวัดต้นทาง</option>
+                                    {source_destination_station.map((destination_station, index) => (
+                                        <option key={index} value={destination_station}>{destination_station}</option>
+                                    ))}
                                 </select>
                             </form>
                         </div>
 
                         <div className='mt-5'>
                             วันเดินทางไป
-                            <Date />
+                            <Date onDateChange={handleDatePickerChange} />
                         </div>
                     </div>
-                    {selectedProvince === 'เลือกจังหวัดต้นทาง' || selectedProvince === '' || selectedStation === '' || selectedStation === 'เลือกจุดขึ้นรถ' || selectedDestination === '' || selectedDestination === 'เลือกจังหวัดปลายทาง' ? (
+                    {selectedProvince === 'เลือกจังหวัดต้นทาง' || selectedProvince === '' || selectedStation === '' || selectedStation === 'เลือกจุดขึ้นรถ' || selectedDestination === '' || selectedDestination === 'เลือกจังหวัดปลายทาง' || selectedDestinationStation === '' || selectedDestinationStation === 'เลือกจังหวัดปลายทาง' || selectedDateFromDatePicker === null ? (
                         <div className='flex justify-center'>
 
                             <button
