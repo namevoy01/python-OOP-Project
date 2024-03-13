@@ -13,7 +13,7 @@ from User import User
 from BusService_Controller import BusService_Controller
 import datetime
 
-bus_controller = BusService_Controller([], [], [], [], [], [], [])
+bus_controller = BusService_Controller()
 
 def get_controller():
     return bus_controller
@@ -2978,6 +2978,16 @@ def create_instance():
     bus_6.add_seat(Seat('A35', False))
     bus_6.add_seat(Seat('A36', False))
     
+########### add_admin ###########
+
+    bus_controller.add_admin('Voy',
+                             '1234',
+                             'Suphanat',
+                             'Sitsingpiroj',
+                             'Male',
+                             '0945673456')
+
+    
 create_instance()
 
 print("-----------------------------------------------------------------")
@@ -3000,113 +3010,13 @@ status_payment = True
 departure_date = '11/03/2024'
 departure_time = '08.30'
 seat_number = 'A01'
-ticket_id = '35301073'
+ticket_id = 35301073
+username = 'Voy'
+password = '1234'
 
 bus_controller.add_booking(name_passenger, surname_passenger, gender, tel, email, status_payment, payment_option, amount, date, bus_license, seat_number, source_province, source_station, destination_province, destination_station, departure_date)
-                
-# print(get_trip(source_province, source_station, destination_province, destination_station, departure_date))
 bus_controller.add_ticket(name_passenger)
+print(bus_controller.cancel_ticket(ticket_id))
+print(bus_controller.login_for_admin(username, password))
 
-booking = bus_controller.search_booking_by_name_passenger(name_passenger)
-seat = booking.get_seat
-seat_number = seat.get_seat_number
-# print(seat_number)
-# print(booking.get_booking_id)
-
-for ticket in bus_controller.get_ticket_lst:
-    print("Ticket Details:")
-    print("Ticket:", ticket)
-    
-    # Assuming get_booking returns a Booking object
-    booking = ticket.get_booking
-    
-    print("Booking:", booking)
-    
-    # Assuming get_booking_id is a method of the Booking class
-    print("Booking ID:", booking.get_booking_id)
-    
-    # Assuming get_seat_number is a method of the Ticket class
-    print("Seat Number:", ticket.get_seat_number)
-    
-    # Assuming get_ticket_id is a method of the Ticket class
-    print("Ticket ID:", ticket.get_ticket_id)
-    
-    # Assuming ticket_id is a variable holding the desired ticket ID
-    if ticket.get_ticket_id == ticket_id:
-        print('Success')
-    else:
-        print('Error')
-
-
-# print(bus_controller.cancel_ticket(ticket_id))
-
-# for show in bus_controller.get_passenger_lst:
-#     for booking in show.get_booking_lst:
-#         trip = booking.get_bus_trip
-#         province = trip.get_province
-#         route = trip.get_route
-#         bus = trip.get_bus
-#         print(booking.get_bus_trip)
-        
-        
-# payment = bus_controller.add_payment(Payment(name_passenger))
-# print(bus_controller.change_status_seat_when_passenger_has_paid(name_passenger))
-# for payment in bus_controller.get_payment_lst:
-#     if payment.get_name_passenger == name_passenger:
-#         for passenger in bus_controller.get_passenger_lst:
-#             if passenger.get_name_passenger == name_passenger and passenger.get_status_payment == True:
-#                 for booking in passenger.get_booking_lst:
-#                     seat = booking.get_seat
-#                     seat.set_status_seat(False)
-#                     print(seat.get_status_seat)
-
-# print(bus_controller.change_status_seat_when_passenger_has_paid('Chamaiporn'))
-
-
-
-                # for seat in bus.get_seat_lst:
-                #     seat.set_status_seat(False)
-                #     print(seat.get_status_seat)
-                
-# for bus_trip in bus_controller.get_bus_trip_lst:
-#     province = bus_trip.get_province
-#     print(bus_trip.get_bus, province.get_province_name, bus_trip.get_route, bus_trip.get_departure_date)
-
-########################################
-
-
-# if province.get_province_name == source_province:
-#     for route in province.get_route_lst:
-#         if (route.get_source_station == source_station
-#             and route.get_destination_province == destination_province
-#             and route.get_destination_station == destination_station):
-#             print(source_province)
-
-# for trip in bus_controller.get_bus_trip_lst:
-#     province = trip.get_province
-#     route = trip.get_route
-#     departure_date = trip.get_departure_date
-#     departure_time = trip.get_departure_time
-#     print(trip.get_bus, province.get_province_name, route.get_destination_province)
-
-# def get_trip(source_province, source_station, destination_province, destination_station, date_time):
-# for trip in bus_controller.get_province_lst:
-#     source = trip.get_province_name
-#     for route in trip.get_route_lst:
-#         if trip.get_province_name == source_province and route.get_source_station == source_station and route.get_destination_province == destination_province and route.get_destination_station == destination_station:
-#             print(source_province, source_station, destination_province, destination_station)
-#             destination = destination_province
-#             price = route.get_price
-#             bus = route.get_bus
-#             seat_lst = bus_controller.search_all_seat_by_bus_license(bus)
-#             seat = len(seat_lst)
-#             departure_time = route.get_departure_time
-#             print(date_time, bus, source, destination, seat, price, departure_time)
-
-# seat = bus_controller.search_seat_by_bus_license_and_seat_number('1นค5463', 'A01')
-# status = bus_controller.search_status_seat_by_bus_license_and_seat_number('1นค5463', 'A01')
-# print(seat, status)
-
-# todo.set_status(True)
-# def set_status(self, status):
-#     self.__status = True
+print(bus_controller.get_schedule_info())

@@ -13,7 +13,7 @@ from Seat import Seat
 from Station import Station
 from Ticket import Ticket
 from User import User
-from Instance import create_instance, get_controller
+from Instance import get_controller
 from BusService_Controller import BusService_Controller
 
 app = FastAPI()
@@ -43,7 +43,7 @@ def get_data():
 
 @app.get('/api/source_province')
 def get_source_province():
-    source_province = [province.get_province_name for province in bus_controller.get_province_lst]
+    source_province =  [province.get_province_name for province in bus_controller.get_province_lst]
     return source_province
   
 @app.get('/api/source_station')  
@@ -53,60 +53,54 @@ def get_source_station(source_province):
 
 @app.get('/api/destination_province')
 def get_destination_province(source_province, source_station):
-    destination_province = bus_controller.search_destination_province(source_province, source_station)
+    destination_province =  bus_controller.search_destination_province(source_province, source_station)
     return destination_province
-
+    
 @app.get('/api/destination_station')
 def get_destination_station(source_province, source_station, destination_province):
-    destination_station = bus_controller.search_destination_station(source_province, source_station,destination_province)
+    destination_station =  bus_controller.search_destination_station(source_province, source_station,destination_province)
     return destination_station
-
+    
 @app.get('/api/info_trip')
-def get_booking(source_province, source_station, destination_province, destination_station, departure_date, departure_time, bus_license, seat_number):
-    for trip in bus_controller.get_province_lst:
-        if trip.get_province_name == source_province:
-            source = source_province
-            for route in trip.get_route_lst:
-                if route.get_source_station == source_station and route.get_destination_province == destination_province and route.get_destination_station == destination_station:
-                    destination = destination_province
-                    bus = route.get_bus
-                    seat_number = bus_controller.search_seat_by_bus_license_and_seat_number(bus_license, seat_number)
-                    departure_time = route.get_departure_time
-                    return source, destination, source_station, destination_station, departure_date, departure_time, bus, seat_number
+def get_info(source_province, source_station, destination_province, destination_station, departure_date, departure_time, bus_license, seat_number):
+    info_on_booking = bus_controller.get_info_on_booking(source_province, source_station, destination_province, destination_station, departure_date, departure_time, bus_license, seat_number)
+    return info_on_booking
 
 @app.get('/api/trip')
 def get_trip(source_province, source_station, destination_province, destination_station, departure_date):
-    for trip in bus_controller.get_province_lst:
-        if trip.get_province_name == source_province:
-            source = source_province
-            for route in trip.get_route_lst:
-                if route.get_source_station == source_station and route.get_destination_province == destination_province and route.get_destination_station == destination_station:
-                    destination = destination_province
-                    bus = route.get_bus
-                    departure_time = route.get_departure_time
-                    return source, destination, source_station, destination_station, departure_date, departure_time, bus
+    trip = bus_controller.get_trip(source_province, source_station, destination_province, destination_station, departure_date)
+    return trip
                 
 @app.get('/api/seat')
 def get_seat(bus_license):
-    bus_lst = bus_controller.search_bus_by_bus_license(bus_license)
-    seat_show = []
-    for bus in bus_lst:
-        for seat in bus.get_seat_lst:
-            seat_show.append([seat.get_seat_number, seat.get_status_seat])
-    return seat_show
-
-@app.post('/api/seat')
-def post_seat():
-    pass
+    seat = bus_controller.search_seat_lst_by_bus_license(bus_license)
+    return seat.get_seat_number, seat.get_status_seat
 
 @app.post('/api/info')
-def post_info():
-    pass
+def post_info(name_passenger, surname_passenger, gender, tel, email, status_payment, payment_option, amount, date, bus_license, seat_number, source_province, source_station, destination_province, destination_station, departure_date):
+    input_booking = bus_controller.add_booking(name_passenger, surname_passenger, gender, tel, email, status_payment, payment_option, amount, date, bus_license, seat_number, source_province, source_station, destination_province, destination_station, departure_date)
 
 @app.get('/api/ticket')
 def get_ticket(ticket_id):
-    pass
+    ticket = bus_controller.search_ticket_by_ticket_id(ticket_id)
+    name_passenger = ticket.get_name_passenger
+    passenger = bus_controller.search_passenger_by_name_passenger(name_passenger)
+    bus_trip = bus_controller.search_bus_trip_by_name_passenger(name_passenger)
+    province = bus_trip.get_province
+    route = bus_trip.get_route
+    return ticket.get_ticket_id, bus_trip.get_departure_date, route.get_departure_time, province.get_province_name, route.get_source_station, route.get_destination_province, route.get_destination_station, ticket.get_name_passenger, passenger.get_surname_passenger, passenger.get_status_payment, passenger.get_tel, passenger.get_email
 
-@app.put('/api/cancel')
-def put_cancel():
-    pass
+@app.delete('/api/cancel')
+def delete_cancel(ticket_id):
+    cancel_ticket = bus_controller.cancel_ticket(ticket_id)
+    return cancel_ticket
+
+@app.post('/api/login')
+def login(username, password):
+    user = bus_controller.login_for_admin(username, password)
+    return user
+
+@app.get('/api/schedule')
+def schedule():
+    schedule = bus_controller.get_schedule_info()
+    return schedule
