@@ -2,8 +2,14 @@ import React, { useState, useEffect } from 'react';
 import Date from '../component/date';
 import Navbar from '../component/navbar';
 import { Link } from 'react-router-dom';
+// import { withRouter } from 'react-router-dom';
 
 function Home() {
+
+    // function goBack() {
+    //     // window.history.go(-1);
+    //     // console.log('ควย');
+    // };
 
     const [selectedProvince, setSelectedProvince] = useState('');
     const [source_province, set_source_province] = useState([]);
@@ -22,6 +28,7 @@ function Home() {
         const fetchData = async () => {
             if (selectedProvince) {
                 try {
+                    setSourceStation('');
                     const response = await fetch(`http://127.0.0.1:8000/api/source_station?source_province=${encodeURIComponent(selectedProvince)}`);
                     const data = await response.json();
                     set_source_station(data);
@@ -34,25 +41,63 @@ function Home() {
         fetchData();
     }, [selectedProvince]);
 
+    const [selectedDestination, setSelectedDestination] = useState('');
+    const [source_destination, set_source_destination] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            if (selectedStation) {
+                try {
+                    setSelectedDestination('');
+                    const response = await fetch(`http://127.0.0.1:8000/api/destination_province?source_province=${encodeURIComponent(selectedProvince)}&source_station=${encodeURIComponent(selectedStation)}`);
+                    const data = await response.json();
+                    set_source_destination(data);
+                } catch (error) {
+                    console.error('Error fetching source stations:', error);
+                }
+            }
+        };
+
+        fetchData();
+    }, [selectedStation], [selectedProvince]);
+
+
+
+
 
     const handleProvinceChange = (event) => {
         const selectedValue = event.target.value;
         setSelectedProvince(selectedValue);
-        // เพิ่มโค้ดอื่น ๆ ที่คุณต้องการทำเมื่อมีการเลือกจังหวัด
+
     };
 
     const handleStationChange = (event) => {
         const selectedStation = event.target.value;
         setSourceStation(selectedStation);
 
-        // เพิ่มโค้ดอื่น ๆ ที่คุณต้องการทำเมื่อมีการเลือกจังหวัด
-        // เช่น การดึงข้อมูลจาก API หรือปรับแต่งการแสดงผล
+    };
+
+    const handleDestinationChange = (event) => {
+        const selectedDestination = event.target.value;
+        setSelectedDestination(selectedDestination);
+
     };
 
     return (
         <div>
-            <p>จังหวัดที่เลือก: {selectedProvince}</p>
-            <p>{selectedStation}</p>
+            {/* <button onClick={goBack}>Go Back</button> */}
+
+            {/* <select id="station" onChange={handleDestinationChange} value={selectedDestination} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option selected>เลือกจุดขึ้นรถ</option>
+                {source_destination.map((destination, index) => (
+                    <option key={index} value={destination}>{destination}</option>
+                ))}
+            </select>
+
+            <p>จังหวัดที่เลือก: {selectedDestination}</p>
+
+            {source_destination.map((destination, index) => (
+                <option key={index} value={destination}>{destination}</option>
+            ))} */}
 
             <Navbar />
             <div className="max-w-screen-2xl mx-auto xl:w-10/12 lg: w-10/12">
@@ -106,12 +151,11 @@ function Home() {
                         <div className='mt-5'>
                             จังหวัดปลายทาง
                             <form className="mt-3">
-                                <select id="countries" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option selected>Choose a country</option>
-                                    <option value="US">United States</option>
-                                    <option value="CA">Canada</option>
-                                    <option value="FR">France</option>
-                                    <option value="DE">Germany</option>
+                                <select id="station" onChange={handleDestinationChange} value={selectedDestination} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option selected>เลือกจังหวัดปลายทาง</option>
+                                    {source_destination.map((destination, index) => (
+                                        <option key={index} value={destination}>{destination}</option>
+                                    ))}
                                 </select>
                             </form>
                         </div>
@@ -134,12 +178,12 @@ function Home() {
                             <Date />
                         </div>
                     </div>
-                    {selectedProvince == 'เลือกจังหวัดต้นทาง' || selectedProvince == '' ? (
+                    {selectedProvince === 'เลือกจังหวัดต้นทาง' || selectedProvince === '' || selectedStation === '' || selectedStation === 'เลือกจุดขึ้นรถ' || selectedDestination === '' || selectedDestination === 'เลือกจังหวัดปลายทาง' ? (
                         <div className='flex justify-center'>
 
                             <button
                                 type="button"
-                                className="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="text -white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
                                 disabled
                             >
                                 ค้นหาเที่ยวรถ
