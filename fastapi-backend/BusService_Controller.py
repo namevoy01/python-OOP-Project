@@ -7,7 +7,6 @@ from Payment import Payment
 from Province import Province
 from Route import Route
 from Seat import Seat
-from Station import Station
 from Ticket import Ticket
 from User import User
 
@@ -167,7 +166,7 @@ class BusService_Controller :
             if bus.get_bus_license == bus_license:
                 for seat in bus.get_seat_lst:
                     if seat.get_status_seat == True:
-                        seat_lst.append(seat)  
+                        seat_lst.append(seat.get_seat_number, seat.get_status_seat)
         return seat_lst
     
     def search_seat_lst_by_bus_license(self, bus_license):
@@ -229,6 +228,20 @@ class BusService_Controller :
         seat = booking.get_seat
         seat.set_status_seat(False)
         return seat.get_status_seat
+
+    def get_seat(self, bus_license):
+        id = 0
+        info_seat = []
+        for bus in self.__bus_lst:
+            if bus.get_bus_license == bus_license:
+                for seat in bus.get_seat_lst:
+                    id += 1
+                    info_seat.append({
+                    'id': id, 
+                    'seat_number': seat.get_seat_number,
+                    'status_seat': seat.get_status_seat
+                    })
+            return info_seat
 
     def get_trip(self, source_province, source_station, destination_province, destination_station, departure_date):
         id = 0

@@ -10,7 +10,6 @@ from Payment import Payment
 from Province import Province
 from Route import Route
 from Seat import Seat
-from Station import Station
 from Ticket import Ticket
 from User import User
 from Instance import get_controller
@@ -73,8 +72,8 @@ def get_trip(source_province, source_station, destination_province, destination_
                 
 @app.get('/api/seat')
 def get_seat(bus_license):
-    seat = bus_controller.search_seat_lst_by_bus_license(bus_license)
-    return seat.get_seat_number, seat.get_status_seat
+    seat = bus_controller.get_seat(bus_license)
+    return seat
 
 @app.post('/api/info')
 def post_info(name_passenger, surname_passenger, gender, tel, email, status_payment, payment_option, amount, date, bus_license, seat_number, source_province, source_station, destination_province, destination_station, departure_date):

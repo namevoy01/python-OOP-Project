@@ -7,7 +7,6 @@ from Payment import Payment
 from Province import Province
 from Route import Route
 from Seat import Seat
-from Station import Station
 from Ticket import Ticket
 from User import User
 from BusService_Controller import BusService_Controller
@@ -3022,6 +3021,4 @@ print("-----------------------------------------------------------------")
 
 
 
-# print(route.get_source_station, source_station)
-# if route.get_source_station == source_province:
-#     print(route.get_source_station)
+# print(bus_controller.get_seat(bus_license))
