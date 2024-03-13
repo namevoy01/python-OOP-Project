@@ -175,13 +175,6 @@ class BusService_Controller :
             if bus.get_bus_license == bus_license:
                 for seat in bus.get_seat_lst:
                     return seat
-    
-    def search_status_seat_by_bus_license_and_seat_number(self, bus_license, seat_number):
-        for bus in self.__bus_lst:
-            if bus.get_bus_license == bus_license:
-                for seat in bus.get_seat_lst:
-                    if seat.get_seat_number == seat_number:
-                        return seat.get_status_seat
                     
     def search_price_by_route(self, source_province, source_station, destination_province, destination_station):
         for trip in self.get_province_lst:
@@ -239,7 +232,7 @@ class BusService_Controller :
 
     def get_trip(self, source_province, source_station, destination_province, destination_station, departure_date):
         id = 0
-        result = []
+        info_trip = []
         for trip in self.get_bus_trip_lst:
             bus_lst = trip.get_bus
             bus = bus_lst.get_bus_license
@@ -249,8 +242,9 @@ class BusService_Controller :
             if route.get_source_station == source_station and route.get_destination_province == destination_province and route.get_destination_station == destination_station:
                 self.add_bus_trip(bus.get_bus_license, source_province, source_station, destination_province, destination_station, departure_date)
                 departure_time = route.get_departure_time
+                price = route.get_price
                 id += 1
-                result.append({
+                info_trip.append({
                 'id': id, 
                 'source_province': source_province,
                 'destination_province': destination_province,
@@ -259,9 +253,10 @@ class BusService_Controller :
                 'departure_date': departure_date,
                 'departure_time': departure_time,
                 'bus_license': bus.get_bus_license,
-                'count_seat': count_seat
+                'count_seat': count_seat,
+                'price' : price
             })
-            return result
+            return info_trip
     
     def get_info_on_booking(self, source_province, source_station, destination_province, destination_station, departure_date, departure_time, bus_license, seat_number):
         id = 0
@@ -308,8 +303,14 @@ class BusService_Controller :
                 seat.set_status_seat(True)
                 
     def login_for_admin(self, username, password):
+        id = 0
+        info_admin = []
         for admin in self.get_admin_lst:
             if admin.get_username == username and admin.get_password == password:
+                info_admin.append({
+                    'username' : username,
+                    'password' : password
+                })
                 return username, password
             
     def get_schedule_info(self):
