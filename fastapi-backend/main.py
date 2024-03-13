@@ -104,3 +104,8 @@ def login(username, password):
 def schedule():
     schedule = bus_controller.get_schedule_info()
     return schedule
+
+@app.get('/api/search_ticket')
+def search_ticket(ticket_id):
+    search = bus_controller.get_search_ticket(ticket_id)
+    return search
