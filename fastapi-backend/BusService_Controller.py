@@ -247,7 +247,17 @@ class BusService_Controller :
             if route.get_source_station == source_station and route.get_destination_province == destination_province and route.get_destination_station == destination_station:
                 self.add_bus_trip(bus.get_bus_license, source_province, source_station, destination_province, destination_station, departure_date)
                 departure_time = route.get_departure_time
-                return source_province, destination_province, source_station, destination_station, departure_date, departure_time, bus.get_bus_license, count_seat
+                result = {
+                'source_province': source_province,
+                'destination_province': destination_province,
+                'source_station': source_station,
+                'destination_station': destination_station,
+                'departure_date': departure_date,
+                'departure_time': departure_time,
+                'bus_license': bus.get_bus_license,
+                'count_seat': count_seat
+            }
+            return result
     
     def get_info_on_booking(self, source_province, source_station, destination_province, destination_station, departure_date, departure_time, bus_license, seat_number):
         for trip in self.get_bus_trip_lst:
