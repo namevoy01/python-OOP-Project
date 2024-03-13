@@ -239,6 +239,7 @@ class BusService_Controller :
 
     def get_trip(self, source_province, source_station, destination_province, destination_station, departure_date):
         id = 0
+        result = []
         for trip in self.get_bus_trip_lst:
             bus_lst = trip.get_bus
             bus = bus_lst.get_bus_license
@@ -249,7 +250,7 @@ class BusService_Controller :
                 self.add_bus_trip(bus.get_bus_license, source_province, source_station, destination_province, destination_station, departure_date)
                 departure_time = route.get_departure_time
                 id += 1
-                result = [{
+                result = ({
                 'id': id, 
                 'source_province': source_province,
                 'destination_province': destination_province,
@@ -259,19 +260,37 @@ class BusService_Controller :
                 'departure_time': departure_time,
                 'bus_license': bus.get_bus_license,
                 'count_seat': count_seat
-            }]
+            })
             return result
     
     def get_info_on_booking(self, source_province, source_station, destination_province, destination_station, departure_date, departure_time, bus_license, seat_number):
+        id = 0
+        info_in_booking = []
         for trip in self.get_bus_trip_lst:
-            seat = self.search_seat_lst_by_bus_license(bus_license)
+            bus = trip.get_bus
             route = trip.get_route
             if route.get_source_station == source_station and route.get_destination_province == destination_province and route.get_destination_station == destination_station:
                 seat = self.search_seat_lst_by_bus_license(bus_license)
                 seat_number = seat.get_seat_number
                 status_seat = seat.get_status_seat
                 departure_time = route.get_departure_time
-                return source_province, destination_province, source_station, destination_station, departure_date, departure_time, bus_license, seat_number, status_seat
+                if route.get_source_station == source_station and route.get_destination_province == destination_province and route.get_destination_station == destination_station:
+                    self.add_bus_trip(bus.get_bus_license, source_province, source_station, destination_province, destination_station, departure_date)
+                    departure_time = route.get_departure_time
+                    id += 1
+                    info_in_booking = ({
+                        'id': id, 
+                        'source_province': source_province,
+                        'destination_province': destination_province,
+                        'source_station': source_station,
+                        'destination_station': destination_station,
+                        'departure_date': departure_date,
+                        'departure_time': departure_time,
+                        'bus_license': bus_license,
+                        'seat_number' : seat_number,
+                        'seat_status' : status_seat,
+                    })
+                return info_in_booking
     
     def cancel_ticket(self, ticket_id):
         for get_ticket in self.get_ticket_lst:
@@ -294,7 +313,17 @@ class BusService_Controller :
                 return username, password
             
     def get_schedule_info(self):
+        id = 0
+        info_schedule = []
         for bus in self.__bus_lst:
             for province in self.__province_lst:
                 for route in province.get_route_lst:
-                    return bus.get_bus_license, province.get_province_name, route.get_destination_province, route.get_departure_time
+                    id += 1
+                    info_schedule.append({
+                        'id': id, 
+                        'bus_license': bus.get_bus_license,
+                        'source_province': province.get_province_name,
+                        'destination_province': route.get_destination_province,
+                        'departure_time': route.get_departure_time
+                    })
+        return info_schedule
