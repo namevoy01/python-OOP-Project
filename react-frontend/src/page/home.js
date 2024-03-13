@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import Date from '../component/date';
 import Navbar from '../component/navbar';
 import { Link } from 'react-router-dom';
@@ -108,10 +109,14 @@ function Home() {
 
     };
 
-    const [selectedDateFromDatePicker, setSelectedDateFromDatePicker] = useState(null);
 
-    const handleDatePickerChange = (date) => {
-        setSelectedDateFromDatePicker(date);
+    const [selectedDate, setSelectedDate] = useState('');
+
+
+    const handleDateSelect = (date) => {
+
+        // เก็บวันที่ใน selectedDate
+        setSelectedDate(date);
     };
     return (
         <div>
@@ -214,10 +219,10 @@ function Home() {
 
                         <div className='mt-5'>
                             วันเดินทางไป
-                            <Date onDateChange={handleDatePickerChange} />
+                            <Date onDateChange={handleDateSelect} />
                         </div>
                     </div>
-                    {selectedProvince === 'เลือกจังหวัดต้นทาง' || selectedProvince === '' || selectedStation === '' || selectedStation === 'เลือกจุดขึ้นรถ' || selectedDestination === '' || selectedDestination === 'เลือกจังหวัดปลายทาง' || selectedDestinationStation === '' || selectedDestinationStation === 'เลือกจังหวัดปลายทาง' || selectedDateFromDatePicker === null ? (
+                    {selectedProvince === 'เลือกจังหวัดต้นทาง' || selectedProvince === '' || selectedStation === '' || selectedStation === 'เลือกจุดขึ้นรถ' || selectedDestination === '' || selectedDestination === 'เลือกจังหวัดปลายทาง' || selectedDestinationStation === '' || selectedDestinationStation === 'เลือกจังหวัดปลายทาง' ? (
                         <div className='flex justify-center'>
 
                             <button
@@ -232,7 +237,7 @@ function Home() {
                     )
                         : (
                             <div className='flex justify-center'>
-                                <Link to="/travel"><button type="button" className="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 text-lg">ค้นหาเที่ยวรถ</button></Link>
+                                <Link to={`/travel/${selectedProvince}/${selectedStation}/${selectedDestination}/${selectedDestinationStation}/${selectedDate}`}><button type="button" className="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 text-lg">ค้นหาเที่ยวรถ</button></Link>
                             </div>
                         )}
 

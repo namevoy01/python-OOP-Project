@@ -20,7 +20,7 @@ const router = createBrowserRouter([
   },
   
   {
-    path: "travel",
+    path: "travel/:province/:station/:destination/:destinationstation/:date",
     element: <Travel />
   },
 
@@ -61,6 +61,7 @@ root.render(
   <React.StrictMode>
     <RouterProvider router={router} />
   </React.StrictMode>
+  
 
 
 );
