@@ -155,7 +155,7 @@ function useTicketRemove() {
                                             ))}
 
                                         </div>
-                                        พิมพ์ตั๋วโดยสารด้วยตนเองผ่านเว็บไซต์ ตั๋วที่พิมพ์สามารถใช้เดินทางได้โดยไม่ต้องแลกตั๋ว
+                                        หักค่าธรรมเนียมการคืนตั๋ว 10% จากอัตราค่าโดยสาร และ คิดค่าธรรมเนียมการโอนเงิน 30 บาท/ครั้ง
                                         <button
                                             className="w-full mt-2 p-2.5 flex-1 text-white bg-red-600 rounded-md outline-none ring-offset-2 ring-red-600 focus:ring-2"
                                             onClick={() => {
