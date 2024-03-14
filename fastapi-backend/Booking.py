@@ -2,13 +2,13 @@ from datetime import datetime
 
 class Booking:
     booking_id = 1552010
-    def __init__(self, name_passenger, payment_option, amount, date, time_reserve, bus_trip, seat):
+    def __init__(self, name_passenger, payment_option, amount, departure_date, time_reserve, bus_trip, seat):
         Booking.booking_id += 1
         self.__booking_id  = Booking.booking_id 
         self.__name_passenger = name_passenger
         self.__payment_option = payment_option
         self.__amount = amount
-        self.__date = date
+        self.__departure_date = departure_date
         self.__time_reserve = datetime.now().strftime("%H:%M")
         self.__bus_trip = bus_trip
         self.__seat = seat
@@ -30,8 +30,8 @@ class Booking:
         return self.__amount
     
     @property
-    def get_date(self):
-        return self.__date
+    def get_departure_date(self):
+        return self.__departure_date
     
     @property
     def get_time_reserve(self):

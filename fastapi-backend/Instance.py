@@ -2995,13 +2995,11 @@ source_province = 'กรุงเทพมหานคร'
 source_station = 'สถานีขนส่งผู้โดยสารกรุงเทพฯ(รังสิต)'
 destination_province = 'ฉะเชิงเทรา'
 destination_station = 'ท่าศรีราชา'
-date_time = '22/11/2024'
 bus_license = '1นค5463'
 name_passenger = 'Chamaiporn'
 surname_passenger = 'Phomrasri'
 payment_option = 'Credit Card'
 amount = 145
-date = '25/02/2024'
 time_reserve = datetime.now().strftime("%H:%M")
 gender = 'Female'
 tel = '085465116'
@@ -3014,10 +3012,10 @@ ticket_id = 35301073
 username = 'Voy'
 password = '1234'
 
-bus_controller.add_booking(name_passenger, surname_passenger, gender, tel, email, status_payment, payment_option, amount, date, time_reserve, bus_license, seat_number, source_province, source_station, destination_province, destination_station, departure_date)
+bus_controller.add_booking(name_passenger, surname_passenger, gender, tel, email, status_payment, payment_option, amount, time_reserve, bus_license, seat_number, source_province, source_station, destination_province, destination_station, departure_date)
 bus_controller.add_ticket(name_passenger)
 # # print(bus_controller.cancel_ticket(ticket_id))
 
-# search = bus_controller.return_ticket(name_passenger, surname_passenger, time_reserve)
-# print(search)
+search = bus_controller.get_info_on_booking(source_province, source_station, destination_province, destination_station, departure_date, departure_time, bus_license, seat_number)
+print(search)
 # print(bus_controller.get_seat(bus_license))

@@ -57,10 +57,10 @@ class BusService_Controller :
         self.__admin_lst.append(new_admin)
         return self.__admin_lst
     
-    def add_booking(self, name_passenger, surname_passenger, gender, tel, email, status_payment, payment_option, amount, date, time_reserve, bus_license, seat_number, source_province, source_station, destination_province, destination_station, departure_date):
+    def add_booking(self, name_passenger, surname_passenger, gender, tel, email, status_payment, payment_option, amount, time_reserve, bus_license, seat_number, source_province, source_station, destination_province, destination_station, departure_date):
         seat = self.search_seat_number_and_status_seat_by_seat(bus_license, seat_number)
         bus_trip = self.add_bus_trip(bus_license, source_province, source_station, destination_province, destination_station, departure_date)
-        booking = Booking(name_passenger, payment_option, amount, date, time_reserve, bus_trip, seat)
+        booking = Booking(name_passenger, payment_option, amount, departure_date, time_reserve, bus_trip, seat)
         self.add_passenger(name_passenger, surname_passenger, gender, tel, email, status_payment)
         passenger_lst = self.search_passenger_by_name_passenger(name_passenger, surname_passenger)
         passenger_lst.get_booking_lst.append(booking)
@@ -285,23 +285,22 @@ class BusService_Controller :
                 seat_number = seat.get_seat_number
                 status_seat = seat.get_status_seat
                 departure_time = route.get_departure_time
-                if route.get_source_station == source_station and route.get_destination_province == destination_province and route.get_destination_station == destination_station:
-                    self.add_bus_trip(bus.get_bus_license, source_province, source_station, destination_province, destination_station, departure_date)
-                    departure_time = route.get_departure_time
-                    id += 1
-                    info_in_booking.append({
-                        'id': id, 
-                        'source_province': source_province,
-                        'destination_province': destination_province,
-                        'source_station': source_station,
-                        'destination_station': destination_station,
-                        'departure_date': departure_date,
-                        'departure_time': departure_time,
-                        'bus_license': bus_license,
-                        'seat_number' : seat_number,
-                        'seat_status' : status_seat,
-                    })
-        return info_in_booking
+                self.add_bus_trip(bus.get_bus_license, source_province, source_station, destination_province, destination_station, departure_date)
+                departure_time = route.get_departure_time
+                id += 1
+                info_in_booking.append({
+                    'id': id, 
+                    'source_province': source_province,
+                    'destination_province': destination_province,
+                    'source_station': source_station,
+                    'destination_station': destination_station,
+                    'departure_date': departure_date,
+                    'departure_time': departure_time,
+                    'bus_license': bus_license,
+                    'seat_number' : seat_number,
+                    'seat_status' : status_seat,
+                })
+            return info_in_booking
     
     def cancel_ticket(self, ticket_id):
         for get_ticket in self.get_ticket_lst:
