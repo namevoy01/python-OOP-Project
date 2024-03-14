@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
 const useSeatSelect = () => {
-    const { bus_license } = useParams();
-    console.log(bus_license);
+    const { bus_license, province, station, destination, destinationstation, date,time,amount} = useParams();
+    
+    console.log(province, station, destination, destinationstation, date,time,bus_license,amount);
 
     const [busLicenseData, setBusLicenseData] = useState([]);
 
@@ -106,7 +107,7 @@ const useSeatSelect = () => {
                         <Link to="/travel"><button type="button" className="text-white bg-gradient-to-r from-gray-400 via-gray-500 to-gray-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-gray-300 dark:focus:ring-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2   text-lg mt-5">กลับไปเลือกเที่ยวรถ</button></Link>
                         
                         {selectedSeat !== null ? (
-                            <Link to='/inputfill'>
+                            <Link to={`/inputfill/${bus_license}/${province}/${station}/${destination}/${destinationstation}/${date}/${time}/${amount}/${selectedSeat}`}>
                                 <button
                                     type="button"
                                     className="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 text-lg mt-5"
