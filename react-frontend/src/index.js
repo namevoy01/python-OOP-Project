@@ -47,7 +47,7 @@ const router = createBrowserRouter([
     element: <Ticket />
   },
   {
-    path: "seat",
+    path: "seat/:bus_license",
     element: <Seat />
   },
   {

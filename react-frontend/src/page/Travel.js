@@ -45,9 +45,13 @@ function Travel() {
 
     const handleRadioChange = (tripId) => {
         setSelectedTripId(tripId);
+        const selectedTrip = data.find(trip => trip.id === tripId);
+        setSelectedBusLicense(selectedTrip ? selectedTrip.bus_license : null);
     };
 
-    console.log('ddddd', selectedTripId);
+    const [selectedBusLicense, setSelectedBusLicense] = useState(null);
+
+    console.log('ddddd', selectedBusLicense);
     // `http://127.0.0.1:8000/api/trip?source_province=${encodeURIComponent(province)}&source_station=${encodeURIComponent(station)}&destination_province=${encodeURIComponent(destination)}&destination_station=${encodeURIComponent(destinationstation)}&departure_date=${encodeURIComponent(date)}`
     return (
 
@@ -93,6 +97,9 @@ function Travel() {
                                     ที่นั่งว่าง
                                 </th>
                                 <th scope="col" class="px-6 py-3">
+                                    ทะเบียนรถ
+                                </th>
+                                <th scope="col" class="px-6 py-3">
                                     ราคา
                                 </th>
                                 <th scope="col" class="px-6 py-3">
@@ -102,40 +109,38 @@ function Travel() {
                         </thead>
                         <tbody className=''>
                             {data.map((trip) => (
-
-                                <tr key={trip.id} class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <tr key={trip.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {trip.source_province}
                                     </td>
-                                    <td class="px-6 py-4">
+                                    <td className="px-6 py-4">
                                         {trip.source_province} - {trip.destination_province}
-
                                     </td>
-                                    <td class="px-6 py-4">
+                                    <td className="px-6 py-4">
                                         {trip.destination_province}
                                     </td>
-                                    <td class="px-6 py-4">
+                                    <td className="px-6 py-4">
                                         {trip.count_seat}
                                     </td>
-                                    <td class="px-6 py-4">
+                                    <td className="px-6 py-4">
+                                        {trip.bus_license}
+                                    </td>
+                                    <td className="px-6 py-4">
                                         {trip.price}
                                     </td>
-                                    <td class="px-6 py-4">
-                                        <input id={`default-radio-${trip.id}`} onChange={() => handleRadioChange(trip.id)}
-                                            checked={selectedTripId === trip.id} type="radio" value={trip.id} name="default-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-
+                                    <td className="px-6 py-4">
+                                        <input
+                                            id={`default-radio-${trip.id}`}
+                                            onChange={() => handleRadioChange(trip.id)}
+                                            checked={selectedTripId === trip.id}
+                                            type="radio"
+                                            value={trip.id}
+                                            name="default-radio"
+                                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                        />
                                     </td>
                                 </tr>
                             ))}
-
-
-
-
-
-
-
-
-
 
 
 
@@ -147,7 +152,7 @@ function Travel() {
                     <Link to="/"><button type="button" class="text-white bg-gradient-to-r from-gray-400 via-gray-500 to-gray-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-gray-300 dark:focus:ring-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2   text-lg mt-5">กลับไปค้นหาเที่ยวรถ</button></Link>
 
                     {selectedTripId !== null ? (
-                        <Link to="/seat">
+                        <Link to={`/seat/${selectedBusLicense}`}>
                             <button
                                 type="button"
                                 className="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 text-lg mt-5"
