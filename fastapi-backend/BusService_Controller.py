@@ -262,7 +262,7 @@ class BusService_Controller :
                         'count_seat': count_seat,
                         'price' : price
                     })
-                return info_trip
+            return info_trip
     
     def get_info_on_booking(self, source_province, source_station, destination_province, destination_station, departure_date, departure_time, bus_license, seat_number):
         id = 0
