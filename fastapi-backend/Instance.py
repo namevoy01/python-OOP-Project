@@ -3007,14 +3007,15 @@ email = 'oihto@gmail.com'
 status_payment = True
 departure_date = '11/03/2024'
 departure_time = '17.40 น.'
-seat_number = 'A02'
+seat_number = 'A10'
 ticket_id = 35301073
 username = 'Voy'
 password = '1234'
 
 bus_controller.add_booking(name_passenger, surname_passenger, gender, tel, email, status_payment, payment_option, amount, time_reserve, bus_license, seat_number, source_province, source_station, destination_province, destination_station, departure_date)
 bus_controller.add_ticket(name_passenger)
-# # print(bus_controller.cancel_ticket(ticket_id))
+# print(bus_controller.cancel_ticket(ticket_id))
+# print(bus_controller.get_ticket_lst)
 
-# search = bus_controller.cancel_ticket(ticket_id)
-# print(search)
+search = bus_controller.search_all_seat_by_bus_license(bus_license)
+print(len(search))

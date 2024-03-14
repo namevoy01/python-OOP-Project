@@ -31,7 +31,7 @@ const router = createBrowserRouter([
   },
 
   {
-    path: "inputfill",
+    path: "inputfill/:bus_license/:province/:station/:destination/:destinationstation/:date/:time/:amount/:seat",
     element: <Inputfill />
   },
   {
@@ -47,7 +47,7 @@ const router = createBrowserRouter([
     element: <Ticket />
   },
   {
-    path: "seat/:bus_license",
+    path: "seat/:bus_license/:province/:station/:destination/:destinationstation/:date/:time/:amount",
     element: <Seat />
   },
   {

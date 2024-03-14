@@ -1,8 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../component/navbar';
 import { Link } from 'react-router-dom';
 
-const ticket = () => {
+const Ticket = () => {
+
+    const [source_ticket, set_ticket] = useState([]);
+    useEffect(() => {
+        fetch('http://127.0.0.1:8000/api/ticket?ticket_id=35301073')
+            .then(response => response.json())
+            .then(data => {
+                if (data && data.length > 0) {
+                    set_ticket(data[0]); // Assuming the response is an array and you're interested in the first element
+                } else {
+                    console.error('Empty or invalid response from the API');
+                }
+            })
+            .catch(error => console.error('Error fetching ticket data:', error));
+    }, []);
+
+    console.log(source_ticket);
     return (
         <div>
             <Navbar />
@@ -31,57 +47,75 @@ const ticket = () => {
                 <div className="max-w-screen-2xl mx-auto xl:w-10/12 lg: w-10/12">
 
                     <div className="py-8 px-8 bg-white rounded-xl border-solid border-2 border-gray-100 shadow-md  space-y-2 mt-5">
-                        <div className="grid grid-cols-2 gap-4">
-                            <div className="col-start-1 col-end-3">
-                                <b> รหัสตั๋ว : 1150</b>
+                        <div className="grid grid-cols-2 gap-4 ">
+                            <div className="col-span-2">
+                                <b> รหัสตั๋ว : {source_ticket.ticket_id}</b>
                             </div>
 
-                            <div>
-                                <form className="mt-3 flex">
-                                    <div className='mt-1.5 me-2'> จาก</div>
-                                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" value='10/3/2024 09:00 จังหวัด:กรุงเทพ จุดขึ้น:หมอชิต' disabled />
-                                </form>
+                            <div className="col-span-2">
+                                <div className="flex">
+                                    <div className="mt-1.5 me-2"> จาก </div>
+                                    <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" value={`จ.${source_ticket.source_province} จุดขึ้น ${source_ticket.source_station}`} disabled />
+                                </div>
                             </div>
-                            <div>
-                                <form className="mt-3 flex">
-                                    <div className='mt-1.5 me-3'>ไป</div>
-                                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" value='จังหวัด:กระบี่ จุดลง:จุดจอดอำเภอลำทับ' disabled />
 
-                                </form>
-
+                            <div className="col-span-2">
+                                <div className="flex">
+                                    <div className="mt-1.5 me-3"> ถึง </div>
+                                    <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" value={`จ.${source_ticket.destination_province} จุดลง ${source_ticket.destination_station}`} disabled />
+                                </div>
                             </div>
-                            <div>
-                                <form className="mt-3 flex">
-                                    <div className='mt-1.5 me-3'>นาย สมชาย สองมือ</div>
 
-                                </form>
+                            <div className="col-span-2">
+                                <div className="flex">
+                                    <div className="mt-1.5 me-3"> รถออกเวลา : {source_ticket.departure_time}</div>
+                                </div>
+                            </div>
 
+                            <div className="col-span-2">
+                                <div className="flex">
+                                    <div className="mt-1.5 me-3"> หมายเลขทะเบียนรถ : {source_ticket.bus_license}</div>
+                                </div>
                             </div>
-                            <div>
-                                <form className="mt-3 flex">
-                                    <div className='mt-1.5 me-3'>สถานะ:
-                                        <span class="ms-2 inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Paid</span>
 
-                                    </div>
+                            <div className="col-span-2">
+                                <div className="flex">
+                                    <div className="mt-1.5 me-3"> {source_ticket.name_passenger} {source_ticket.surname_passenger}</div>
+                                </div>
+                            </div>
 
-                                </form>
+                            <div className="col-span-2">
+                                <div className="flex">
+                                    {source_ticket.status_payment == false ? (
+                                        <div className="mt-1.5 me-3"> สถานะ: <span className="ms-2 inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-700 ring-1 ring-inset ring-yellow-600/20">ยังไม่ชำระเงิน</span></div>
+                                    ) : (
+                                        <div className="mt-1.5 me-3"> สถานะ: <span className="ms-2 inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Paid</span></div>
+                                    )}
+                                </div>
+                            </div>
 
+                            <div className="col-span-2">
+                                <b><div className="mt-1.5 me-3"> รายละเอียดข้อมูลติดต่อ:</div></b>
                             </div>
-                            <div className=" col-start-1  mt-3 col-end-3">
-                                <b><div className='mt-1.5 me-3'>รายละเอียดข้อมูลติดต่อ:
-                                </div></b>
+
+                            <div className="col-span-2 mt-4">
+                                เบอร์โทร: {source_ticket.tel}
                             </div>
-                            <div className="mt-4">
-                                เบอร์โทร: 099-999-9999 
+
+                            <div className="col-span-2 mt-4">
+                                อีเมล: {source_ticket.email}
                             </div>
-                            <div className="mt-4">
-                                อีเมล: 123@gmail.com 
+
+                            <div className="col-span-2 flex justify-center">
+                                <Link to="/">
+                                    <button type="button" className="mt-5 text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 text-lg">กลับหน้าแรก</button>
+                                </Link>
                             </div>
-                        </div>
-                        <div className='flex justify-center'>
-                            <Link to="/"><button type="button" className="mt-5 text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 text-lg">กลับหน้าแรก</button></Link>
                         </div>
                     </div>
+
+
+
 
                 </div>
             </div>
@@ -89,4 +123,4 @@ const ticket = () => {
     );
 };
 
-export default ticket;
+export default Ticket;
