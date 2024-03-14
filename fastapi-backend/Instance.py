@@ -3017,10 +3017,10 @@ bus_controller.add_booking(name_passenger, surname_passenger, gender, tel, email
 bus_controller.add_ticket(name_passenger)
 # print(bus_controller.cancel_ticket(ticket_id))
 
-search = bus_controller.get_search_ticket(ticket_id)
+search = bus_controller.get_trip(source_province, source_station, destination_province, destination_station, departure_date)
 print(search)
 
-for ticket in bus_controller.get_ticket_lst:
-    print(ticket.get_name_passenger)
+
+
 
 # print(bus_controller.get_seat(bus_license))

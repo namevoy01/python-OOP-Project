@@ -166,8 +166,8 @@ class BusService_Controller :
             if bus.get_bus_license == bus_license:
                 for seat in bus.get_seat_lst:
                     if seat.get_status_seat == True:
-                        seat_lst.append(seat.get_seat_number, seat.get_status_seat)
-        return seat_lst
+                        seat_lst.append((seat.get_seat_number, seat.get_status_seat))
+            return seat_lst
     
     def search_seat_lst_by_bus_license(self, bus_license):
         for bus in self.__bus_lst:
