@@ -100,6 +100,9 @@ function Travel() {
                                     ทะเบียนรถ
                                 </th>
                                 <th scope="col" class="px-6 py-3">
+                                    เวลา
+                                </th>
+                                <th scope="col" class="px-6 py-3">
                                     ราคา
                                 </th>
                                 <th scope="col" class="px-6 py-3">
@@ -124,6 +127,9 @@ function Travel() {
                                     </td>
                                     <td className="px-6 py-4">
                                         {trip.bus_license}
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        {trip.departure_time}
                                     </td>
                                     <td className="px-6 py-4">
                                         {trip.price}
