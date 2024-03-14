@@ -1,46 +1,124 @@
-// src/components/404Error.js
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 
 const Login = () => {
-    return (
-        <div>
-            <section class="bg-gray-50 dark:bg-gray-900">
-                <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-                    
-                    <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-                        <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-                            <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                                Sign in to your account
-                            </h1>
-                            <form class="space-y-4 md:space-y-6" action="#">
-                                <div>
-                                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                                    <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-pink-600 focus:border-pink-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="" />
-                                </div>
-                                <div>
-                                    <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                                    <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-pink-600 focus:border-pink-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
-                                </div>
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-start">
-                                        <div class="flex items-center h-5">
-                                            <input id="remember" aria-describedby="remember" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-pink-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-pink-600 dark:ring-offset-gray-800" required="" />
-                                        </div>
-                                        <div class="ml-3 text-sm">
-                                            <label for="remember" class="text-gray-500 dark:text-gray-300">Remember me</label>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                                <Link to='/admin'><button type="submit" class="mt-5 w-full text-white bg-pink-600 hover:bg-pink-700 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800">Sign in</button></Link>
-                                <Link to='/'><button type="submit" class="mt-5 w-full text-white bg-gray-600 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-pink-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">กลับหน้าแรก</button></Link>
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [loginSuccess, setLoginSuccess] = useState(false);
+    const [apiData, setApiData] = useState(null);
+    const [loading, setLoading] = useState(false);
 
-                            </form>
+    localStorage.setItem('adminUsername', apiData); // เก็บ username ของ admin
+
+    const handleUsernameChange = (event) => {
+        setUsername(event.target.value);
+    };
+
+    const handlePasswordChange = (event) => {
+        setPassword(event.target.value);
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+    
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/api/login?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+    
+            if (response.ok) {
+                const data = await response.json();
+                setApiData(data);
+                setLoginSuccess(true);
+    
+                // เก็บ username ลงใน localStorage
+                localStorage.setItem('userData', JSON.stringify(username));
+            } else {
+                setLoginSuccess(false);
+            }
+        } catch (error) {
+            console.error('Error occurred:', error);
+        }
+    };
+    console.log(username);
+    useEffect(() => {
+        const fetchData = async () => {
+            setLoading(true);
+            try {
+                const response = await fetch(`http://127.0.0.1:8000/api/login?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    setApiData(data);
+                    setLoading(false);
+                } else {
+                    setLoading(false);
+                }
+            } catch (error) {
+                console.error('Error occurred:', error);
+                setLoading(false);
+            }
+        };
+
+        if (loginSuccess) {
+            fetchData();
+        }
+    }, [loginSuccess]);
+
+    useEffect(() => {
+        if (apiData !== null && apiData.length !== 0) {
+            window.location.href = '/admin'; // เปลี่ยนหน้าไปยังหน้า admin โดยใช้ window.location.href
+        }
+    }, [apiData]);
+
+    return (
+        <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-md w-full space-y-8">
+                <div>
+                    <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Login</h2>
+                </div>
+                <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+                    <input type="hidden" name="remember" value="true" />
+                    <div className="rounded-md shadow-sm -space-y-px">
+                        <div>
+                            <label htmlFor="username" className="sr-only">Username</label>
+                            <input
+                                id="username"
+                                name="username"
+                                type="text"
+                                autoComplete="username"
+                                required
+                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-pink-500 focus:border-pink-500 focus:z-10 sm:text-sm"
+                                placeholder="Username"
+                                value={username}
+                                onChange={handleUsernameChange}
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="password" className="sr-only ">Password</label>
+                            <input
+                                id="password"
+                                name="password"
+                                type="password"
+                                autoComplete="current-password"
+                                required
+                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-pink-500 focus:border-pink-500 focus:z-10 sm:text-sm"
+                                placeholder="Password"
+                                value={password}
+                                onChange={handlePasswordChange}
+                            />
                         </div>
                     </div>
-                </div>
-            </section>    </div>
+
+                    <div>
+                        <button type="submit" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-pink-600 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
+                            Login
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     );
 };
 
