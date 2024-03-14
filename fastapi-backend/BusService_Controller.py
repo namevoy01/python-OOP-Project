@@ -76,8 +76,7 @@ class BusService_Controller :
         self.__payment_lst.append(payment)
         
     def add_bus_trip(self, bus_license, source_province, source_station, destination_province, destination_station, departure_date):
-        bus_lst = self.search_bus_by_bus_license(bus_license)
-        bus = Bus(bus_lst)
+        bus = Bus(self.search_bus_by_bus_license(bus_license))
         province = Province(source_province)
         source_station = self.search_source_station_by_route(source_province, source_station, destination_province, destination_station)
         destination_province = self.search_destination_province_by_route(source_province, source_station, destination_province, destination_station)
@@ -350,20 +349,18 @@ class BusService_Controller :
         for ticket in self.get_ticket_lst:
             if str(ticket.get_ticket_id) == str(ticket_id):
                 name_passenger = ticket.get_name_passenger
-                ticket = self.search_ticket_by_ticket_id(ticket_id)
                 for passenger in self.__passenger_lst:
                     surname_passenger = passenger.get_surname_passenger
-                    passenger = self.search_passenger_by_name_passenger(name_passenger, surname_passenger)
                     bus_trip = self.search_bus_trip_by_name_passenger(name_passenger, surname_passenger)
-                    bus = bus_trip.get_bus
-                    bus_license = bus.get_bus_license
                     province = bus_trip.get_province
                     route = bus_trip.get_route
+                    bus = bus_trip.get_bus
+                    return bus.get_bus_license
                     id += 1
                     info_ticket.append({
                         'id': id, 
                             'ticket_id': ticket_id,
-                            'bus_license': bus_license.get_bus_license,
+                            'bus_license': bus_license,
                             'source_province': province.get_province_name,
                             'destination_province': route.get_destination_province,
                             'source_station' : route.get_source_station,
