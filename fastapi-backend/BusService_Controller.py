@@ -288,7 +288,7 @@ class BusService_Controller :
                     'seat_number' : seat_number,
                     'seat_status' : status_seat,
                 })
-            return info_in_booking
+                return info_in_booking
     
     def cancel_ticket(self, ticket_id):
         for ticket in self.__ticket_lst:
