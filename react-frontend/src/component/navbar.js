@@ -13,12 +13,22 @@ const Navbar = () => {
 
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
 
-                <Link to='/' className='flex'>
-                    <img className='rounded-full' style={{ width: "100%", height: '70px' }}
-                        src="https://media.discordapp.net/attachments/1204425495962324992/1217183769304371260/Pink_Cute_Simple_Textured_Gaming_Twitch_Logo_.gif?ex=660319b8&is=65f0a4b8&hm=fb61cc8859109a6ed4e58e8a822508dfb76095d2d5b7ab26609f3aa3158c352f&=&width=662&height=662" alt="Description" />
+                {storedUserData ? (
+                    <div className='flex'>
+                        <img className='rounded-full' style={{ width: "100%", height: '70px' }}
+                            src="https://media.discordapp.net/attachments/1204425495962324992/1217183769304371260/Pink_Cute_Simple_Textured_Gaming_Twitch_Logo_.gif?ex=660319b8&is=65f0a4b8&hm=fb61cc8859109a6ed4e58e8a822508dfb76095d2d5b7ab26609f3aa3158c352f&=&width=662&height=662" alt="Description" />
 
-                    <span className="ms-3 self-center text-2xl font-semibold whitespace-nowrap dark:text-white">ThaiTour</span>
-                </Link>
+                        <span className="ms-3 self-center text-2xl font-semibold whitespace-nowrap dark:text-white">ThaiTour Admin</span>
+                    </div>
+                ) : (
+                    <Link to='/' className='flex'>
+                        <img className='rounded-full' style={{ width: "100%", height: '70px' }}
+                            src="https://media.discordapp.net/attachments/1204425495962324992/1217183769304371260/Pink_Cute_Simple_Textured_Gaming_Twitch_Logo_.gif?ex=660319b8&is=65f0a4b8&hm=fb61cc8859109a6ed4e58e8a822508dfb76095d2d5b7ab26609f3aa3158c352f&=&width=662&height=662" alt="Description" />
+
+                        <span className="ms-3 self-center text-2xl font-semibold whitespace-nowrap dark:text-white">ThaiTour</span>
+                    </Link>
+                )}
+
                 {storedUserData ? (
                     <div className="hidden w-full md:block md:w-auto" id="navbar-multi-level">
                         <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
@@ -42,6 +52,8 @@ const Navbar = () => {
                         </ul>
                     </div>
                 )}
+
+
             </div>
 
         </nav>
