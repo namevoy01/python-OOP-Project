@@ -319,7 +319,7 @@ class BusService_Controller :
     def login_for_admin(self, username, password):
         id = 0
         info_admin = []
-        for admin in self.get_admin_lst:
+        for admin in self.__admin_lst:
             if admin.get_username == username and admin.get_password == password:
                 info_admin.append({
                     'username' : username,
@@ -354,13 +354,13 @@ class BusService_Controller :
                     bus_trip = self.search_bus_trip_by_name_passenger(name_passenger, surname_passenger)
                     province = bus_trip.get_province
                     route = bus_trip.get_route
-                    bus = bus_trip.get_bus
-                    return bus.get_bus_license
+                    bus_lst = bus_trip.get_bus
+                    bus = bus_lst.get_bus_license
                     id += 1
                     info_ticket.append({
                         'id': id, 
                             'ticket_id': ticket_id,
-                            'bus_license': bus_license,
+                            'bus_license': bus.get_bus_license,
                             'source_province': province.get_province_name,
                             'destination_province': route.get_destination_province,
                             'source_station' : route.get_source_station,
