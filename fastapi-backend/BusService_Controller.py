@@ -285,7 +285,6 @@ class BusService_Controller :
                 status_seat = seat.get_status_seat
                 departure_time = route.get_departure_time
                 self.add_bus_trip(bus.get_bus_license, source_province, source_station, destination_province, destination_station, departure_date)
-                departure_time = route.get_departure_time
                 id += 1
                 info_in_booking.append({
                     'id': id, 
@@ -302,19 +301,21 @@ class BusService_Controller :
             return info_in_booking
     
     def cancel_ticket(self, ticket_id):
-        for get_ticket in self.get_ticket_lst:
-            if get_ticket.get_ticket_id == ticket_id:
-                name_passenger = get_ticket.get_name_passenger
-                passenger = self.search_passenger_by_name_passenger(name_passenger)
-                bus_trip = self.search_bus_trip_by_name_passenger(name_passenger)
-                booking = self.search_booking_by_name_passenger(name_passenger)
-                seat = booking.get_seat
-                self.get_ticket_lst.remove(get_ticket)
-                passenger.get_booking_lst.remove(booking)
-                self.get_bus_trip_lst.remove(bus_trip)
-                self.get_passenger_lst.remove(passenger)
-                passenger.set_status_payment(True)
-                seat.set_status_seat(True)
+        for ticket in self.get_ticket_lst:
+            if ticket.get_ticket_id == ticket_id:
+                name_passenger = ticket.get_name_passenger
+                for passenger in self.__passenger_lst:
+                    surname_passenger = passenger.get_surname_passenger
+                    bus_trip = self.search_bus_trip_by_name_passenger(name_passenger, surname_passenger)
+                    booking = self.search_booking_by_name_passenger(name_passenger, surname_passenger)
+                    seat = booking.get_seat
+                    self.get_ticket_lst.remove(ticket)
+                    passenger.get_booking_lst.remove(booking)
+                    self.get_bus_trip_lst.remove(bus_trip)
+                    self.get_passenger_lst.remove(passenger)
+                    passenger.set_status_payment(True)
+                    seat.set_status_seat(True)
+            return 'Success'
                 
     def login_for_admin(self, username, password):
         id = 0

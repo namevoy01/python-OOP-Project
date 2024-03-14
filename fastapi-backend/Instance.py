@@ -3016,5 +3016,5 @@ bus_controller.add_booking(name_passenger, surname_passenger, gender, tel, email
 bus_controller.add_ticket(name_passenger)
 # # print(bus_controller.cancel_ticket(ticket_id))
 
-search = bus_controller.login_for_admin(username, password)
-print(search)
+# search = bus_controller.cancel_ticket(ticket_id)
+# print(search)
