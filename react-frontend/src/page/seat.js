@@ -104,8 +104,24 @@ const useSeatSelect = () => {
 
                     <div className='flex justify-center'>
                         <Link to="/travel"><button type="button" className="text-white bg-gradient-to-r from-gray-400 via-gray-500 to-gray-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-gray-300 dark:focus:ring-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2   text-lg mt-5">กลับไปเลือกเที่ยวรถ</button></Link>
-                        <Link to="/inputfill"><button type="button" className="mt-5 text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 text-lg">ชำระเงิน</button></Link>
-                    </div>
+                        
+                        {selectedSeat !== null ? (
+                            <Link to='/inputfill'>
+                                <button
+                                    type="button"
+                                    className="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 text-lg mt-5"
+                                >
+                                    ชำระเงิน
+                                </button>
+                            </Link>
+                        ) : (
+                            <button
+                                type="button"
+                                className="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 text-lg mt-5 disabled:opacity-50 disabled:cursor-not-allowed"
+                                disabled>
+                                ชำระเงิน
+                            </button>
+                        )}                    </div>
 
 
                 </div>
