@@ -90,7 +90,7 @@ def delete_cancel(ticket_id):
     cancel_ticket = bus_controller.cancel_ticket(ticket_id)
     return cancel_ticket
 
-@app.post('/api/login')
+@app.get('/api/login')
 def login(username, password):
     user = bus_controller.login_for_admin(username, password)
     return user
