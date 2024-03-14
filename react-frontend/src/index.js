@@ -11,6 +11,7 @@ import Login from './page/login';
 import Ticket from './page/ticket';
 import Admin from './page/admin';
 import TicketRemove from './page/ticketRemove';
+import SearchTicket from './page/searchTicket';
 import Error from './page/error404';
 
 const router = createBrowserRouter([
@@ -49,7 +50,10 @@ const router = createBrowserRouter([
     path: "seat",
     element: <Seat />
   },
-
+  {
+    path: "searchticket",
+    element: <SearchTicket />
+  },
   {
     path: "*",
     element: <Error />
