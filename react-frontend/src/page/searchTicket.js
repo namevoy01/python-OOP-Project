@@ -29,15 +29,15 @@ function SearchTicket() {
         return response.json();
       })
       .then(data => {
-        if (data) {
-          setTicketData(data); // Save fetched data to state
-          setShowModal(true); // Show modal after fetching data
-        } else {
+        if (data.length === 0) {
           Swal.fire({
             icon: "error",
             title: "มีบางอย่างผิดพลาด",
             text: "กรุณากรอก   หมายเลขตั๋วให้ถูกต้อง",
           });;
+        } else {
+          setTicketData(data); // Save fetched data to state
+          setShowModal(true); // Show modal after fetching data
         }
       })
       .catch(error => {
@@ -45,6 +45,7 @@ function SearchTicket() {
         console.error('There was a problem with your fetch operation:', error);
       });
   };
+  console.log(ticketData);
   return (
     <div>
       <Navbar />

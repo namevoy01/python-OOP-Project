@@ -19,7 +19,7 @@ const Login = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
+    
         try {
             const response = await fetch(`http://127.0.0.1:8000/api/login?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`, {
                 method: 'GET',
@@ -27,12 +27,12 @@ const Login = () => {
                     'Content-Type': 'application/json'
                 }
             });
-
+    
             if (response.ok) {
                 const data = await response.json();
                 setApiData(data);
                 setLoginSuccess(true);
-
+    
                 // เก็บ username ลงใน localStorage
                 localStorage.setItem('userData', JSON.stringify(username));
             } else {
@@ -42,7 +42,7 @@ const Login = () => {
             console.error('Error occurred:', error);
         }
     };
-    console.log(loading);
+    console.log(username);
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
@@ -64,7 +64,7 @@ const Login = () => {
         if (loginSuccess) {
             fetchData();
         }
-    }, [loginSuccess, username, password]);
+    }, [loginSuccess]);
 
     useEffect(() => {
         if (apiData !== null && apiData.length !== 0) {
@@ -72,9 +72,6 @@ const Login = () => {
         }
     }, [apiData]);
 
-    const backHome = () => {
-        window.location.href = '/';
-    };
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-md w-full space-y-8">
@@ -114,12 +111,9 @@ const Login = () => {
                         </div>
                     </div>
 
-                    <div className='flex'>
-                        <button type="submit" className="w-10/12 flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-pink-600 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
+                    <div>
+                        <button type="submit" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-pink-600 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
                             Login
-                        </button>
-                        <button type="submit" onClick={backHome} className="ms-3 w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-                            หน้าแรก
                         </button>
                     </div>
                 </form>
