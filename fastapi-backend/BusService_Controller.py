@@ -163,10 +163,11 @@ class BusService_Controller :
            
     def search_all_seat_by_bus_license(self, bus_license):
         seat_lst = []
-        seat = self.search_seat_lst_by_bus_license(bus_license)
-        if seat.get_status_seat == True:
-            seat_lst.append((seat.get_seat_number, seat.get_status_seat))
-        return seat_lst
+        for bus in self.__bus_lst:
+            for seat in bus.get_seat_lst:
+                if seat.get_status_seat == True:
+                    seat_lst.append((seat.get_seat_number, seat.get_status_seat))
+            return seat_lst
     
     def search_seat_lst_by_bus_license(self, bus_license):
         bus = self.search_bus_by_bus_license(bus_license)
@@ -304,7 +305,7 @@ class BusService_Controller :
                     self.get_passenger_lst.remove(passenger)
                     passenger.set_status_payment(True)
                     seat.set_status_seat(True)
-                    return self.__ticket_lst
+                    return ticket.get_ticket_id
                 
     def login_for_admin(self, username, password):
         id = 0

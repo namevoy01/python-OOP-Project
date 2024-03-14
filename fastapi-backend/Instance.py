@@ -3017,5 +3017,5 @@ bus_controller.add_ticket(name_passenger)
 # print(bus_controller.cancel_ticket(ticket_id))
 # print(bus_controller.get_ticket_lst)
 
-# search = bus_controller.cancel_ticket(self, ticket_id)
-# print(search)
+search = bus_controller.search_all_seat_by_bus_license(bus_license)
+print(len(search))
