@@ -57,12 +57,12 @@ class BusService_Controller :
         self.__admin_lst.append(new_admin)
         return self.__admin_lst
     
-    def add_booking(self, name_passenger, surname_passenger, gender, tel, email, status_payment, payment_option, amount, date, bus_license, seat_number, source_province, source_station, destination_province, destination_station, departure_date):
+    def add_booking(self, name_passenger, surname_passenger, gender, tel, email, status_payment, payment_option, amount, date, time_reserve, bus_license, seat_number, source_province, source_station, destination_province, destination_station, departure_date):
         seat = self.search_seat_number_and_status_seat_by_seat(bus_license, seat_number)
         bus_trip = self.add_bus_trip(bus_license, source_province, source_station, destination_province, destination_station, departure_date)
-        booking = Booking(name_passenger, payment_option, amount, date, bus_trip, seat)
+        booking = Booking(name_passenger, payment_option, amount, date, time_reserve, bus_trip, seat)
         self.add_passenger(name_passenger, surname_passenger, gender, tel, email, status_payment)
-        passenger_lst = self.search_passenger_by_name_passenger(name_passenger)
+        passenger_lst = self.search_passenger_by_name_passenger(name_passenger, surname_passenger)
         passenger_lst.get_booking_lst.append(booking)
         return passenger_lst
         
@@ -91,8 +91,11 @@ class BusService_Controller :
     
     def add_ticket(self, name_passenger):
         new_ticket = Ticket(name_passenger)
-        self.payment(name_passenger)
-        self.change_status_seat_when_passenger_has_paid(name_passenger)
+        for passenger in self.__passenger_lst:
+            if passenger.get_name_passenger == name_passenger:
+                surname_passenger = passenger.get_surname_passenger
+        self.payment(name_passenger, surname_passenger)
+        self.change_status_seat_when_passenger_has_paid(name_passenger, surname_passenger)
         self.__ticket_lst.append(new_ticket)
         return self.__ticket_lst
     
@@ -101,9 +104,9 @@ class BusService_Controller :
             if bus.get_bus_license == bus_license:
                 return bus
     
-    def search_passenger_by_name_passenger(self, name_passenger):
+    def search_passenger_by_name_passenger(self, name_passenger, surname_passenger):
         for passenger in self.__passenger_lst:
-            if passenger.get_name_passenger == name_passenger:
+            if passenger.get_name_passenger == name_passenger and passenger.get_surname_passenger == surname_passenger:
                 return passenger
 
     def search_source_station(self, source_province):
@@ -149,14 +152,14 @@ class BusService_Controller :
             if ticket.get_ticket_id == ticket_id:
                 return ticket
             
-    def search_booking_by_name_passenger(self, name_passenger) :
+    def search_booking_by_name_passenger(self, name_passenger, surname_passenger) :
         for passenger in self.__passenger_lst:
-            if passenger.get_name_passenger == name_passenger:
+            if passenger.get_name_passenger == name_passenger and passenger.get_surname_passenger == surname_passenger:
                 for booking in passenger.get_booking_lst:
                     return booking
                 
-    def search_bus_trip_by_name_passenger(self, name_passenger):
-        booking = self.search_booking_by_name_passenger(name_passenger)
+    def search_bus_trip_by_name_passenger(self, name_passenger, surname_passenger):
+        booking = self.search_booking_by_name_passenger(name_passenger, surname_passenger)
         bus_trip = booking.get_bus_trip
         return bus_trip
            
@@ -217,14 +220,14 @@ class BusService_Controller :
                     if seat.get_seat_number == seat_number:
                         return seat
         
-    def payment(self, name_passenger) :
-        passenger = self.search_passenger_by_name_passenger(name_passenger)
+    def payment(self, name_passenger, surname_passenger) :
+        passenger = self.search_passenger_by_name_passenger(name_passenger, surname_passenger)
         if passenger.get_name_passenger == name_passenger:
             passenger.set_status_payment(False)
             return passenger.get_status_payment
                            
-    def change_status_seat_when_passenger_has_paid(self, name_passenger):
-        booking = self.search_booking_by_name_passenger(name_passenger)
+    def change_status_seat_when_passenger_has_paid(self, name_passenger, surname_passenger):
+        booking = self.search_booking_by_name_passenger(name_passenger, surname_passenger)
         seat = booking.get_seat
         seat.set_status_seat(False)
         return seat.get_status_seat
@@ -349,26 +352,39 @@ class BusService_Controller :
             if str(ticket.get_ticket_id) == str(ticket_id):
                 name_passenger = ticket.get_name_passenger
                 ticket = self.search_ticket_by_ticket_id(ticket_id)
-                passenger = self.search_passenger_by_name_passenger(name_passenger)
-                bus_trip = self.search_bus_trip_by_name_passenger(name_passenger)
-                bus = bus_trip.get_bus
-                bus_license = bus.get_bus_license
-                province = bus_trip.get_province
-                route = bus_trip.get_route
-                id += 1
-                info_ticket.append({
-                    'id': id, 
-                        'ticket_id': ticket_id,
-                        'bus_license': bus_license.get_bus_license,
-                        'source_province': province.get_province_name,
-                        'destination_province': route.get_destination_province,
-                        'source_station' : route.get_source_station,
-                        'destination_station' : route.get_destination_station,
-                        'departure_time': route.get_departure_time,
-                        'name_passenger' : name_passenger,
-                        'surname_passenger' : passenger.get_surname_passenger,
-                        'status_payment' : passenger.get_status_payment,
-                        'tel' : passenger.get_tel,
-                        'email' : passenger.get_email
-                })
-            return info_ticket
+                for passenger in self.__passenger_lst:
+                    surname_passenger = passenger.get_surname_passenger
+                    passenger = self.search_passenger_by_name_passenger(name_passenger, surname_passenger)
+                    bus_trip = self.search_bus_trip_by_name_passenger(name_passenger, surname_passenger)
+                    bus = bus_trip.get_bus
+                    bus_license = bus.get_bus_license
+                    province = bus_trip.get_province
+                    route = bus_trip.get_route
+                    id += 1
+                    info_ticket.append({
+                        'id': id, 
+                            'ticket_id': ticket_id,
+                            'bus_license': bus_license.get_bus_license,
+                            'source_province': province.get_province_name,
+                            'destination_province': route.get_destination_province,
+                            'source_station' : route.get_source_station,
+                            'destination_station' : route.get_destination_station,
+                            'departure_time': route.get_departure_time,
+                            'name_passenger' : name_passenger,
+                            'surname_passenger' : passenger.get_surname_passenger,
+                            'status_payment' : passenger.get_status_payment,
+                            'tel' : passenger.get_tel,
+                            'email' : passenger.get_email
+                    })
+                return info_ticket
+        
+    def return_ticket(self, name_passenger, surname_passenger, time_reserve):
+        for passenger in self.__passenger_lst:
+            if passenger.get_name_passenger == name_passenger and passenger.get_surname_passenger == surname_passenger:
+                for booking in passenger.get_booking_lst:
+                    # print(booking.get_time_reserve, str(time_reserve))
+                    # return type(booking.get_time_reserve), type(str(time_reserve))
+                    if booking.get_time_reserve == str(time_reserve):
+                        for ticket in self.__ticket_lst:
+                            if ticket.get_name_passenger == name_passenger:
+                                return ticket.get_ticket_id

@@ -10,7 +10,7 @@ from Seat import Seat
 from Ticket import Ticket
 from User import User
 from BusService_Controller import BusService_Controller
-import datetime
+from datetime import datetime
 
 bus_controller = BusService_Controller()
 
@@ -3002,6 +3002,7 @@ surname_passenger = 'Phomrasri'
 payment_option = 'Credit Card'
 amount = 500
 date = '25/02/2024'
+time_reserve = datetime.now().strftime("%H:%M")
 gender = 'Female'
 tel = '085465116'
 email = 'oihto@gmail.com'
@@ -3013,14 +3014,10 @@ ticket_id = 35301073
 username = 'Voy'
 password = '1234'
 
-bus_controller.add_booking(name_passenger, surname_passenger, gender, tel, email, status_payment, payment_option, amount, date, bus_license, seat_number, source_province, source_station, destination_province, destination_station, departure_date)
+bus_controller.add_booking(name_passenger, surname_passenger, gender, tel, email, status_payment, payment_option, amount, date, time_reserve, bus_license, seat_number, source_province, source_station, destination_province, destination_station, departure_date)
 bus_controller.add_ticket(name_passenger)
 # print(bus_controller.cancel_ticket(ticket_id))
 
-search = bus_controller.get_search_ticket(ticket_id)
+search = bus_controller.return_ticket(name_passenger, surname_passenger, time_reserve)
 print(search)
-
-
-
-
 # print(bus_controller.get_seat(bus_license))
