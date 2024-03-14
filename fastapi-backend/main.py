@@ -80,11 +80,6 @@ def post_info(name_passenger, surname_passenger, gender, tel, email, status_paym
     bus_controller.add_booking(name_passenger, surname_passenger, gender, tel, email, status_payment, payment_option, amount, date, bus_license, seat_number, source_province, source_station, destination_province, destination_station, departure_date, time_reserve)
     bus_controller.add_ticket(name_passenger, surname_passenger)
 
-@app.get('/api/get_ticket_id')
-def ticket_id():
-    ticket_id = bus_controller.get_ticket_id
-    return ticket_id
-
 @app.get('/api/ticket')
 def get_ticket(ticket_id):
     search_ticket = bus_controller.get_search_ticket(ticket_id)
@@ -105,7 +100,7 @@ def schedule():
     schedule = bus_controller.get_schedule_info()
     return schedule
 
-@app.get('/api/')
+@app.get('/api/get_ticket_id')
 def get_ticket_id(name_passenger, surname_passenger, time_reserve):
     ticket_id = bus_controller.return_ticket(name_passenger, surname_passenger, time_reserve)
     return ticket_id
