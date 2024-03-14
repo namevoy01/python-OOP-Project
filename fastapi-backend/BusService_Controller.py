@@ -290,8 +290,8 @@ class BusService_Controller :
             return info_in_booking
     
     def cancel_ticket(self, ticket_id):
-        for ticket in self.get_ticket_lst:
-            if ticket.get_ticket_id == ticket_id:
+        for ticket in self.__ticket_lst:
+            if str(ticket.get_ticket_id) == ticket_id:
                 name_passenger = ticket.get_name_passenger
                 for passenger in self.__passenger_lst:
                     surname_passenger = passenger.get_surname_passenger
@@ -304,7 +304,7 @@ class BusService_Controller :
                     self.get_passenger_lst.remove(passenger)
                     passenger.set_status_payment(True)
                     seat.set_status_seat(True)
-            return self.get_ticket_lst
+                    return self.__ticket_lst
                 
     def login_for_admin(self, username, password):
         id = 0
