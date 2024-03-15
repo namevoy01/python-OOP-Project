@@ -3,12 +3,11 @@
 ---------------------------------------------------------------------------
 1) ติดตั้งครั้งแรก วิธี RUN back-end
 1. เข้า C:\Users\Path\Documents\GitHub\python-OOP-Project
-2. ลบไฟล์ venv
-3. python -m venv myenv
-4. myenv\Scripts\activate
-5. เข้า C:\Users\Path\Documents\GitHub\python-OOP-Project\fastapi-backend
-6. pip install fastapi uvicorn
-7. uvicorn main:app --reload
+2. python -m venv myenv
+3. myenv\Scripts\activate
+4. เข้า C:\Users\Path\Documents\GitHub\python-OOP-Project\fastapi-backend
+5. pip install fastapi uvicorn
+6. uvicorn main:app --reload
 
 
 2) มี Project อยู่แล้ว
