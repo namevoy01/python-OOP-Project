@@ -7,7 +7,7 @@ const Login = () => {
     const [apiData, setApiData] = useState(null);
     const [loading, setLoading] = useState(false);
 
-    localStorage.setItem('adminUsername', apiData); // เก็บ username ของ admin
+    localStorage.setItem('adminUsername', apiData);
 
     const handleUsernameChange = (event) => {
         setUsername(event.target.value);
@@ -33,7 +33,6 @@ const Login = () => {
                 setApiData(data);
                 setLoginSuccess(true);
 
-                // เก็บ username ลงใน localStorage
             } else {
                 setLoginSuccess(false);
             }
@@ -68,7 +67,7 @@ const Login = () => {
     useEffect(() => {
         if (apiData !== null && apiData.length !== 0) {
             localStorage.setItem('userData', JSON.stringify(username));
-            window.location.href = '/admin'; // เปลี่ยนหน้าไปยังหน้า admin โดยใช้ window.location.href
+            window.location.href = '/admin'; 
         }        
     }, [apiData]);
 

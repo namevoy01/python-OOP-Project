@@ -7,7 +7,7 @@ function useTicketRemove() {
     const [showModal, setShowModal] = useState(false);
     const [ticketNumber, setTicketNumber] = useState('');
     const [loading, setLoading] = useState(false);
-    const [ticketData, setTicketData] = useState(null); // State variable to hold ticket data
+    const [ticketData, setTicketData] = useState(null); 
 
     const handleTicketNumberChange = (event) => {
         setTicketNumber(event.target.value);
@@ -16,20 +16,18 @@ function useTicketRemove() {
     const cancelTicket = async () => {
         try {
             const response = await fetch(`http://127.0.0.1:8000/api/cancel?ticket_id=${ticketNumber}`, {
-                method: 'DELETE', // หรือว่า 'POST' หรือ 'PUT' ตามที่ API ต้องการ
+                method: 'DELETE', 
                 headers: {
                     'Content-Type': 'application/json',
-                    // อาจต้องการส่ง Token หรือข้อมูลอื่น ๆ ก็เพิ่มที่นี่
+                    
                 },
-                // อาจต้องการส่งข้อมูลเพิ่มเติมด้วย
-                // body: JSON.stringify({ ticketId: 123 }),
+
             });
 
             if (!response.ok) {
                 throw new Error('ไม่สามารถยกเลิกตั๋วได้');
             }
 
-            // อาจต้องการทำบางอย่างหลังจากที่สำเร็จ โดยไม่ต้องการตอบกลับอะไรกลับมา ให้ใส่ที่นี่
         } catch (error) {
             console.error('เกิดข้อผิดพลาดในการยกเลิกตั๋ว:', error);
         }
@@ -52,8 +50,8 @@ function useTicketRemove() {
             })
             .then(data => {
                 if (data) {
-                    setTicketData(data); // Save fetched data to state
-                    setShowModal(true); // Show modal after fetching data
+                    setTicketData(data);
+                    setShowModal(true);
                 } else {
                     Swal.fire({
                         icon: "error",

@@ -3,14 +3,10 @@ import React, { useState, useEffect } from 'react';
 import Date from '../component/date';
 import Navbar from '../component/navbar';
 import { Link } from 'react-router-dom';
-// import { withRouter } from 'react-router-dom';
 
 function Home() {
 
-    // function goBack() {
-    //     // window.history.go(-1);
-    //     // console.log('ควย');
-    // };
+
 
     const [selectedProvince, setSelectedProvince] = useState('');
     const [source_province, set_source_province] = useState([]);
@@ -58,7 +54,7 @@ function Home() {
         };
 
         fetchData();
-    }, [selectedStation, selectedProvince]); // Include selectedProvince in the dependency array
+    }, [selectedStation, selectedProvince]);
 
 
 
@@ -114,26 +110,10 @@ function Home() {
 
     const handleDateSelect = (date) => {
 
-        // เก็บวันที่ใน selectedDate
         setSelectedDate(date);
     };
     return (
         <div>
-            {/* <button onClick={goBack}>Go Back</button> */}
-
-            {/* <select id="station" onChange={handleDestinationStation} value={selectedDestinationStation} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <option selected>เลือกจุดขึ้นรถ</option>
-                {source_destination_station.map((destination_station, index) => (
-                    <option key={index} value={destination_station}>{destination_station}</option>
-                ))}
-            </select> */}
-
-            {/* <p>จังหวัดที่เลือก: {selectedDestinationStation}</p> */}
-
-            {/* {source_destination_station.map((destination_station, index) => (
-                <option key={index} value={destination_station}>{destination_station}</option>
-            ))} */}
-
             <Navbar />
             <div className="max-w-screen-2xl mx-auto xl:w-10/12 lg: w-10/12">
                 <div className='flex justify-between'>

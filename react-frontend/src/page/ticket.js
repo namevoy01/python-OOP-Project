@@ -10,7 +10,7 @@ const Ticket = () => {
             .then(response => response.json())
             .then(data => {
                 if (data && data.length > 0) {
-                    set_ticket(data[0]); // Assuming the response is an array and you're interested in the first element
+                    set_ticket(data[0]);
                 } else {
                     console.error('Empty or invalid response from the API');
                 }

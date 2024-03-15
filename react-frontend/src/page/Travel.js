@@ -25,7 +25,7 @@ function Travel() {
         const fetchData = async () => {
             try {
                 const response = await fetch(`http://127.0.0.1:8000/api/trip?source_province=${encodeURIComponent(province)}&source_station=${encodeURIComponent(station)}&destination_province=${encodeURIComponent(destination)}&destination_station=${encodeURIComponent(destinationstation)}&departure_date=${encodeURIComponent(formattedDate)}`, {
-                    method: 'GET', // หรือ 'POST' หรือวิธีที่ต้องการ
+                    method: 'GET',
                 });
 
                 if (!response.ok) {
@@ -62,10 +62,8 @@ function Travel() {
     console.log('ddddd', selectedTime);
     console.log('ddddd', selectedAmount);
 
-    // `http://127.0.0.1:8000/api/trip?source_province=${encodeURIComponent(province)}&source_station=${encodeURIComponent(station)}&destination_province=${encodeURIComponent(destination)}&destination_station=${encodeURIComponent(destinationstation)}&departure_date=${encodeURIComponent(date)}`
     return (
 
-        // http://127.0.0.1:8000/api/trip?source_province=กรุงเทพมหานคร&source_station=สถานีขนส่งผู้โดยสารกรุงเทพฯ (หมอชิต 2)&destination_province=กาญจนบุรี&destination_station=จุดจอด%20อ.สังขละบุรี&departure_date=22%2F11%2F2024`
         <div>
 
             <Navbar />

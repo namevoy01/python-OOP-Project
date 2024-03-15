@@ -5,7 +5,7 @@ const Navbar = () => {
     const storedUserData = JSON.parse(localStorage.getItem('userData'));
     const handleLogout = () => {
         localStorage.removeItem('userData');
-        // ทำการออกจากหน้า admin หรือทำการ redirect ไปยังหน้าอื่นตามต้องการ
+
         window.location.href = '/';
     };
     return (

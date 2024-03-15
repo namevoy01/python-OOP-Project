@@ -1,3 +1,5 @@
+ต้องรันทั้ง front-end และ back-end พร้อมกัน
+
 ---------------------------------------------------------------------------
 1) ติดตั้งครั้งแรก วิธี RUN back-end
 1. เข้า C:\Users\Path\Documents\GitHub\python-OOP-Project

@@ -11,7 +11,7 @@ const MyDatePicker = ({ onDateChange }) => {
     if (date) {
       onDateChange(format(date, 'dd-MM-yyyy'));
     } else {
-      onDateChange(null); // Handle the case when no date is selected
+      onDateChange(null);
     }
   };
 

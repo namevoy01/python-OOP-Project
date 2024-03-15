@@ -1,4 +1,3 @@
-// src/components/404Error.js
 import React from 'react';
 
 const NotFound = () => {

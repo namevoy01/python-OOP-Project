@@ -24,7 +24,7 @@ const Inputfill = () => {
                 const response = await fetch(`http://127.0.0.1:8000/api/info_trip?source_province=${encodeURIComponent(province)}&source_station=${encodeURIComponent(station)}&destination_province=${encodeURIComponent(destination)}&destination_station=${encodeURIComponent(destinationstation)}&departure_date=${encodeURIComponent(date)}&departure_time=${encodeURIComponent(time)}&bus_license=${encodeURIComponent(bus_license)}&seat_number=${encodeURIComponent(seat)}`);
                 const data = await response.json();
                 if (data && data.length > 0) {
-                    set_info(data[0]); // Assuming the response is an array and you're interested in the first element
+                    set_info(data[0]);
                 } else {
                     console.error('Empty or invalid response from the API');
                 }

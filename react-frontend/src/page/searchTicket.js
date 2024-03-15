@@ -7,7 +7,7 @@ function SearchTicket() {
   const [showModal, setShowModal] = useState(false);
   const [ticketNumber, setTicketNumber] = useState('');
   const [loading, setLoading] = useState(false);
-  const [ticketData, setTicketData] = useState(null); // State variable to hold ticket data
+  const [ticketData, setTicketData] = useState(null); 
 
   const handleTicketNumberChange = (event) => {
     setTicketNumber(event.target.value);
@@ -30,8 +30,8 @@ function SearchTicket() {
       })
       .then(data => {
         if (data) {
-          setTicketData(data); // Save fetched data to state
-          setShowModal(true); // Show modal after fetching data
+          setTicketData(data); 
+          setShowModal(true); 
         } else {
           Swal.fire({
             icon: "error",
@@ -137,7 +137,6 @@ function SearchTicket() {
                     <button
                       className="w-full mt-2 p-2.5 flex-1 text-white bg-green-600 rounded-md outline-none ring-offset-2 ring-green-600 focus:ring-2"
                       onClick={() => {
-                        // Your action here
                         setShowModal(false);
                       }}
                     >
