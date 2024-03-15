@@ -65,25 +65,28 @@ class BusService_Controller :
         bus_trip = self.add_bus_trip(bus_license, source_province, source_station, destination_province, destination_station, departure_date)
         booking = Booking(name_passenger, payment_option, amount, departure_date, bus_trip, seat)
         self.add_passenger(name_passenger, surname_passenger, gender, tel, email, status_payment)
-        passenger_lst = self.search_passenger_by_name_passenger(name_passenger, surname_passenger)
-        passenger_lst.get_booking_lst.append(booking)
-        id += 1
-        return_booking.append({
-            'id': id, 
-                'booking_id': booking.booking_id,
-                'name_passenger' : name_passenger,
-                'payment_option' : payment_option,
-                'price' : amount,
-                'departure_date' : departure_date,
-                'bus_license' : bus_license,
-                'source_province' : source_province,
-                'source_station' : source_station,
-                'destination_province' : destination_province,
-                'destination_station' : destination_station,
-                'departure_time' : departure_date,
-                'seat_number' : seat_number
-        })
-        return return_booking
+        passenger = self.search_passenger_by_name_passenger(name_passenger, surname_passenger)
+        passenger.get_booking_lst.append(booking)
+        for booking in passenger.get_booking_lst:
+            id += 1
+            return_booking.append({
+                'id': id, 
+                    'booking_id': booking.booking_id,
+                    'name_passenger' : name_passenger,
+                    'surname_passenger' : surname_passenger,
+                    'payment_option' : payment_option,
+                    'price' : amount,
+                    'departure_date' : departure_date,
+                    'bus_license' : bus_license,
+                    'source_province' : source_province,
+                    'source_station' : source_station,
+                    'destination_province' : destination_province,
+                    'destination_station' : destination_station,
+                    'departure_time' : departure_date,
+                    'seat_number' : seat_number,
+                    'time_reserve' : booking.get_time_reserve
+            })
+            return return_booking
         
     def add_province(self, province) :
         self.__province_lst.append(province)
@@ -397,8 +400,6 @@ class BusService_Controller :
         for passenger in self.__passenger_lst:
             if passenger.get_name_passenger == name_passenger and passenger.get_surname_passenger == surname_passenger:
                 for booking in passenger.get_booking_lst:
-                    # print(booking.get_time_reserve, str(time_reserve))
-                    # return type(booking.get_time_reserve), type(str(time_reserve))
                     if booking.get_time_reserve == str(time_reserve):
                         for ticket in self.__ticket_lst:
                             if ticket.get_name_passenger == name_passenger:
