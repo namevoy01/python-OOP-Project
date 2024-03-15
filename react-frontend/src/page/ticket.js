@@ -49,32 +49,33 @@ const Ticket = () => {
                     <div className="py-8 px-8 bg-white rounded-xl border-solid border-2 border-gray-100 shadow-md  space-y-2 mt-5">
                         <div className="grid grid-cols-2 gap-4 ">
                             <div className="col-span-2">
-                                <b> รหัสตั๋ว : {source_ticket.ticket_id}</b>
+                                <b> รหัสตั๋ว : 35301074</b>
                             </div>
 
                             <div className="col-span-2">
                                 <div className="flex">
                                     <div className="mt-1.5 me-2"> จาก </div>
-                                    <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" value={`จ.${source_ticket.source_province} จุดขึ้น ${source_ticket.source_station}`} disabled />
+                                    <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" value={`จ.กรุงเทพมหานคร จุดขึ้น สถานีขนส่งผู้โดยสารกรุงเทพฯ (หมอชิต 2)
+`} disabled />
                                 </div>
                             </div>
 
                             <div className="col-span-2">
                                 <div className="flex">
                                     <div className="mt-1.5 me-3"> ถึง </div>
-                                    <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" value={`จ.${source_ticket.destination_province} จุดลง ${source_ticket.destination_station}`} disabled />
+                                    <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" value={`จ.จันทบุรี จุดลง สถานีขนส่งผู้โดยสาร จ.จันทบุรี`} disabled />
                                 </div>
                             </div>
 
                             <div className="col-span-2">
                                 <div className="flex">
-                                    <div className="mt-1.5 me-3"> รถออกเวลา : {source_ticket.departure_time}</div>
+                                    <div className="mt-1.5 me-3"> รถออกเวลา : 11.40 น.</div>
                                 </div>
                             </div>
 
                             <div className="col-span-2">
                                 <div className="flex">
-                                    <div className="mt-1.5 me-3"> หมายเลขทะเบียนรถ : {source_ticket.bus_license}</div>
+                                    <div className="mt-1.5 me-3"> หมายเลขทะเบียนรถ : 1นค5463</div>
                                 </div>
                             </div>
 
@@ -99,11 +100,11 @@ const Ticket = () => {
                             </div>
 
                             <div className="col-span-2 mt-4">
-                                เบอร์โทร: {source_ticket.tel}
+                                เบอร์โทร: 0999999999
                             </div>
 
                             <div className="col-span-2 mt-4">
-                                อีเมล: {source_ticket.email}
+                                อีเมล: email@gmail.com
                             </div>
 
                             <div className="col-span-2 flex justify-center">

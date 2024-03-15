@@ -69,7 +69,7 @@ const Login = () => {
         if (apiData !== null && apiData.length !== 0) {
             localStorage.setItem('userData', JSON.stringify(username));
             window.location.href = '/admin'; // เปลี่ยนหน้าไปยังหน้า admin โดยใช้ window.location.href
-        }
+        }        
     }, [apiData]);
 
     const backHome = () => {

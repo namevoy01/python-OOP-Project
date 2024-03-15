@@ -77,10 +77,9 @@ const Inputfill = () => {
                                         </dt>
                                         <select id="countries" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected>ระบุเพศ</option>
-                                            <option value="US">United States</option>
-                                            <option value="CA">Canada</option>
-                                            <option value="FR">France</option>
-                                            <option value="DE">Germany</option>
+                                            <option value="US">ชาย</option>
+                                            <option value="CA">หญิง</option>
+                                            
                                         </select>
                                         <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="ชื่อ" />
                                         <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="นามสกุล" />
@@ -139,7 +138,7 @@ const Inputfill = () => {
                                             ราคาตั๋ว
                                         </dt>
                                         <div className='text-center'>{amount}</div>
-                                        <div className='text-end'>1,144.00 (บาท) </div>
+                                        <div className='text-end'>{amount} </div>
 
 
                                         <dt class="text-sm font-medium text-gray-500">
@@ -172,10 +171,8 @@ const Inputfill = () => {
 
                                         <select id="countries" className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected>กรุณาเลือก</option>
-                                            <option value="US">United States</option>
-                                            <option value="CA">Canada</option>
-                                            <option value="FR">France</option>
-                                            <option value="DE">Germany</option>
+                                            <option value="US">Credit Card</option>
+                                           
                                         </select>
 
 
