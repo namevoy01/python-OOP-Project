@@ -17,6 +17,7 @@ const Inputfill = () => {
         window.history.length > 1 ? window.history.go(-1) : window.location.href = '/';
     };
 
+    const amountUp = parseInt(amount, 10) + 20;
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -137,20 +138,20 @@ const Inputfill = () => {
                                         <dt class="text-sm font-medium text-gray-500">
                                             ราคาตั๋ว
                                         </dt>
-                                        <div className='text-center'>(2 x 572.00)</div>
+                                        <div className='text-center'>{amount}</div>
                                         <div className='text-end'>1,144.00 (บาท) </div>
 
 
                                         <dt class="text-sm font-medium text-gray-500">
                                             ค่าดำเนินการจัดการ
                                         </dt>
-                                        <div className='text-center'>(2 x 20)</div>
-                                        <div className='text-end'>40 (บาท) </div>
+                                        <div className='text-center'>20</div>
+                                        <div className='text-end'>20 (บาท) </div>
 
                                         <dt class="text-lg font-medium text-gray-500">
                                             <b> ราคารวม</b>
                                         </dt>
-                                        <div className='text-lg col-start-2 col-end-4 text-end '><b> 1,184.00 (บาท) </b></div>
+                                        <div className='text-lg col-start-2 col-end-4 text-end '><b> {amountUp} </b></div>
 
                                     </div>
 

@@ -2991,30 +2991,30 @@ create_instance()
 
 print("-----------------------------------------------------------------")
 
-source_province = 'กรุงเทพมหานคร'
-source_station = 'สถานีขนส่งผู้โดยสารกรุงเทพฯ(รังสิต)'
-destination_province = 'ฉะเชิงเทรา'
-destination_station = 'ท่าศรีราชา'
-bus_license = '1นค5463'
-name_passenger = 'Chamaiporn'
-surname_passenger = 'Phomrasri'
-payment_option = 'Credit Card'
-amount = 145
-time_reserve = datetime.now().strftime("%H:%M")
-gender = 'Female'
-tel = '085465116'
-email = 'oihto@gmail.com'
-status_payment = True
-departure_date = '11/03/2024'
-departure_time = '17.40 น.'
-seat_number = 'A10'
-ticket_id = 35301073
-username = 'Voy'
-password = '1234'
+# source_province = 'กรุงเทพมหานคร'
+# source_station = 'สถานีขนส่งผู้โดยสารกรุงเทพฯ(รังสิต)'
+# destination_province = 'ฉะเชิงเทรา'
+# destination_station = 'ท่าศรีราชา'
+# bus_license = '1นค5463'
+# name_passenger = 'Chamaiporn'
+# surname_passenger = 'Phomrasri'
+# payment_option = 'Credit Card'
+# amount = 145
+# time_reserve = datetime.now().strftime("%H:%M")
+# gender = 'Female'
+# tel = '085465116'
+# email = 'oihto@gmail.com'
+# status_payment = True
+# departure_date = '11/03/2024'
+# departure_time = '17.40 น.'
+# seat_number = 'A10'
+# ticket_id = 35301073
+# username = 'Voy'
+# password = '1234'
 
-print(bus_controller.add_booking(name_passenger, surname_passenger, gender, tel, email, status_payment, payment_option, bus_license, seat_number, source_province, source_station, destination_province, destination_station, departure_date))
+# print(bus_controller.add_booking(name_passenger, surname_passenger, gender, tel, email, status_payment, payment_option, bus_license, seat_number, source_province, source_station, destination_province, destination_station, departure_date))
 
-print(bus_controller.add_ticket(name_passenger))
+# print(bus_controller.add_ticket(name_passenger))
 # # print(bus_controller.cancel_ticket(ticket_id))
 # # print(bus_controller.get_ticket_lst)
 
