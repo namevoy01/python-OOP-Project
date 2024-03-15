@@ -76,9 +76,11 @@ def get_seat(bus_license):
     return seat
 
 @app.post('/api/info')
-def post_info(name_passenger, surname_passenger, gender, tel, email, status_payment, payment_option, amount, date, bus_license, seat_number, source_province, source_station, destination_province, destination_station, departure_date, time_reserve):
-    bus_controller.add_booking(name_passenger, surname_passenger, gender, tel, email, status_payment, payment_option, amount, date, bus_license, seat_number, source_province, source_station, destination_province, destination_station, departure_date, time_reserve)
-    bus_controller.add_ticket(name_passenger, surname_passenger)
+def post_info(name_passenger, surname_passenger, gender, tel, email, status_payment, payment_option, bus_license, seat_number, source_province, source_station, destination_province, destination_station, departure_date):
+    booking = bus_controller.add_booking(name_passenger, surname_passenger, gender, tel, email, status_payment, payment_option, bus_license, seat_number, source_province, source_station, destination_province, destination_station, departure_date)
+    ticket = bus_controller.add_ticket(name_passenger)
+    print(booking, ticket)
+    return booking, ticket
 
 @app.get('/api/ticket')
 def get_ticket(ticket_id):

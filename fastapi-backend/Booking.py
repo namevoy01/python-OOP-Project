@@ -2,7 +2,7 @@ from datetime import datetime
 
 class Booking:
     booking_id = 1552010
-    def __init__(self, name_passenger, payment_option, amount, departure_date, time_reserve, bus_trip, seat):
+    def __init__(self, name_passenger, payment_option, amount, departure_date, bus_trip, seat):
         Booking.booking_id += 1
         self.__booking_id  = Booking.booking_id 
         self.__name_passenger = name_passenger
